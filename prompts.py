@@ -1,0 +1,213 @@
+prompt_1 = [
+    {
+        "role": "user",
+        "content": (
+            "Erstelle den ersten Absatz des Urteils betreffend Amtshilfe in Steuersachen. In diesem Absatz wird festgehalten, "
+            "wann (Datum), basierend auf welcher gesetzlichen Grundlage (dies ist in der Regel ein Artikel im Doppelbesteuerungsabkommen "
+            "zwischen dem Land der ausländischen bzw. ersuchenden Behörde und der Schweiz, der sich mit der Amtshilfe befasst), "
+            "betreffend welche Person (dies ist die sogenannte «betroffene Person»; über diese möchte die ausländische Behörde letztlich "
+            "Informationen erhalten, in der Regel um sie der Besteuerung im Land der ersuchenden Behörde zuzuführen) die ausländische "
+            "Behörde (dies ist die sogenannte «ersuchende Behörde») das Amtshilfeersuchen an die Eidgenössische Steuerverwaltung stellt. "
+            "Gegebenenfalls möchte die ersuchende Behörde mithilfe des Amtshilfeersuchens Informationen über eine andere Person erhalten "
+            "(dies ist dann die sogenannte «Informationsinhaberin», in der Regel eine schweizerische Gesellschaft), welche nicht die betroffene Person ist."
+        ),
+    },
+    {
+        "role": "user",
+        "content": (
+            "Halte dich bei den Formulierungen möglichst nahe an folgendem Beispiel:\n"
+            "”Am 1. September 2024 richtete die zuständige österreichische Steuerbehörde, das Central Liaison Office for International Cooperation, "
+            "Bundesministerium für Finanzen, Brehmstrasse 14, 1110 Wien (nachfolgend: CLO oder ersuchende Behörde), gestützt auf Art. 26 des Abkommens "
+            "vom 30. Januar 1974 zwischen der Schweizerischen Eidgenossenschaft und der Republik Österreich zur Vermeidung der Doppelbesteuerung auf dem "
+            "Gebiete der Steuern vom Einkommen und vom Vermögen (SR 0.672.916.31, nachfolgend: DBA CH-AT) ein Amtshilfeersuchen an die Eidgenössische "
+            "Steuerverwaltung (ESTV) betreffend X GmbH (nachfolgend auch: betroffene Person). Als Informationsinhaberin wurde die Y AG (nachfolgend: "
+            "schweizerische Gesellschaft) genannt.”"
+        ),
+    }
+]
+
+prompt_2 = [
+    {
+        "role": "user",
+        "content": (
+            "Erstelle den zweiten Absatz des Urteils betreffend Amtshilfe in Steuersachen. In diesem Absatz wird festgehalten, was die ersuchende Behörde "
+            "in ihrem Amtshilfeersuchen zum Sachverhalt ausgeführt hat. Es sollte daraus hervorgehen, was gemäss der ersuchenden Behörde vorgefallen ist "
+            "und warum die ersuchende Behörde das Amtshilfeersuchen stellt (in der Regel geht es um eine bestimmte Besteuerung der betroffenen Person im Land der ersuchenden Behörde)."
+        ),
+    },
+    {
+        "role": "user",
+        "content": (
+            "Halte dich bei den Formulierungen möglichst nahe an folgendem Beispiel:\n"
+            "”Das CLO hat zum Sachverhalt im Wesentlichen Folgendes ausgeführt: Die zuständige österreichische Behörde führe eine Überprüfung der Steuerbelange der betroffenen Person "
+            "durch betreffend die direkten Steuern für die Steuerperioden 2020 (1. Juli 2020 bis 30. Juni 2021) bis 2021 (1. Juli 2021 bis 30. Juni 2022). "
+            "Die betroffene Person habe in den Steuerperioden 2020 und 2021 Kosten für den Kauf von Waren von einer Konzerngesellschaft, der schweizerischen Gesellschaft, geltend gemacht. "
+            "Die Abzugsfähigkeit dieser Kosten könne unter anderem durch die Abschaffung der Bundespraxis zu Steuerausscheidungen bei Prinzipalgesellschaften und die Einführung von Art. 61a "
+            "des Bundesgesetzes vom 14. Dezember 1990 über die direkte Bundessteuer (DBG, SR 642.11) beeinträchtigt sein.”"
+        ),
+    }
+]
+
+prompt_3 = [
+    {
+        "role": "user",
+        "content": (
+            "Erstelle den dritten Absatz des Urteils betreffend Amtshilfe in Steuersachen. In diesem Absatz wird festgehalten, um welche Informationen die ersuchende Behörde die ESTV ersucht. "
+            "Diese Informationen werden im Amtshilfeersuchen in der Regel genau spezifiziert und im dritten Absatz des Urteils wortwörtlich (d.h. in der entsprechenden Sprache gemäss Amtshilfeersuchen) wiedergegeben."
+        ),
+    },
+    {
+        "role": "user",
+        "content": (
+            "Halte dich bei den Formulierungen möglichst nahe an folgendem Beispiel:\n"
+            "”Das CLO hat die ESTV für den Zeitraum vom 1. Juli 2020 bis 30. Juni 2022 um nachstehende Informationen über die schweizerische Gesellschaft ersucht: ...”"
+        ),
+    }
+]
+
+prompt_4 = [
+    {
+        "role": "user",
+        "content": (
+            "Erstelle den vierten Absatz des Urteils betreffend Amtshilfe in Steuersachen. In diesem Absatz wird festgehalten, inwiefern die ersuchende Behörde im Amtshilfeersuchen erklärt hat, "
+            "dass bestimmte Voraussetzungen (gemäss dem entsprechenden DBA bzw. gemäss StAhiG) betreffend das Amtshilfeersuchen erfüllt sind. Diese Erklärung der ersuchenden Behörde ist in der Regel dem "
+            "Amtshilfeersuchen selbst zu entnehmen und wird von der ESTV in der Schlussverfügung gegebenenfalls wiedergegeben. Typischerweise geht es um folgende Punkte: das Ersuchen entspricht dem innerstaatlichen "
+            "Recht und der Verwaltungspraxis der ersuchenden Behörde; die ersuchten Informationen könnten unter vergleichbaren Umständen nach dem Recht der ersuchenden Behörde und im üblichen Rahmen ihrer Verwaltungspraxis eingeholt werden; "
+            "alle auf dem Staatsgebiet der ersuchenden Behörde zur Verfügung stehenden Mittel wurden ausgeschöpft, mit Ausnahme solcher, die mit unverhältnismässigem Aufwand verbunden gewesen wären; sämtliche durch das Ersuchen erhaltenen Auskünfte werden "
+            "vertraulich behandelt und nur für solche Zwecke verwendet, die im zugrundeliegenden Abkommen genehmigt wurden.\n\n"
+            "Im vierten Absatz des Urteils wird die Erklärung der ersuchenden Behörde nicht wortwörtlich wiedergegeben."
+        ),
+    },
+    {
+        "role": "user",
+        "content": (
+            "Halte dich bei den Formulierungen möglichst nahe an folgendem Beispiel:\n"
+            "«Die ersuchende Behörde erklärte, dass das Ersuchen ihrem innerstaatlichen Recht, ihrer Verwaltungspraxis und dem zugrundeliegenden Abkommen entspreche; "
+            "dass die Informationen unter vergleichbaren Umständen nach ihrem Recht und im üblichen Rahmen ihrer Verwaltungspraxis eingeholt werden könnten; "
+            "dass alle auf dem eigenen Staatsgebiet zur Verfügung stehenden Mittel ausgeschöpft worden seien, mit Ausnahme solcher, die mit unverhältnismässigem Aufwand verbunden gewesen wären; "
+            "dass sämtliche durch das vorliegende Ersuchen erhaltenen Auskünfte vertraulich behandelt und nur für solche Zwecke verwendet werden würden, die im zugrundeliegenden Abkommen genehmigt worden seien.»"
+        ),
+    }
+]
+
+prompt_5 = [
+    {
+        "role": "user",
+        "content": (
+            "Erstelle den fünften Absatz des Urteils betreffend Amtshilfe in Steuersachen. In diesem Absatz wird festgehalten, dass die ESTV auf das Amtshilfeersuchen der ersuchenden Behörde eingetreten ist. "
+            "Im gleichen Absatz wird sodann festgehalten, wann die ESTV an wen sogenannte Editionsverfügungen gesendet hat, um die von der ersuchenden Behörde ersuchten Informationen zu erhalten. Die ESTV sendet die Editionsverfügungen in der Regel an die betroffene Person (wenn diese selbst in der Schweiz ansässig ist), "
+            "an die Informationsinhaberin und/oder an weitere Personen bzw. Behörden (z.B. kantonale Steuerbehörden oder Banken), um diese aufzufordern, ihr (der ESTV) die ersuchten Informationen zukommen zu lassen. Es wird im gleichen Absatz sodann festgehalten, inwiefern die Adressaten der Aufforderung der ESTV nachgekommen sind. "
+            "Gegebenenfalls beantragen die Adressaten der Aufforderung Fristerstreckungen. Gegebenenfalls stellt die ESTV später ergänzende Editionsverfügungen zu, denen die Adressaten dann ebenfalls nachkommen."
+        ),
+    },
+    {
+        "role": "user",
+        "content": (
+            "Halte dich bei den Formulierungen möglichst nahe an folgendem Beispiel:\n"
+            "”Nach Prüfung des Ersuchens gelangte die ESTV zum Schluss, dass auf dieses einzutreten sei, und eröffnete ein Verfahren mit der Nummer 574.12-2024-IT-0055. "
+            "Daraufhin ersuchte sie am 11. Juli 2024 die Steuerverwaltung des Kantons Zürich (nachfolgend: Steuerverwaltung ZH) und die schweizerische Gesellschaft je mittels Editionsverfügung, ihr (der ESTV) die ersuchten Informationen zukommen zu lassen. "
+            "Die Steuerverwaltung ZH ist der Aufforderung der ESTV fristgerecht nachgekommen. Die schweizerische Gesellschaft ist der Aufforderung der ESTV innert zweimalig erstreckter Frist nachgekommen.”"
+        ),
+    }
+]
+
+prompt_6 = [
+    {
+        "role": "user",
+        "content": (
+            "Erstelle den sechsten Absatz des Urteils betreffend Amtshilfe in Steuersachen. In diesem Absatz wird festgehalten, inwieweit die betroffene Person und/oder die Informationsinhaberin gegen die Gewährung der Amtshilfe opponieren. "
+            "Dies geschieht in der Regel in einem oder mehreren Schreiben, welche die betroffene Person und/oder die Informationsinhaberin an die ESTV richten. Kurz davor hat die ESTV die betroffene Person und/oder die Informationsinhaberin in der Regel über den wesentlichen Inhalt des Amtshilfeersuchens und über die Informationen, welche sie der ersuchenden Behörde übermitteln will, informiert und ihnen Gelegenheit zur Stellungnahme gegeben."
+        ),
+    },
+    {
+        "role": "user",
+        "content": (
+            "Halte dich bei den Formulierungen möglichst nahe an folgendem Beispiel:\n"
+            "”Mit Schreiben vom 21. November 2022 an die ESTV hat die schweizerische Gesellschaft gegen die Gewährung der Amtshilfe opponiert.”"
+        ),
+    }
+]
+
+prompt_7 = [
+    {
+        "role": "user",
+        "content": (
+            "Erstelle den siebten Absatz des Urteils betreffend Amtshilfe in Steuersachen. In diesem Absatz wird festgehalten, dass die ESTV eine Schlussverfügung erlassen hat und inwieweit sie der ersuchenden Behörde Amtshilfe leisten und die ersuchten Informationen übermitteln möchte. "
+            "In der Regel wird die Amtshilfe vollständig geleistet, gegebenenfalls wird die Amtshilfe betreffend einige Punkte eingeschränkt (z.B. indem die ESTV Schwärzungen von manchen Informationen vornimmt)."
+        ),
+    },
+    {
+        "role": "user",
+        "content": (
+            "Halte dich bei den Formulierungen möglichst nahe an folgendem Beispiel:\n"
+            "”Mit Schlussverfügung vom 14. April 2025 erkannte die ESTV (nachfolgend auch: Vorinstanz), dass dem CLO Amtshilfe betreffend die betroffene Person zu leisten und die ersuchten Informationen zu übermitteln seien.”"
+        ),
+    }
+]
+
+prompt_8 = [
+    {
+        "role": "user",
+        "content": (
+            "Erstelle den achten Absatz des Urteils betreffend Amtshilfe in Steuersachen. In diesem Absatz wird festgehalten, wer (dies ist die als Beschwerdeführer bzw. Beschwerdeführerin bzw. Beschwerdeführerinnen aufgeführte/n Person/en in der Beschwerde) wann (Datum) gegen die Schlussverfügung der ESTV eine Beschwerde ans Bundesverwaltungsgericht erhebt. "
+            "Im gleichen Absatz werden sodann die Rechtsbegehren bzw. Anträge der Beschwerdeführerin wortwörtlich aus der Beschwerde übernommen. Diese Rechtsbegehren bzw. Anträge befinden sich in der Regel mit entsprechender Bezeichnung recht weit vorne in der Beschwerde, können sich unter Umständen aber auch aus dem Blocktext der Beschwerde ergeben. Um die entsprechende Stelle in der Beschwerde zu finden, orientiere dich an den Anträgen bzw. Begehren aus dem nachfolgenden Beispiel (die Formulierungen der Anträge bzw. Begehren sind recht standardisiert). Gegebenenfalls stellt die Beschwerdeführerin zu einem späteren Zeitpunkt weitere Anträge oder zieht alte Anträge zurück. Dies müsste dann in einem späteren Absatz erwähnt werden."
+        ),
+    },
+    {
+        "role": "user",
+        "content": (
+            "Halte dich bei den Formulierungen möglichst nahe an folgendem Beispiel:\n"
+            "”Gegen die Schlussverfügung vom 14. April 2025 lässt die schweizerische Gesellschaft (nachfolgend auch: Beschwerdeführerin) am 4. Mai 2025 Beschwerde beim Bundesverwaltungsgericht erheben. Sie stellt folgende Anträge: ...”"
+        ),
+    }
+]
+
+prompt_9 = [
+    {
+        "role": "user",
+        "content": (
+            "Erstelle den neunten Absatz des Urteils betreffend Amtshilfe in Steuersachen. In diesem Absatz wird festgehalten, ob bzw. wann die Vorinstanz sich vernehmen liess und was die Vorinstanz in ihrer Vernehmlassung beantragt. "
+            "Die Anträge der Vorinstanz befinden sich in der Regel recht weit vorne in der Vernehmlassung. In der Regel wird die Vorinstanz beantragen, die Beschwerde kostenpflichtig abzuweisen. Gegebenenfalls heisst die Vorinstanz die Beschwerde teilweise gut, insbesondere wenn sie beantragten Schwärzungen in den zur Übermittlung vorgesehenen Informationen stattgibt. Die Anträge der Vorinstanz in der Vernehmlassung werden nicht wortwörtlich erwähnt."
+        ),
+    },
+    {
+        "role": "user",
+        "content": (
+            "Halte dich bei den Formulierungen möglichst nahe an folgendem Beispiel:\n"
+            "”Mit Vernehmlassung vom 29. Januar 2025 beantragt die Vorinstanz, die Beschwerde sei kostenpflichtig abzuweisen.”"
+        ),
+    }
+]
+
+prompt_10 = [
+    {
+        "role": "user",
+        "content": (
+            "Erstelle unter nachfolgend bezeichneten Umständen weitere Absätze des Urteils betreffend Amtshilfe in Steuersachen. In diesen Absätzen wird festgehalten, ob bzw. wann es zu weiteren Schriftwechseln zwischen den Verfahrensbeteiligten (d.h. die Beschwerdeführer/in und/oder die Vorinstanz) kommt.\n\n"
+            "Nimmt die Beschwerführerin Stellung zur Vernehmlassung (dies wird dann als «Replik» bezeichnet), erstelle einen Absatz, in dem festgehalten wird, wann die Replik erfolgt und inwieweit die Beschwerdeführerin an ihren Anträgen aus der Beschwerde festhält. Halte dich dabei bei den Formulierungen möglichst nahe an folgendem Beispiel: ”Mit Replik vom 9. August 2023 nimmt die Beschwerdeführerin zur Vernehmlassung Stellung und bekräftigt ihre Anträge aus der Beschwerde.»\n\n"
+            "Nimmt die Vorinstanz Stellung zur Replik der Beschwerdeführerin (dies wird dann als «Duplik» bezeichnet), erstelle einen weiteren Absatz, in dem festgehalten wird, wann die Duplik erfolgt und inwieweit die Vorinstanz an ihren Anträgen aus der Vernehmlassung festhält. Halte dich dabei bei den Formulierungen möglichst nahe an folgendem Beispiel: ”Mit Duplik vom 17. August 2023 äussert sich die Vorinstanz zu den Vorbringen der Beschwerdeführerin in der Replik und hält an ihren Anträgen fest.»\n\n"
+            "Erstelle weitere Absätze nach gleichem Muster, wenn es nach der Duplik noch weitere Schriftwechsel geben sollte zwischen den Verfahrensbeteiligten. Weitere Stellungnahmen nennen sich Triplik, Quadruplik, Quintuplik, Sextuplik usw."
+        ),
+    },
+    {
+        "role": "user",
+        "content": (
+            "Erstelle in kursiver Schrift folgenden Satz::\n"
+            "Auf die vorstehenden und die weiteren Vorbringen der Verfahrensbeteiligten sowie die Akten wird nachfolgend unter den Erwägungen insoweit eingegangen, "
+            "als sie für den vorliegenden Entscheid wesentlich sind."
+        ),
+    }
+]
+
+prompt_dict = {
+    "prompt_1": prompt_1,
+    "prompt_2": prompt_2,
+    "prompt_3": prompt_3,
+    "prompt_4": prompt_4,
+    "prompt_5": prompt_5,
+    "prompt_6": prompt_6,
+    "prompt_7": prompt_7,
+    "prompt_8": prompt_8,
+    "prompt_9": prompt_9,
+    "prompt_10": prompt_10,
+}
