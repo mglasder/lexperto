@@ -9,7 +9,8 @@ prompt_1 = [
             "Informationen erhalten, in der Regel um sie der Besteuerung im Land der ersuchenden Behörde zuzuführen) die ausländische "
             "Behörde (dies ist die sogenannte «ersuchende Behörde») das Amtshilfeersuchen an die Eidgenössische Steuerverwaltung stellt. "
             "Gegebenenfalls möchte die ersuchende Behörde mithilfe des Amtshilfeersuchens Informationen über eine andere Person erhalten "
-            "(dies ist dann die sogenannte «Informationsinhaberin», in der Regel eine schweizerische Gesellschaft), welche nicht die betroffene Person ist."
+            "(dies ist dann die sogenannte «Informationsinhaberin», in der Regel eine schweizerische Gesellschaft "
+            "(wird dann auch als schweizerische Gesellschaft bezeichnet), welche nicht die betroffene Person ist."
         ),
     },
     {
@@ -149,8 +150,17 @@ prompt_8 = [
     {
         "role": "user",
         "content": (
-            "Erstelle den achten Absatz des Urteils betreffend Amtshilfe in Steuersachen. In diesem Absatz wird festgehalten, wer (dies ist die als Beschwerdeführer bzw. Beschwerdeführerin bzw. Beschwerdeführerinnen aufgeführte/n Person/en in der Beschwerde) wann (Datum) gegen die Schlussverfügung der ESTV eine Beschwerde ans Bundesverwaltungsgericht erhebt. "
-            "Im gleichen Absatz werden sodann die Rechtsbegehren bzw. Anträge der Beschwerdeführerin wortwörtlich aus der Beschwerde übernommen. Diese Rechtsbegehren bzw. Anträge befinden sich in der Regel mit entsprechender Bezeichnung recht weit vorne in der Beschwerde, können sich unter Umständen aber auch aus dem Blocktext der Beschwerde ergeben. Um die entsprechende Stelle in der Beschwerde zu finden, orientiere dich an den Anträgen bzw. Begehren aus dem nachfolgenden Beispiel (die Formulierungen der Anträge bzw. Begehren sind recht standardisiert). Gegebenenfalls stellt die Beschwerdeführerin zu einem späteren Zeitpunkt weitere Anträge oder zieht alte Anträge zurück. Dies müsste dann in einem späteren Absatz erwähnt werden."
+            "Erstelle den achten Absatz des Urteils betreffend Amtshilfe in Steuersachen. In diesem Absatz wird festgehalten, "
+            "wer (dies ist die als Beschwerdeführer bzw. Beschwerdeführerin bzw. Beschwerdeführerinnen aufgeführte/n "
+            "Person/en in der Beschwerde) wann (Datum) gegen die Schlussverfügung der ESTV eine Beschwerde ans "
+            "Bundesverwaltungsgericht erhebt. Im gleichen Absatz werden sodann die Rechtsbegehren bzw. Anträge der "
+            "Beschwerdeführerin wortwörtlich aus der Beschwerde übernommen. Diese Rechtsbegehren bzw. Anträge befinden "
+            "sich in der Regel mit entsprechender Bezeichnung recht weit vorne in der Beschwerde, können sich unter "
+            "Umständen aber auch aus dem Blocktext der Beschwerde ergeben. Um die entsprechende Stelle in der Beschwerde "
+            "zu finden, orientiere dich an den Anträgen bzw. Begehren aus dem nachfolgenden Beispiel (die Formulierungen "
+            "der Anträge bzw. Begehren sind recht standardisiert). Gegebenenfalls stellt die Beschwerdeführerin zu einem "
+            "späteren Zeitpunkt weitere Anträge oder zieht alte Anträge zurück. Dies müsste dann in einem späteren Absatz "
+            "erwähnt werden. Verwende nur Informationen, die tatsächlich gegeben sind. Andernfalls verwende Platzhalter: [...]."
         ),
     },
     {
