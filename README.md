@@ -8,7 +8,8 @@ LexPerto uses large language models to analyze legal documents and generate draf
 
 ## Features
 
-- Process legal documents in various formats (PDF, DOCX, TXT)
+- PDF support is not yet implemented
+- Process legal documents in various formats (DOCX and TXT)
 - Generate structured court ruling drafts
 - Customize output based on jurisdiction and case type
 - Maintain references to source materials

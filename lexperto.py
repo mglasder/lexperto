@@ -12,7 +12,7 @@ api_key = os.getenv("OPENAI_API_KEY")
 
 instruction = """
 Sie sind ein erfahrener Richter am Schweizer Bundesverwaltungsgerichts.
-Formulieren Sie den Sachverhalt für ein Gerichtsurteil in einem Amtshilfevergahren basierend auf der gegebenen 
+Formulieren Sie den Sachverhalt für ein Gerichtsurteil in einem Amtshilfeverfahren basierend auf der gegebenen 
 Verfügung und Beschwerde. Verwenden Sie einen sachlichen, neutralen Stil ohne Wertungen oder Beurteilungen.
 """
 

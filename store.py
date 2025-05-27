@@ -38,7 +38,7 @@ def retrieve():
         query=user_query,
     )
     for result in results:
-        print(print(result.content))
+        print(result.content)
 
 def ask_assistant_with_store():
     bgb_store_id = "vs_6831657e75048191b74cd994e2232105"
