@@ -110,7 +110,6 @@ venv.bak/
 # Ignore data directories except templates
 data/*
 !data/templates/
-output/
 logs/
 .DS_Store
 .idea/
