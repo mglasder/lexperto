@@ -19,7 +19,7 @@ class BasePromptItem(BaseModel):
 
 class SachverhaltItem(BasePromptItem):
     task: str
-    example: str
+    example: Optional[str]
 
     def task_as_prompt(self) -> List[dict]:
         prompt = [{"role": "user",
