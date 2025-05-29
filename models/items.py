@@ -2,6 +2,7 @@ from typing import Optional, List
 import yaml
 from pydantic import BaseModel
 
+
 class BasePromptItem(BaseModel):
 
     @classmethod
@@ -14,7 +15,9 @@ class BasePromptItem(BaseModel):
     def to_yaml(self, path: str):
         """Save the instance as a YAML file."""
         with open(path, "w", encoding="utf-8") as f:
-            yaml.dump(self.model_dump(), f, allow_unicode=True, default_flow_style=False)
+            yaml.dump(
+                self.model_dump(), f, allow_unicode=True, default_flow_style=False
+            )
 
     def task_as_prompt(self) -> List[dict]:
         raise NotImplementedError("Subclasses must implement this method.")
@@ -28,8 +31,7 @@ class SachverhaltItem(BasePromptItem):
     example: Optional[str]
 
     def task_as_prompt(self) -> List[dict]:
-        prompt = [{"role": "user",
-                   "content": f"{self.task}"}]
+        prompt = [{"role": "user", "content": f"{self.task}"}]
         return prompt
 
     def examples_as_prompt(self) -> List[dict]:
@@ -43,22 +45,20 @@ class AbstrakteErwItem(BasePromptItem):
     requirement_for_analysis: Optional[str] = None
 
     def task_as_prompt(self) -> List[dict]:
-        prompt = [{"role": "user",
-                   "content": f"{self.task}"}]
+        prompt = [{"role": "user", "content": f"{self.task}"}]
         return prompt
 
     def examples_as_prompt(self) -> List[dict]:
         prompt = []
         for ex in self.examples:
-            prompt.extend([{"role": "user",
-                           "content": ex}])
+            prompt.extend([{"role": "user", "content": ex}])
         return prompt
 
     def requirement_as_prompt(self) -> List[dict]:
         if self.requirement_for_analysis:
-            return [{"role": "user",
-                     "content": f"{self.requirement_for_analysis}"}]
+            return [{"role": "user", "content": f"{self.requirement_for_analysis}"}]
         return []
+
 
 if __name__ == "__main__":
 
@@ -66,11 +66,12 @@ if __name__ == "__main__":
     import os
     import glob
     from pathlib import Path
-    folder_path = Path("prompts/sach/")
+
+    folder_path = Path("../prompts/sach/")
 
     yaml_files = glob.glob(os.path.join(folder_path, "*.yaml"))
     # sort by numbering in filename
-    yaml_files.sort(key=lambda x: int(Path(x).stem.split('_')[1]))
+    yaml_files.sort(key=lambda x: int(Path(x).stem.split("_")[1]))
 
     for yaml_file in yaml_files:
         try:
@@ -78,4 +79,3 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"Error loading {yaml_file}: {e}")
             continue
-
