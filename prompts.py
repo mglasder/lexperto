@@ -202,7 +202,7 @@ prompt_10 = [
     {
         "role": "user",
         "content": (
-            "Erstelle in kursiver Schrift folgenden Satz::\n"
+            "Erstelle folgenden Satz:\n"
             "Auf die vorstehenden und die weiteren Vorbringen der Verfahrensbeteiligten sowie die Akten wird nachfolgend unter den Erwägungen insoweit eingegangen, "
             "als sie für den vorliegenden Entscheid wesentlich sind."
         ),
