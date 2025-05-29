@@ -1,14 +1,17 @@
 import os
 from datetime import datetime
 
-from agents import Agent, Runner
+from agents import Agent, Runner, RunResult
 from dotenv import load_dotenv
 from prompts import prompt_dict
-from fpdf import FPDF
 from docx import Document
 
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
+
+
+# TODO: create a detailed prompt with agentic intstructions
+# TODO: externalize all prompts in text files (.txt, or simple .yaml), no complicated object creation though.
 
 instruction = """
 Sie sind ein erfahrener Richter am Schweizer Bundesverwaltungsgerichts.
@@ -26,20 +29,8 @@ def read_word(file_path):
     doc = Document(file_path)
     return "\n".join([para.text for para in doc.paragraphs])
 
-agent = Agent(name="Richter", instructions=instruction, model="gpt-4.1")
 
-def main():
-    # beschwerde = read_file("data/1_beschwerde_sachverhalt.txt")
-    # verfuegung = read_file("data/1_verfuegung_sachverhalt.txt")
-
-    beschwerde = read_word("data/Beschwerde_Clean_Format.docx")
-    verfuegung = read_word("data/Verfuegung_Clean_Format.docx")
-
-    prompt = [{"role": "user", "content": "Hier ist der Sachverhalt aus der Verfügung:"},
-             {"role": "user", "content": verfuegung},
-             {"role": "user", "content": "Hier ist der Sachverhalt aus der Beschwerdeschrift:"},
-             {"role": "user", "content": beschwerde},
-             ]
+def create_sachverhalt(agent, prompt) -> RunResult:
 
     for _, p in prompt_dict.items():
         prompt.extend(p)
@@ -47,31 +38,41 @@ def main():
     prompt.extend([
         {"role": "user", "content": "Nummeriere die Absätze des Sachverhalts."},
     ])
-
     result = Runner.run_sync(agent, prompt)
+    return result
 
-    # timestampt as YYYYMMDD_HHMMSS
+# TODO: create document saver class
+def add_to_output_word(doc: RunResult, text: RunResult) -> Document:
+    result_doc = doc
+    result_doc.add_heading('Urteil in Amtshilfeverfahren', level=1)
+    result_doc.add_paragraph(text.final_output)
+    return result_doc
+
+def save_output_word(doc: Document, output_folder: str = "output"):
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
-    # save result as markdown file
-    with open(f"data/{now}_ergebnis.md", "w", encoding="utf-8") as f:
-        f.write(result.final_output)
+    doc.save(f"{output_folder}/{now}_ergebnis.docx")
 
-    # def sanitize_text(text):
-    #     return text.encode('latin-1', 'replace').decode('latin-1')  # or use 'ignore'
-    #
-    # # Usage before adding to PDF
-    # text = sanitize_text(result.final_output)
-    #
-    # # save as pdf
-    # pdf = FPDF()
-    # pdf.add_page()
-    # pdf.set_auto_page_break(auto=True, margin=15)
-    # pdf.set_font("Arial", size=12)
-    # for line in text.split('\n'):
-    #     pdf.multi_cell(0, 10, line)
-    # pdf.output(f"data/{now}_ergebnis.pdf")
+def main():
+    agent = Agent(name="Richter", instructions=instruction, model="gpt-4.1")
 
-    print(result.final_output)
+    beschwerde = read_word("input/Beschwerde_Clean_Format.docx")
+    verfuegung = read_word("input/Verfuegung_Clean_Format.docx")
+
+    # TODO: create a prompt builder
+    prompt = [{"role": "user", "content": "Hier ist die Verfügung:"},
+             {"role": "user", "content": verfuegung},
+             {"role": "user", "content": "Hier ist die Beschwerdeschrift:"},
+             {"role": "user", "content": beschwerde},
+             ]
+
+    sachverhalt = create_sachverhalt(agent, prompt)
+
+    doc = Document()
+    result_doc = add_to_output_word(doc, sachverhalt)
+    save_output_word(result_doc)
+
+    # convert word document to string for output
+    print("\n".join([para.text for para in result_doc.paragraphs]))
 
 if __name__ == "__main__":
     main()
