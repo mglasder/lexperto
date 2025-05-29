@@ -79,6 +79,16 @@ class PromptBuilder:
         """
         return self.prompt
 
+    def set_with(self, history: List[Dict[str, str]]) -> None:
+        """Set the prompt to a new list of messages.
+
+        Args:
+            messages: List of message dictionaries to set as the prompt
+        """
+        if not all(k in msg for msg in history for k in ("role", "content")):
+            raise ValueError("Each message must have 'role' and 'content' keys")
+        self.prompt = history
+
     def __len__(self) -> int:
         """Return the number of messages in the prompt."""
         return len(self.prompt)

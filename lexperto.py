@@ -3,11 +3,13 @@ import os
 from datetime import datetime
 from pathlib import Path
 
-from agents import Agent, Runner, RunResult
+from agents import Agent, Runner
 from dotenv import load_dotenv
 
-from models import AbstrakteErwItem, SachverhaltItem, BasePromptItem
+from models.items import AbstrakteErwItem, SachverhaltItem, BasePromptItem
 from docx import Document
+
+from models.prompt import PromptBuilder
 
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
@@ -48,28 +50,21 @@ def get_instr(which: str) -> str:
 def create_sachverhalt(agent, prompt) -> list[str]:
     paragraphs = []
 
-    prompt.extend(
-        [
-            {
-                "role": "user",
-                "content": get_instr("sachverhalt_instruction.txt"),
-            }
-        ]
-    )
+    prompt.add_user(get_instr("sachv_instruction.txt"))
 
     items = load_items_to_examine_from(
         f"{PROMPTS_FOLDER}/sach/", item_cls=SachverhaltItem
     )
 
     for item in items:
-        prompt.extend(item.task_as_prompt())
+        prompt.add_user(item.task)
         if item.example:
             prompt.extend(item.examples_as_prompt())
-        prompt.extend([{"role": "user", "content": "Erstelle jetzt den Paragraphen:"}])
+        prompt.add_user("Erstelle jetzt den Paragraphen:")
 
-        result = Runner.run_sync(agent, prompt)
+        result = Runner.run_sync(agent, prompt.get())
         paragraphs.append(result.final_output)
-        prompt = result.to_input_list()
+        prompt.set_with(result.to_input_list())
 
     return paragraphs
 
@@ -96,21 +91,7 @@ def load_items_to_examine_from(
 
 
 def create_abstract_considerations(agent, prompt) -> list[str]:
-    prompt.extend(
-        [
-            {
-                "role": "user",
-                "content": """
-                    Du wirst nun den Teil des Urteils formulieren, der die abstrakten Erwägungen des Bundesverwaltungsgerichts enthält.
-                    Du wirst im folgenden Prüfungspunkte zu den abstrakten Erwägungen des Bundesverwaltungsgerichts Paragraph für Paragraph bearbeiten.
-                    Du erhälst zu jedem Prüfungspunkt eine Angabe, was zu Prüfen ist und ein Beispiel, wie die Prüfung formuliert werden könnte.
-                    Für jeden Prüfungspunkt musst du die Beschwerde und Verfügung lesen und die relevanten Informationen für den Prüfungspunkt extrahieren.
-                    Dann erstellst du einen spezifischen Absatz für den vorliegenden Fall, der sich an dem Beispiel orientiert.
-                    DU DARFST NUR INFORMATIONEN AUS DER VERFÜGUNG UND DER BESCHWERDE VERWENDEN, DIE FÜR DEN PRÜFUNGSPUNKT RELEVANT SIND.
-                    """,
-            }
-        ]
-    )
+    prompt.add_user(get_instr("aerw_instructions.txt"))
 
     items = load_items_to_examine_from(
         f"{PROMPTS_FOLDER}/aerw/", item_cls=AbstrakteErwItem
@@ -118,64 +99,36 @@ def create_abstract_considerations(agent, prompt) -> list[str]:
     results = []
 
     for item in items:
-        prompt.extend(
-            [{"role": "user", "content": "Hier ist die Angabe, was zu prüfen ist:"}]
-        )
+        prompt.add_user("Hier ist die Angabe, was zu prüfen ist:")
         prompt.extend(item.task_as_prompt())
 
         if not item.mandatory:
-            prompt.extend(
-                [
-                    {
-                        "role": "user",
-                        "content": """
-                            Dieser Prüfungspunkt ist nicht obligatorisch.
-                            Prüfe, ob der Prüfungspunkt für den vorliegenden Fall relevant ist.
-                            Hier sind die Voraussetzungen unter denen der Prüfungspunkt zu prüfen ist:
-                            """,
-                    }
-                ]
+            prompt.add_user(
+                """
+                Dieser Prüfungspunkt ist nicht obligatorisch.
+                Prüfe, ob der Prüfungspunkt für den vorliegenden Fall relevant ist.
+                Hier sind die Voraussetzungen unter denen der Prüfungspunkt zu prüfen ist:
+                """
             )
             prompt.extend(item.requirement_as_prompt())
-            prompt.extend(
-                [{"role": "user", "content": "Antworte NUR mit <<Ja>> oder <<Nein>>"}]
-            )
+            prompt.add_user("Antworte NUR mit <<Ja>> oder <<Nein>>")
 
-            is_relevant = Runner.run_sync(agent, prompt)
+            is_relevant = Runner.run_sync(agent, prompt.get())
 
             if is_relevant.final_output.lower() == "nein":
                 continue
             else:
-                prompt.extend(
-                    [
-                        {
-                            "role": "user",
-                            "content": "Der Prüfungspunkt ist relevant. Bitte fahre fort.",
-                        }
-                    ]
-                )
+                prompt.add_user("Der Prüfungspunkt ist relevant. Bitte fahre fort.")
 
-        prompt.extend(
-            [
-                {
-                    "role": "user",
-                    "content": "Hier ist das Beispiel, wie eine Prüfung aussehen könnte:",
-                }
-            ]
-        )
+        prompt.add_user("Hier ist das Beispiel, wie eine Prüfung aussehen könnte:")
         prompt.extend(item.examples_as_prompt())
-        prompt.extend(
-            [
-                {
-                    "role": "user",
-                    "content": "Erstelle jetzt den spezifischen Absatz für den vorliegenden Fall. Gib nur den Absatz zurück, ohne sonstige Erklärungen, oder Ergänzungen.",
-                }
-            ]
+        prompt.add_user(
+            "Erstelle jetzt den spezifischen Absatz für den vorliegenden Fall. Gib nur den Absatz zurück, ohne sonstige Erklärungen, oder Ergänzungen."
         )
 
-        result = Runner.run_sync(agent, prompt)
+        result = Runner.run_sync(agent, prompt.get())
         results.append(result.final_output)
-        prompt = [{"role": "assistant", "content": result.final_output}]
+        prompt.set_with(result.to_input_list())
 
     return results
 
@@ -196,27 +149,18 @@ def main():
     beschwerde = read_word("input/Beschwerde_Clean_Format.docx")
     verfuegung = read_word("input/Verfuegung_Clean_Format.docx")
 
-    # TODO: create a prompt builder
-    prompt = [
-        {"role": "user", "content": "Hier ist die Verfügung:"},
-        {"role": "user", "content": verfuegung},
-        {"role": "user", "content": "Hier ist die Beschwerdeschrift:"},
-        {"role": "user", "content": beschwerde},
-    ]
+    prompt = PromptBuilder()
+    prompt.add_user("Hier ist die Verfügung:")
+    prompt.add_user(verfuegung)
+    prompt.add_user("Hier ist die Beschwerdeschrift:")
+    prompt.add_user(beschwerde)
 
     sachverhalt = create_sachverhalt(agent, prompt)
 
-    prompt.extend(
-        [
-            {
-                "role": "user",
-                "content": "Hier ist der vollständige Sachverhalt, den du formuliert hast:",
-            },
-        ]
-    )
+    prompt.add_user("Hier ist der vollständige Sachverhalt, den du formuliert hast:")
 
     for sach in sachverhalt:
-        prompt.extend([{"role": "assistant", "content": sach}])
+        prompt.add_assistant(sach)
 
     erwaegungen = create_abstract_considerations(agent, prompt)
 
