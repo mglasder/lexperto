@@ -16,6 +16,12 @@ class BasePromptItem(BaseModel):
         with open(path, "w", encoding="utf-8") as f:
             yaml.dump(self.model_dump(), f, allow_unicode=True, default_flow_style=False)
 
+    def task_as_prompt(self) -> List[dict]:
+        raise NotImplementedError("Subclasses must implement this method.")
+
+    def examples_as_prompt(self) -> List[dict]:
+        raise NotImplementedError("Subclasses must implement this method.")
+
 
 class SachverhaltItem(BasePromptItem):
     task: str
