@@ -1,0 +1,5 @@
+task: "Prüfung des anwendbaren (materiellen) Rechts: Das Bundesverwaltungsgericht prüft, welches Bundesgesetz und/oder DBA anwendbar ist bzw. nach welchem Recht sich die Durchführung des DBA richtet."
+examples:
+  - "Die Durchführung des DBA CH-IT richtet sich nach dem Bundesgesetz vom 28. September 2012 über die internationale Amtshilfe in Steuersachen (StAhiG, SR 651.1; Art. 1 Abs. 1 Bst. a StAhiG). Allenfalls abweichende Bestimmungen des vorliegend anwendbaren DBA CH-IT gehen vor (Art. 1 Abs. 2 StAhiG)."
+mandatory: true
+requirement_for_analysis: 

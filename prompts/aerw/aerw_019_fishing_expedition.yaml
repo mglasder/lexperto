@@ -1,0 +1,5 @@
+task: "Prüfung, ob das vorliegende Amtshilfeersuchen die formellen Anforderungen erfüllt bzw. ob eine sogenannte 'fishing expedition' vorliegt"
+examples:
+  - "Das vorliegend zu beurteilende Amtshilfeersuchen erfüllt die an ein solches gestellten formellen Anforderungen (E. 3.3.1).  Wie gerade festgehalten, erfüllt das Amtshilfeersuchen die formellen Anforderungen, welche «fishing expeditions» verhindern sollen. Das Ersuchen ist auf einen konkreten Sachverhalt bezogen, der recht detailliert beschrieben ist. Auch erklärt die ersuchende Behörde, warum sie davon ausgeht, dass die Informationen, um die sie ersucht, für die Besteuerung der Beschwerdeführerin voraussichtlich erheblich sind. Von einer «fishing expedition» oder einer Anfrage aufs Geratewohl kann keine Rede sein.  Soweit die Beschwerdeführerin geltend macht, es liege eine «fishing expedition» vor, weil die Informationen, um die ersucht werde, nicht voraussichtlich erheblich seien, ist dieses Vorbringen unter dem Titel der voraussichtlichen Erheblichkeit der entsprechenden Informationen zu prüfen (vgl. E. 4.3)."
+mandatory: true
+requirement_for_analysis: 

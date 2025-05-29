@@ -1,0 +1,5 @@
+task: "Prüfung der Legitimation des Beschwerdeführers: Das Bundesverwaltungsgericht prüft, inwieweit der Beschwerdeführer zur Beschwerde legitimiert ist."
+examples:
+  - "Die Beschwerdeführerin ist als Verfügungsadressatin gemäss Art. 48 Abs. 1 VwVG in Verbindung mit Art. 19 Abs. 2 StAhiG zur Beschwerde legitimiert."
+mandatory: true
+requirement_for_analysis: 

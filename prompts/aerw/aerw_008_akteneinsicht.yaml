@@ -1,0 +1,5 @@
+task: "Akteneinsicht: Prüfung, inwieweit dem Beschwerdeführer im Verfahren vor dem Bundesverwaltungsgericht Akteneinsicht gewährt wird"
+examples:
+  - "Dem prozessualen Antrag der Beschwerdeführenden auf uneingeschränkte Akteneinsicht wurde im Rahmen des Verfahrens vor dem Bundesverwaltungsgericht entsprochen (vgl. Sachverhalt Bst. C.d). Folglich erübrigen sich weitere Ausführungen zum Prozessantrag."
+mandatory: false
+requirement_for_analysis: "Nein, nur wenn beantragt bzw. geltend gemacht"

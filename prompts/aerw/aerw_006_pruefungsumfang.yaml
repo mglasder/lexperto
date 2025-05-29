@@ -1,0 +1,5 @@
+task: "Prüfungsumfang: Das Bundesverwaltungsgericht prüft, in welchem Umfang es den angefochtenen Entscheid bzw. die Verfügung überprüft."
+examples:
+  - "Das Bundesverwaltungsgericht überprüft den angefochtenen Entscheid grundsätzlich in vollem Umfang. Die beschwerdeführende Partei kann mit der Beschwerde neben der Verletzung von Bundesrecht auch die unrichtige oder unvollständige Feststellung des rechtserheblichen Sachverhalts sowie die Unangemessenheit rügen (Art. 49 VwVG)."
+mandatory: true
+requirement_for_analysis: 

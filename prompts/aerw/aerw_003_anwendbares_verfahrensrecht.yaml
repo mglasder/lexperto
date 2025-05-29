@@ -1,0 +1,5 @@
+task: "Prüfung des anwendbaren Verfahrensechts: Das Bundesverwaltungsgericht prüft, nach welchen Bestimmungen sich das Beschwerdeverfahren richtet."
+examples:
+  - "«Das Beschwerdeverfahren richtet sich nach den Bestimmungen über die Bundesrechtspflege und somit nach dem VwVG, soweit das VGG oder das StAhiG nichts anderes bestimmen (Art. 5 Abs. 1 und Art. 19 Abs. 5 StAhiG, Art. 37 VGG).»"
+mandatory: true
+requirement_for_analysis: 
