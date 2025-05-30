@@ -1,16 +1,10 @@
-import glob
 import os
-from datetime import datetime
-from pathlib import Path
-
 from agents import Agent, Runner, trace
 from dotenv import load_dotenv
-from pydantic import Field, BaseModel
-
+from helpers import get_instr, read_word, load_items_to_examine_from, save_output_word
 from models.items import (
     AbstrakteErwItem,
     SachverhaltItem,
-    BasePromptItem,
     ItemRelevanceDecision,
 )
 from docx import Document
@@ -22,20 +16,12 @@ api_key = os.getenv("OPENAI_API_KEY")
 
 TEST = False
 
-
 if TEST:
     PROMPTS_FOLDER = "prompts-test"
     TEST_FILENAME_PREFIX = "test_"
 else:
     PROMPTS_FOLDER = "prompts"
     TEST_FILENAME_PREFIX = ""
-
-
-def get_instr(which: str) -> str:
-    with open(f"prompts/instructions/{which}", "r", encoding="utf-8") as f:
-        instr = f.read()
-    return instr
-
 
 RICHTER_AGENT = Agent(
     name="Richter",
@@ -53,39 +39,6 @@ RELEVANCE_DECIDER = Agent(
 
 
 # TODO: create a detailed prompt with agentic intstructions
-
-
-def read_file(file_path):
-    """Read content from a file."""
-    with open(file_path, "r", encoding="utf-8") as f:
-        return f.read()
-
-
-def read_word(file_path):
-    """Read content from a Word file."""
-    doc = Document(file_path)
-    return "\n".join([para.text for para in doc.paragraphs])
-
-
-def load_items_to_examine_from(
-    folder: str, item_cls: BasePromptItem
-) -> list[BasePromptItem]:
-    folder_path = Path(folder)
-    yaml_files = glob.glob(os.path.join(folder_path, "*.yaml"))
-
-    # sort by numbering in filename
-    yaml_files.sort(key=lambda x: int(Path(x).stem.split("_")[1]))
-
-    # exclude template files
-    yaml_files = [f for f in yaml_files if "template" not in f]
-
-    items = []
-
-    for yaml_file in yaml_files:
-        pp = item_cls.from_yaml(yaml_file)
-        items.append(pp)
-
-    return items
 
 
 def create_sachverhalt(prompt) -> list[str]:
@@ -170,9 +123,6 @@ def create_abstract_considerations(prompt) -> list[str]:
 
 
 # TODO: create document saver class
-def save_output_word(doc: Document, output_folder: str = "output"):
-    now = datetime.now().strftime("%Y%m%d_%H%M%S")
-    doc.save(f"{output_folder}/{TEST_FILENAME_PREFIX}{now}_ergebnis.docx")
 
 
 def main():
