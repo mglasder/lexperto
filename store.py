@@ -1,100 +1,72 @@
-import json
-import os
+import tiktoken
 from dotenv import load_dotenv
 from openai import OpenAI
+import glob
 
-load_dotenv()
-# api_key = os.getenv("OPENAI_API_KEY")
+from tqdm import tqdm
+
+load_dotenv()  # Load environment variables from .env file
 
 client = OpenAI()
 
-
-def create_store_and_upload():
-    vector_store = client.vector_stores.create(        # Create vector store
-        name="BGB",
-    )
-
-    #append id to file
-    with open("data/vector_store_ids.txt", "a") as f:
-        f.write(f"\n{vector_store.id}")
-
-    print(vector_store.id)
+AMTSHILFE_200_50tok = "vs_683985802fb48191ace2ae894aacc329"
+AMTSHILFE_800_400tok = "vs_683988e8fafc8191b005deb06ffac7b0"
 
 
-    file_batch = client.vector_stores.file_batches.upload_and_poll(
-        vector_store_id=vector_store.id, 
-        files=[open("data/BGB.pdf", "rb")]
-    )
+def count_tokens(text: str) -> int:
+    """Count the number of tokens in a given text using the GPT-4o-mini tokenizer."""
+    encoder = tiktoken.encoding_for_model("gpt-4o-mini")
+    return len(encoder.encode(text))
 
-    print(file_batch.status)
-    print(file_batch.file_counts)
 
-def retrieve():
-    bgb_store_id = "vs_6831657e75048191b74cd994e2232105"
-    user_query = "Welche Paragraphen sind relevant für den Kaufvertrag?"
+def create_vector_store(name: str) -> str:
+    """Create a vector store with the given name."""
+    vector_store = client.vector_stores.create(name=name)
+    return vector_store.id
+
+
+def upload_files_to(vector_store_id: str, from_folder: str = "urteile") -> None:
+    """Upload PDF files to the vector store."""
+    pdfs = glob.glob(f"{from_folder}/*.pdf")
+
+    for pdf in tqdm(pdfs):
+        with open(pdf, "rb") as file:
+            file_batch = client.vector_stores.file_batches.upload_and_poll(
+                vector_store_id=vector_store_id,
+                files=[file],
+                chunking_strategy={
+                    "type": "static",
+                    "static": {
+                        "max_chunk_size_tokens": 800,
+                        "chunk_overlap_tokens": 400,
+                    },
+                },
+            )
+        print(file_batch)
+
+
+def try_retrieval(store_id: str) -> None:
+    query = """
+    Prüfung, welchen Zeitraum das vorliegende Amtshilfeersuchen betrifft und auf welches Recht es sich stützt.
+    Das vorliegende Amtshilfeersuchen betrifft den Zeitraum vom 1. Juli 2020 bis 30. Juni 2022 und stützt sich auf Art. 27 DBA CH-IT und auf Bst. ebis des ebenfalls unter SR 0.672.945.41 aufgeführten dazugehörigen Zusatzprotokolls vom 9. März 1976 (nachfolgend: Zusatzprotokoll zum DBA CH-IT).
+    """
 
     results = client.vector_stores.search(
-        vector_store_id=bgb_store_id,
-        query=user_query,
-    )
-    for result in results:
-        print(print(result.content))
-
-def ask_assistant_with_store():
-    bgb_store_id = "vs_6831657e75048191b74cd994e2232105"
-    assistant_id = "asst_CeRT4S3egnpB2oTuJmxcP4UK"
-
-    # assistant = client.beta.assistants.create(
-    #     name="Rechtsrecherche Assistent",
-    #     instructions="Du Bist ein Assistent, der bei der Rechtsrecherche hilft. Die bist Experte für das deutsche BGB.",
-    #     model="gpt-4.1",
-    #     tools=[{"type": "file_search"}],
-    #     tool_resources={"file_search": {"vector_store_ids": [bgb_store_id]}}
-    # )
-
-    # assistant = client.beta.assistants.retrieve(assistant_id)
-    #
-    # assistant = client.beta.assistants.update(
-    #     assistant_id=assistant.id,
-    #     tools=[{"type": "file_search"}],
-    #     tool_resources={"file_search": {"vector_store_ids": [bgb_store_id]}},
-    # )
-
-    thread = client.beta.threads.create(
-        messages=[
-            {
-                "role": "user",
-                "content": "Zitiere $ 453 wortwörtlich aus dem BGB.",
-            }
-        ]
+        max_num_results=3,
+        vector_store_id=store_id,
+        query=query,
     )
 
-    run = client.beta.threads.runs.create_and_poll(
-        thread_id=thread.id, assistant_id=assistant_id
-    )
+    for res in results.data:
+        print(res.score)
+        print(res.content[0].text)
+        print("")
+        print("")
+        print("____________________________________________")
 
-    messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-
-    message_content = messages[0].content[0].text
-    annotations = message_content.annotations
-    citations = []
-    for index, annotation in enumerate(annotations):
-        message_content.value = message_content.value.replace(annotation.text, f"[{index}]")
-        if file_citation := getattr(annotation, "file_citation", None):
-            cited_file = client.files.retrieve(file_citation.file_id)
-            citations.append(f"[{index}] {cited_file.filename}")
-
-    print(message_content.value)
-    print("\ncitations:\n")
-    print("\n".join(citations))
-
-
-def delete_stores(ids: [str] = []):
-    for id_ in ids:
-        # Delete the vector store
-        client.vector_stores.delete(id_)
 
 if __name__ == "__main__":
-    # create_store_and_upload()
-    # retrieve()
-    ask_assistant_with_store()
+    # vs_id = create_vector_store("Amtshilfeurteile-800-400tok")
+    # upload_files_to(vs_id, "urteile")
+
+    try_retrieval(AMTSHILFE_800_400tok)
