@@ -2,7 +2,12 @@ import os
 
 from agents import Agent, Runner, trace
 from dotenv import load_dotenv
-from helpers import get_instr, read_word, load_items_to_examine_from, create_word_document
+from helpers import (
+    get_instr,
+    read_word,
+    load_items_to_examine_from,
+    create_word_document,
+)
 from models.items import (
     AbstrakteErwItem,
     SachverhaltItem,
@@ -10,6 +15,9 @@ from models.items import (
 )
 
 from models.prompt import PromptBuilder
+import logging
+
+logger = logging.getLogger("openai.agents.tracing")
 
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
@@ -18,10 +26,8 @@ TEST = False
 
 if TEST:
     PROMPTS_FOLDER = "prompts-test"
-    TEST_FILENAME_PREFIX = "test_"
 else:
     PROMPTS_FOLDER = "prompts"
-    TEST_FILENAME_PREFIX = ""
 
 RICHTER_AGENT = Agent(
     name="Richter",
@@ -136,13 +142,12 @@ def main():
         prompt.add_user(
             "Hier ist der vollständige Sachverhalt, den du formuliert hast:"
         )
-
         for sach in sachverhalt:
             prompt.add_assistant(sach)
 
         erwaegungen = create_abstract_considerations(prompt)
 
-        doc = create_word_document(erwaegungen, sachverhalt)
+    doc = create_word_document(erwaegungen, sachverhalt, save=True, test=TEST)
 
     # convert word document to string for output
     print("\n".join([para.text for para in doc.paragraphs]))

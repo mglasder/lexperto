@@ -6,7 +6,6 @@ from typing import List
 
 from docx import Document
 
-from lexperto import TEST_FILENAME_PREFIX
 from models.items import BasePromptItem
 
 
@@ -49,13 +48,14 @@ def load_items_to_examine_from(
     return items
 
 
-def save_output_word(doc: Document, output_folder: str = "output"):
+def save_output_word(doc: Document, output_folder: str = "output", test=False):
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
+    TEST_FILENAME_PREFIX = "test_" if test else ""
     doc.save(f"{output_folder}/{TEST_FILENAME_PREFIX}{now}_ergebnis.docx")
 
 
 def create_word_document(
-    erwaegungen: List[str], sachverhalt: List[str], save=True
+    erwaegungen: List[str], sachverhalt: List[str], save=True, test=False
 ) -> Document:
     # TODO: create a document creator class
     doc = Document()
@@ -69,5 +69,5 @@ def create_word_document(
         doc.add_paragraph(erw, style="List Number")
         doc.add_paragraph("")  # Add a blank line between paragraphs
     if save:
-        save_output_word(doc)
+        save_output_word(doc, test=test)
     return doc
