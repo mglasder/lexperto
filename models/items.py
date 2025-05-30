@@ -51,6 +51,7 @@ class AbstrakteErwItem(BasePromptItem):
     examples: List[str] = []
     mandatory: bool = True
     requirement_for_analysis: Optional[str] = None
+    needs_research: bool = True
 
     def task_as_prompt(self) -> List[dict]:
         prompt = [{"role": "user", "content": f"{self.task}"}]
