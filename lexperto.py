@@ -18,11 +18,13 @@ from models.prompt import PromptBuilder
 import logging
 
 logger = logging.getLogger("openai.agents.tracing")
+logging.basicConfig(level=logging.INFO)
+logger.setLevel(logging.INFO)
 
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 
-TEST = False
+TEST = True
 
 if TEST:
     PROMPTS_FOLDER = "prompts-test"
@@ -54,6 +56,7 @@ def create_sachverhalt(prompt) -> list[str]:
     )
 
     for item in items:
+        logger.info(f"Processing sachv item: {item.id}")
         prompt.add_user(item.task)
         if item.example:
             prompt.extend(item.examples_as_prompt())
@@ -75,10 +78,12 @@ def create_abstract_considerations(prompt) -> list[str]:
     results = []
 
     for item in items:
+        logger.info(f"Processing item: {item.id}")
         prompt.add_user("Hier ist die Angabe, was zu prüfen ist:")
         prompt.extend(item.task_as_prompt())
 
         if not item.mandatory:
+            logger.info(f"{item.id} is not mandatory, preparing decision")
             prompt.add_user(
                 """
                 Dieser Prüfungspunkt ist nicht obligatorisch.
@@ -102,13 +107,19 @@ def create_abstract_considerations(prompt) -> list[str]:
                 7. Gib eine Begründung für deine Entscheidung an.
                 """
             )
-            print(f"Deciding: {item.task}")
+
             decision = Runner.run_sync(RELEVANCE_DECIDER, prompt.get())
+
+            logger.info(
+                f"Decision made - {item.id} - is relevant: {decision.final_output.is_relevant}"
+            )
+            logger.info(
+                f"Decision made - {item.id} - reason: {decision.final_output.reason}"
+            )
 
             if not decision.final_output.is_relevant:
                 continue
             else:
-                print(f"Decision made: {decision.final_output}")
                 prompt.add_assistant("Der Prüfungspunkt ist relevant.")
                 prompt.add_assistant(decision.final_output.reason)
 
@@ -137,7 +148,9 @@ def main():
         prompt.add_user("Hier ist die Beschwerdeschrift:")
         prompt.add_user(beschwerde)
 
+        logger.info("Starting to generate Sachverhalt...")
         sachverhalt = create_sachverhalt(prompt)
+        logger.info("Sachverhalt generated.")
 
         prompt.add_user(
             "Hier ist der vollständige Sachverhalt, den du formuliert hast:"
@@ -145,12 +158,14 @@ def main():
         for sach in sachverhalt:
             prompt.add_assistant(sach)
 
+        logger.info("Starting to generate abstract considerations...")
         erwaegungen = create_abstract_considerations(prompt)
+        logger.info("Abstract considerations generated.")
 
     doc = create_word_document(erwaegungen, sachverhalt, save=True, test=TEST)
 
-    # convert word document to string for output
-    print("\n".join([para.text for para in doc.paragraphs]))
+    # # convert word document to string for output
+    # print("\n".join([para.text for para in doc.paragraphs]))
 
 
 if __name__ == "__main__":
