@@ -2,6 +2,7 @@ import glob
 import os
 from datetime import datetime
 from pathlib import Path
+from typing import List
 
 from docx import Document
 
@@ -51,3 +52,22 @@ def load_items_to_examine_from(
 def save_output_word(doc: Document, output_folder: str = "output"):
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
     doc.save(f"{output_folder}/{TEST_FILENAME_PREFIX}{now}_ergebnis.docx")
+
+
+def create_word_document(
+    erwaegungen: List[str], sachverhalt: List[str], save=True
+) -> Document:
+    # TODO: create a document creator class
+    doc = Document()
+    doc.add_heading("Urteil in Amtshilfeverfahren", level=1)
+    doc.add_heading("Sachverhalt:", level=2)
+    for sach in sachverhalt:
+        doc.add_paragraph(sach, style="List Number")
+        doc.add_paragraph("")  # Add a blank line between paragraphs
+    doc.add_heading("Das Bundesverwaltungsgericht zieht in Erwägungen:", level=2)
+    for erw in erwaegungen:
+        doc.add_paragraph(erw, style="List Number")
+        doc.add_paragraph("")  # Add a blank line between paragraphs
+    if save:
+        save_output_word(doc)
+    return doc

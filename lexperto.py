@@ -1,13 +1,13 @@
 import os
+
 from agents import Agent, Runner, trace
 from dotenv import load_dotenv
-from helpers import get_instr, read_word, load_items_to_examine_from, save_output_word
+from helpers import get_instr, read_word, load_items_to_examine_from, create_word_document
 from models.items import (
     AbstrakteErwItem,
     SachverhaltItem,
     ItemRelevanceDecision,
 )
-from docx import Document
 
 from models.prompt import PromptBuilder
 
@@ -36,9 +36,6 @@ RELEVANCE_DECIDER = Agent(
     model="gpt-4.1-mini",
     output_type=ItemRelevanceDecision,
 )
-
-
-# TODO: create a detailed prompt with agentic intstructions
 
 
 def create_sachverhalt(prompt) -> list[str]:
@@ -122,9 +119,6 @@ def create_abstract_considerations(prompt) -> list[str]:
     return results
 
 
-# TODO: create document saver class
-
-
 def main():
 
     with trace("Amtshilfe Workflow"):
@@ -148,20 +142,7 @@ def main():
 
         erwaegungen = create_abstract_considerations(prompt)
 
-        # TODO: create a document creator class
-        doc = Document()
-        doc.add_heading("Urteil in Amtshilfeverfahren", level=1)
-        doc.add_heading("Sachverhalt:", level=2)
-        for sach in sachverhalt:
-            doc.add_paragraph(sach, style="List Number")
-            doc.add_paragraph("")  # Add a blank line between paragraphs
-
-        doc.add_heading("Das Bundesverwaltungsgericht zieht in Erwägungen:", level=2)
-        for erw in erwaegungen:
-            doc.add_paragraph(erw, style="List Number")
-            doc.add_paragraph("")  # Add a blank line between paragraphs
-
-    save_output_word(doc)
+        doc = create_word_document(erwaegungen, sachverhalt)
 
     # convert word document to string for output
     print("\n".join([para.text for para in doc.paragraphs]))
