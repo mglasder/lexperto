@@ -44,9 +44,9 @@ RICHTER_AGENT = Agent(
 )
 
 
-JUNIOR_AGENT = Agent(
-    name="Junior Richter",
-    instructions=get_instr("junior_richter_instructions.txt"),
+RELEVANCE_DECIDER = Agent(
+    name="Relevanzbewerter",
+    instructions=get_instr("relevance_decider_instructions.txt"),
     model="gpt-4.1-mini",
     output_type=ItemRelevanceDecision,
 )
@@ -147,7 +147,7 @@ def create_abstract_considerations(prompt) -> list[str]:
                 """
             )
             print(f"Deciding: {item.task}")
-            decision = Runner.run_sync(JUNIOR_AGENT, prompt.get())
+            decision = Runner.run_sync(RELEVANCE_DECIDER, prompt.get())
 
             if not decision.final_output.is_relevant:
                 continue
