@@ -43,6 +43,7 @@ def load_items_to_examine_from(
 
     for yaml_file in yaml_files:
         pp = item_cls.from_yaml(yaml_file)
+        pp.id = Path(yaml_file).stem  # Set the ID to the filename without extension
         items.append(pp)
 
     return items
