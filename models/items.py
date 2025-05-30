@@ -1,6 +1,13 @@
 from typing import Optional, List
 import yaml
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+
+class ItemRelevanceDecision(BaseModel):
+    """Decision on whether an item is relevant for the case."""
+
+    is_relevant: bool = Field(description="Gibt an, ob der Prüfungspunkt relevant ist.")
+    reason: str = Field("", description="Begründung für die Relevanzentscheidung.")
 
 
 class BasePromptItem(BaseModel):
