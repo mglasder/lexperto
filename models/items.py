@@ -11,6 +11,7 @@ class ItemRelevanceDecision(BaseModel):
 
 
 class BasePromptItem(BaseModel):
+    id: Optional[str] = ""
 
     @classmethod
     def from_yaml(cls, path: str) -> "BasePromptItem":
