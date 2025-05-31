@@ -1,5 +1,12 @@
-task: "Prüfung der Legitimation des Beschwerdeführers: Das Bundesverwaltungsgericht prüft, inwieweit der Beschwerdeführer zur Beschwerde legitimiert ist."
+task: "Prüfung der Legitimation des Beschwerdeführers: Das Bundesverwaltungsgericht prüft, inwieweit der Beschwerdeführer zur Beschwerde legitimiert ist.
+Zur Beschwerde ist berechtigt, wer:
+a. vor der Vorinstanz am Verfahren teilgenommen hat oder keine Möglichkeit zur Teilnahme erhalten hat;
+b. durch die angefochtene Verfügung besonders berührt ist; und
+c. ein schutzwürdiges Interesse an deren Aufhebung oder Änderung hat.
+Zur Beschwerde berechtigt sind ferner Personen, Organisationen und Behörden, denen ein anderes Bundesgesetz dieses Recht einräumt.
+"
 examples:
   - "Die Beschwerdeführerin ist als Verfügungsadressatin gemäss Art. 48 Abs. 1 VwVG in Verbindung mit Art. 19 Abs. 2 StAhiG zur Beschwerde legitimiert."
 mandatory: true
 requirement_for_analysis: 
+needs_research: true
