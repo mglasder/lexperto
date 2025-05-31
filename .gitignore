@@ -114,3 +114,5 @@ logs/
 .DS_Store
 .idea/
 urteile/
+run_logs/
+output/
