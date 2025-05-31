@@ -46,12 +46,13 @@ class SachverhaltItem(BasePromptItem):
     def examples_as_prompt(self) -> List[dict]:
         return [{"role": "user", "content": self.example}]
 
+
 # create enum with search types
 class SearchType(Enum):
     """Enum for search types."""
+
     MOST_RECENT = "most_recent"
     SIMILAR_PARA = "similar_para"
-
 
 
 class AbstrakteErwItem(BasePromptItem):
