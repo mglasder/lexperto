@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import Optional, List
 import yaml
 from pydantic import BaseModel, Field
@@ -45,13 +46,20 @@ class SachverhaltItem(BasePromptItem):
     def examples_as_prompt(self) -> List[dict]:
         return [{"role": "user", "content": self.example}]
 
+# create enum with search types
+class SearchType(Enum):
+    """Enum for search types."""
+    MOST_RECENT = "most_recent"
+    SIMILAR_PARA = "similar_para"
+
+
 
 class AbstrakteErwItem(BasePromptItem):
     task: str = ""
     examples: List[str] = []
     mandatory: bool = True
     requirement_for_analysis: Optional[str] = None
-    needs_research: bool = True
+    search: Optional[SearchType] = None
 
     def task_as_prompt(self) -> List[dict]:
         prompt = [{"role": "user", "content": f"{self.task}"}]
