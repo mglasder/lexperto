@@ -1,5 +1,6 @@
-task: "Prüfung, welchen Zeitraum das vorliegende Amtshilfeersuchen betrifft und auf welches Recht es sich stützt"
+task: "Prüfung, welchen Zeitraum das vorliegende Amtshilfeersuchen betrifft und auf welches Recht (i.e. auf welchen Artikel aus welchem DBA) es sich stützt."
 examples:
   - "Das vorliegende Amtshilfeersuchen betrifft den Zeitraum vom 1. Juli 2020 bis 30. Juni 2022 und stützt sich auf Art. 27 DBA CH-IT und auf Bst. ebis des ebenfalls unter SR 0.672.945.41 aufgeführten dazugehörigen Zusatzprotokolls vom 9. März 1976 (nachfolgend: Zusatzprotokoll zum DBA CH-IT)."
 mandatory: true
 requirement_for_analysis: 
+needs_research: true

@@ -3,3 +3,4 @@ examples:
   - "Gemäss Art. 27 Abs. 1 Satz 1 DBA CH-IT tauschen die zuständigen Behörden der beiden Vertragsstaaten unter sich diejenigen Informationen aus, die zur Durchführung des Abkommens oder zur Anwendung oder Durchsetzung des innerstaatlichen Rechts betreffend Steuern jeder Art und Bezeichnung, die für Rechnung der Vertragsstaaten oder ihrer politischen Unterabteilungen oder lokalen Körperschaften erhoben werden, voraussichtlich erheblich sind (vgl. dazu E. 3.4), soweit die diesem Recht entsprechende Besteuerung nicht dem Abkommen widerspricht. Der Informationsaustausch in Anwendung von Art. 27 DBA CH-IT ist nicht durch Art. 1 DBA CH-IT (persönlicher Geltungsbereich) und Art. 2 DBA CH-IT (sachlicher Geltungsbereich bzw. unter das Abkommen fallende Steuern) eingeschränkt (Art. 27 Abs. 1 Satz 2 DBA CH-IT)."
 mandatory: true
 requirement_for_analysis: 
+needs_research: true

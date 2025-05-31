@@ -3,3 +3,4 @@ examples:
   - "Auf die frist- und formgerecht eingereichte Beschwerde ist folglich einzutreten (vgl. Art. 50 Abs. 1 und Art. 52 Abs. 1 VwVG)."
 mandatory: true
 requirement_for_analysis: 
+needs_research: false
