@@ -9,6 +9,14 @@ from docx import Document
 from models.items import BasePromptItem
 
 
+def load_prompt(name: str, **subs) -> str:
+    """Load a Markdown prompt template and substitute <PLACEHOLDERS>."""
+    content = (Path("prompts/") / name).read_text()
+    for key, val in subs.items():
+        content = content.replace(f"<{key}>", str(val))
+    return content
+
+
 def get_instr(which: str) -> str:
     with open(f"prompts/instructions/{which}", "r", encoding="utf-8") as f:
         instr = f.read()

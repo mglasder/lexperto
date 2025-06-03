@@ -107,31 +107,28 @@ def load_most_recent_ruling(folder: str = "urteile/DBA-CH-FR") -> str:
     return ""
 
 
-def most_recent_search(search_prompt: PromptBuilder) -> str:
+def most_recent_search(description: str) -> str:
+
+    search_prompt = PromptBuilder()
+    search_prompt.add_user(
+        "Hier ist die Beschreibung des Inhalts der abstrakten Erwägung"
+    )
+    search_prompt.add_user(description)
 
     # TODO: make depending on DBA
-    text = load_most_recent_ruling()
+    court_decision = load_most_recent_ruling()
 
     search_prompt.add_user("Hier ist das aktuellste Urteil:")
-    search_prompt.add_user(text)
+    search_prompt.add_user(court_decision)
 
-    # with agent: find the paragraph relating to input in the abstragte erwägungen
-    # return it word for word in plain text
     result = Runner.run_sync(MOST_RECENT_SEARCH_AGENT, search_prompt.get())
-
     return result.final_output
 
 
 if __name__ == "__main__":
 
-    prompt = PromptBuilder()
-    prompt.add_user("Hier ist die Beschreibung des Inhalts der abstrakten Erwägung")
-    prompt.add_user(
-        "Prüfung, welche Informationen die Vertragsstaaten des anwendbaren DBA unter sich austauschen"
-    )
-
+    prompt = "Prüfung, welche Informationen die Vertragsstaaten des anwendbaren DBA unter sich austauschen"
     text = most_recent_search(prompt)
-
     # create line break every 80 characters
     formatted_text = "\n".join(text[i : i + 80] for i in range(0, len(text), 80))
     print(formatted_text)

@@ -1,0 +1,28 @@
+Du wirst die Aufgabe erhalten, eine allgemeingültige Prüfungshierarchie für die abstrakten Erwägungen eines Urteil in Amtshilfeverfahren auf Basis alter Urteile zu erstellen.
+
+Dein Denkprozess soll gründlich sein – es ist also in Ordnung, wenn er sehr lang ausfällt. Du darfst Schritt für Schritt vorgehen, sowohl vor als auch nach jeder Entscheidung, die du triffst.
+
+Du MUSST iterieren und so lange weiterarbeiten, bis das Problem vollständig gelöst ist.
+
+Alles, was du zur Lösung dieses Problems benötigst, befindet sich in den Urteilen im Vektorstore – du brauchst keine Internetverbindung. Ich möchte, dass du dieses Problem vollständig und eigenständig löst, bevor du wieder zu mir zurückkehrst.
+Du kannst soviele Anfragen an den Vektorstore stellen wie du möchtest. Stelle so lange Anfragen, bis du alle nötigen Informationen hast.
+Du sollst auch alle Urteile im Ganzen lesen.
+
+Beende deinen Durchgang nur, wenn du dir absolut sicher bist, dass das Problem gelöst ist. Gehe das Problem Schritt für Schritt durch und vergewissere dich, dass deine Schlussfolgerungen korrekt sind. Beende deinen Durchgang NIEMALS, ohne das Problem gelöst zu haben.
+
+Die Urteile folgen einem sehr ähnlichen Aufbau, der sich im Wesentlichen in folgende Hauptabschnitte gliedert:
+
+1. Kopfzeile und Besetzung
+2. Parteien
+3. Sachverhalt
+4. Verfahrensgang
+5.1. Abstrakte Erwägungen
+5.1.1. Abstrakte Erwägungen allgemein zu Verfahren vor dem BVGer
+5.1.2. Abstrakte Erwägungen spezifisch für Amtshilfeverfahren
+5.2. Konkrete Erwägungen
+6. Dispositiv
+7. Rechtsmittelbelehrung
+8. Zustellung/Versand
+
+Diese Gliederung ist in allen Urteilen mit leichten Varianten zu finden.
+

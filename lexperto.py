@@ -13,12 +13,14 @@ from models.items import (
     AbstrakteErwItem,
     SachverhaltItem,
     ItemRelevanceDecision,
+    SearchType,
 )
 
 from models.prompt import PromptBuilder
 import logging
 
 from models.results import RulingsResearchResult
+from search import most_recent_search
 
 logger = logging.getLogger("openai.agents.tracing")
 now = datetime.now().strftime("%Y%m%d_%H%M")
@@ -29,7 +31,7 @@ logger.setLevel(logging.INFO)
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 
-TEST = True
+TEST = False
 
 if TEST:
     PROMPTS_FOLDER = "prompts-test"
@@ -90,7 +92,7 @@ def create_sachverhalt(prompt) -> list[str]:
 def create_abstract_considerations(prompt) -> list[str]:
     prompt.add_user(get_instr("aerw_instructions.txt"))
 
-    items = load_items_to_examine_from(
+    items: [AbstrakteErwItem] = load_items_to_examine_from(
         f"{PROMPTS_FOLDER}/aerw/", item_cls=AbstrakteErwItem
     )
     results = []
@@ -146,46 +148,25 @@ def create_abstract_considerations(prompt) -> list[str]:
 
         # TODO: extract in a separate function
         # TODO: look for more example in old cases.
-        if item.needs_research:
-            logger.info(f"Item {item.id} needs research ...")
-            prompt.add_user(get_instr("research_task_description.txt"))
-            research_task = Runner.run_sync(RICHTER_AGENT, prompt.get())
-            logger.info(
-                f"Research task created for item {item.id}: {research_task.final_output}"
-            )
+        if item.search == SearchType.MOST_RECENT:
+            logger.info(f"Performing most recent search for {item.id}.")
 
-            research_prompt = PromptBuilder()
-            research_prompt.add_user("Hier ist der Rechercheauftrag:")
-            research_prompt.add_user(research_task.final_output)
-            # research_prompt.add_user("Hier ist das Beispiel zu dem Auftrag:")
-            # research_prompt.extend(item.examples_as_prompt())
-            research_result = Runner.run_sync(RESEARCH_AGENT, research_prompt.get())
-            logger.info(f"Research result generated for item {item.id}")
-            logger.info(
-                f"Research result for item {item.id}: {research_result.final_output}"
-            )
-            # TODO: end
             prompt.add_user(
-                "Hier sind die wortwörtlichen Textpassagen, die der Rechercheassistent gefunden hat:"
+                "Hier ist die aktuellste Fassung des Paragraphen zu dem zu prüfenden Punkt:"
             )
-            prompt.add_user(research_result.final_output)
+            most_recent_paragraph = most_recent_search(item.task)
+            prompt.add_user(most_recent_paragraph)
             prompt.add_user(
-                "Analysiere die Textpassagen im Kontext des vorliegenden Falls und prüfe, welche Teile und Formulierungen für den vorliegenden Fall relevant sind. "
-                "Übernimm diese Formulierungen im Folgenden. Bleib dabei so nah wie möglich an den wortwörtlichen Formulierungen."
-                "Entscheide jetzt, welche Formulierungen du übernehmen kannst und an welcher Stelle du ergänzen musst."
+                "Identifiziere die fallspezifischen Teile des Paragraphen, die für den vorliegenden Fall angepasst werden müssen und passe diese entsprechend an."
             )
-            analysis_result = Runner.run_sync(RICHTER_AGENT, prompt.get())
-            logger.info(f"Analysis of research result: {analysis_result.final_output}")
-            prompt.set_with(analysis_result.to_input_list())
 
-        prompt.add_user(
-            "Erstelle jetzt den spezifischen Absatz für den vorliegenden Fall. Erstelle NUR den Absatz, OHNE sonstigen Erklärungen oder Ergänzungen. "
-            "Der Absatz ist eine abstrakte Erwägung. Die rechtlichen Voraussetzungen werden erläutert, aber es wird nicht subsumiert."
-            "Halte dich dabei so nah wie möglich an den wortwörtlichen Formulierungen, die du oben ausgewählt hast."
-        )
+            aligned_paragraph = Runner.run_sync(RICHTER_AGENT, prompt.get())
+            prompt.set_with(aligned_paragraph.to_input_list())
 
+        prompt.add_user("Füge den Paragraphen in das Urteil ein.")
         result = Runner.run_sync(RICHTER_AGENT, prompt.get())
-        results.append(result.final_output)
+        para = f"{item.id}\n" + f"{result.final_output}"
+        results.append(para)
         prompt.set_with(result.to_input_list())
 
     return results
