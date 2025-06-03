@@ -9,12 +9,13 @@ Amtshilfeurteilen des Bundesverwaltungsgerichts genannt wurden. Denke dabei in P
 strukturiert. In der Regel entspricht jeder Paragraph einem Prüfungspunkt.
 
 ----
-
 **Definition Abstrakte Erwägungen:**
 Abstrakte Erwägungen sind die allgemeinen Prüfungspunkte, die im Abschnitt Erwägungen des Urteil zuerst genannt werden.
 Diese enthalten sowohl allgemeine rechtsgebiet-übergreifende Punkte, als auch Amthilfe-spezifische Punkte. Die abstrakten 
 Erwägungen zeichnen sich dadurch aus, dass in ihnen keine Subsumtion stattfindet (vereinzelte Ausnahmen gibt es, dies sind
 dann kurze, deklaratorische Subsumtionen (meistens nur ein Satz)). 
+
+---
 
 **Wichtige Anforderungen an das Ergebnis:**
 
@@ -44,11 +45,12 @@ Typische Formulierungen (Zitat):
 
 
 Die typische Fomrulierung **MUSS** den vollständigen, ungekürzten Paragraphen enthalten.
+Achte auf **korrekte Klassifizierung**: obligatorisch (O) oder fakultativ (F).
 Erstelle den Output als Markdown-Text.
 
 **Beispiel für einen Punkt:**
 
-1. Zuständigkeit und Verfahrensgrundlagen (O)
+1. Zuständigkeit und Verfahrensgrundlagen (O/F)
 - Erläuterung: Es ist zu prüfen, ob das Amtshilfeersuchen die formellen Voraussetzungen des anwendbaren DBA und des 
 Zusatzprotokolls erfüllt, insbesondere Art. 28 und Ziff. XI Abs. 3 des Zusatzprotokolls, welche Identität der betroffenen 
 Person, Zeitraum, Beschreibung der verlangten Informationen, deren Form, den Steuerzweck und bekannte Adressdaten betreffen. 
@@ -61,6 +63,7 @@ Verwaltungsverfahren (Verwaltungsverfah-rensgesetz, VwVG, SR 172.021), soweit da
 - Quelle(n): A-2453/2021, 1.2
 
 Gib immer den gesamten Paragraphen als Zitat (typische Formulierung) zurück, auch wenn dieser sehr lang ist.
+Klassifiziere als obligatorisch (O) oder fakultativ (F).
 
 ---
 **Tools**
