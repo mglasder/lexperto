@@ -1,7 +1,7 @@
 from datetime import datetime
 import os
 from typing import Optional, List, Tuple
-
+import yaml
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langgraph.prebuilt import create_react_agent
@@ -107,7 +107,7 @@ def main():
     )
 
     # anthropic = init_chat_model(
-    #     "anthropic:claude-4",
+    #     "anthropic:claude-3-5-haiku-latest",
     #     temperature=0.0,
     # )
 
@@ -120,13 +120,15 @@ def main():
         response_format=Schema,
     )
 
+    name = "A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf"
+
     # Run the agent
     response = agent.invoke(
         {
             "messages": [
                 {
                     "role": "user",
-                    "content": "Erstelle jetzt ein Schema für die abstrakten Erwägungen in Amtshilfeurteilen.",
+                    "content": f"Hier ist der Name des Urteils: {name}. Erstelle jetzt ein Schema für die abstrakten Erwägungen:",
                 }
             ]
         }
