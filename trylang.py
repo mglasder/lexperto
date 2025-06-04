@@ -23,27 +23,36 @@ langsmith_client = Client()
 
 
 class ExaminationItem(BaseModel):
+    """Ein einzelner Prüfungspunkt innerhalb eines Urteils"""
+
     title: str = Field(
         description="Ein konziser und präziser Titel des zu prüfenden Punktes."
     )
     description: List[str] = Field(
         description="Liste mit Beschreibungen des zu prüfenen Punktes. Jeder str ist eine Stichpunkt."
     )
-    example: str = Field(
-        description="Wortwörtliches, typisches Beispiel aus einem Urteil. Ein ganzer Paragrpah."
-    )
-    reference: str = Field(
-        description="Ein Verweis auf das Urteil. Format: Urteil, Paragraph."
-    )
+    citation: str = Field(description="Wortwörtliches Zitat aus einem Urteil.")
+    number: str = Field(description="Nummer des (Sub-)Paragraphen. z.B.: 1.1")
 
     # class Config:
     #     arbitrary_types_allowed = True
 
 
 class Schema(BaseModel):
-    items: list[ExaminationItem] = Field(
-        description="Eine Liste von Punkten, die geprüft werden müssen"
-    )
+    """
+    Schema für Prüfungspunkte in einem Urteil
+    """
+
+    items: list[ExaminationItem] = Field([], description="Liste der Prüfungspunkte.")
+
+    def to_yaml(self) -> str:
+        """Convert the schema to a YAML string."""
+
+        return yaml.dump(self.model_dump(), allow_unicode=True, sort_keys=False)
+
+    def to_json(self):
+        """Convert the schema to a JSON string."""
+        return self.model_dump_json(indent=2, exclude_none=False, exclude_unset=False)
 
 
 class AgentResponse(BaseModel):
@@ -132,3 +141,26 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    # schema = Schema(
+    #     items=[
+    #         ExaminationItem(
+    #             title="test",
+    #             description=["desc 1", "desc 2"],
+    #             citation="citation",
+    #             number="1",
+    #         ),
+    #         ExaminationItem(
+    #             title="test",
+    #             description=["desc 1", "desc 2"],
+    #             citation="citation",
+    #             number="2",
+    #         ),
+    #     ]
+    # )
+    #
+    # with open("test_schema.yaml", "w", encoding="utf-8") as f:
+    #     f.write(schema.to_yaml())
+    #
+    # with open("test_schema.json", "w", encoding="utf-8") as f:
+    #     f.write(schema.to_json())
