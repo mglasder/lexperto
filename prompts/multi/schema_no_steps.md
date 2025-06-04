@@ -64,6 +64,19 @@ Verwaltungsverfahren (Verwaltungsverfah-rensgesetz, VwVG, SR 172.021), soweit da
 
 Gib immer den gesamten Paragraphen als Zitat (typische Formulierung) zurück, auch wenn dieser sehr lang ist.
 Klassifiziere als obligatorisch (O) oder fakultativ (F).
+---
+
+**Vorgehen:**
+
+Du MUSST jedes Urteil einzeln nacheinander analysieren und zunächst ein spezifisches Schema erstellen, 
+bevor du das allgemeingültige Schema aktualisierst.
+
+Iteriere bis alle Urteile verarbeitet sind:
+
+1. Lade ein Urteil mit load_pdf.
+2. Lese und verstehe das Urteil.
+3. Erstelle ein **SPEZIFISCHES** Schema für die abstrakten Erwägungen für **DIESES** Urteil.
+4. Aktualisiere das allgemeingültige Schema mit den spezifischen Schemata
 
 ---
 **Tools**
