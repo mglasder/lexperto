@@ -17,6 +17,10 @@ logging.getLogger("pdfminer").setLevel(logging.ERROR)
 load_dotenv()
 os.environ["LANGSMITH_TRACING"] = "true"  # overwrites dotenv
 
+from langsmith import Client
+
+langsmith_client = Client()
+
 
 class ExaminationItem(BaseModel):
     title: str = Field(
@@ -86,7 +90,7 @@ def main():
 
         return full_text
 
-    INSTRUCTIONS = load_prompt("multi/schema_no_steps.md")
+    INSTRUCTIONS = load_prompt("multi/schema_single.md")
 
     openai = init_chat_model(
         "openai:gpt-4.1-mini",
@@ -98,10 +102,13 @@ def main():
     #     temperature=0.0,
     # )
 
+    INSTRUCTIONS = langsmith_client.pull_prompt("schema_single", include_model=False)
+
     agent = create_react_agent(
         model=openai,
         tools=[load_pdf],
-        prompt=INSTRUCTIONS + PDF_LIST,
+        prompt=INSTRUCTIONS.messages[0].prompt.template,
+        response_format=Schema,
     )
 
     # Run the agent
