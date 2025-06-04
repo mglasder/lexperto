@@ -135,8 +135,16 @@ def main():
     print(response["messages"][-1].content)
     # save as markdown file
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
-    with open(f"output/{now}_schema_aerw.md", "w", encoding="utf-8") as f:
-        f.write(response["messages"][-1].content)
+    # with open(f"output/{now}_schema_{name}_aerw.md", "w", encoding="utf-8") as f:
+    #     # f.write(response["messages"][-1].content)
+
+    schema = response["structured_response"]
+
+    with open(f"output/{now}_schema_{name}_aerw.yaml", "w", encoding="utf-8") as f:
+        f.write(schema.to_yaml())
+
+    with open(f"output/{now}_schema_{name}_aerw.json", "w", encoding="utf-8") as f:
+        f.write(schema.to_json())
 
 
 if __name__ == "__main__":
