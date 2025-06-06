@@ -23,7 +23,7 @@ langsmith_client = Client()
 
 
 class ExaminationItem(BaseModel):
-    """Ein einzelner Prüfungspunkt innerhalb eines Urteils"""
+    """Ein einzelner Prüfungspunkt innerhalb eines Paragraphen."""
 
     title: str = Field(
         description="Ein konziser und präziser Titel des zu prüfenden Punktes."
@@ -31,23 +31,53 @@ class ExaminationItem(BaseModel):
     description: List[str] = Field(
         description="Liste mit Beschreibungen des zu prüfenen Punktes. Jeder str ist eine Stichpunkt."
     )
-    citation: str = Field(description="Wortwörtliches Zitat aus einem Urteil.")
-    number: str = Field(description="Nummer des (Sub-)Paragraphen. z.B.: 1.1")
+    citation: str = Field(description="Wortwörtliches Zitat aus dem Urteil.")
+    number: str = Field(description="Nummer des (Subparagraphen. z.B.: 1.1")
 
     # class Config:
     #     arbitrary_types_allowed = True
 
 
-class Schema(BaseModel):
+class Paragraph(BaseModel):
     """
-    Schema für Prüfungspunkte in einem Urteil
+    Ein Paragraph innerhalb des Urteils (Ebene 1., 2., ...). Dieser kann aus mehreren Subparagraphen
+    (1.1, 1.1.1, 1.1.2, 1.2, ...) bestehen, die je einen Subprüfungspunkt enthalten. Die einzelnen Subparagraphen
+    innerhalb eines Paragraphen bilden eine logisch zusammenhängende Einheit.
+
+    Enthält der Paragraph Subparagraphen, so hat er in der Regel selber keinen Text.
+    Enthält der Paragraph keine Subparagrpahen, so enthält er den gesamten Text.
     """
 
-    items: list[ExaminationItem] = Field([], description="Liste der Prüfungspunkte.")
+    number: int = Field(
+        -1,
+        description="Nummer des Paragraphen als Integer, -1 falls nicht extrahierbar.",
+    )
+    title: str = Field(
+        description="Ein konziser und präziser Titel, der den gesamten zu prüfenden Punkt inkl. Subparagraphen beschreibt."
+    )
+    description: List[str] = Field(
+        description="Liste mit Beschreibungen, die den gesamten zu prüfenden Punkt inkl. Subparagraphen zusammenfasst. Jeder str ist eine Stichpunkt."
+    )
+
+    citation: Optional[str] = Field(
+        description="Wortwörtliches Zitat des Paragrpahen, falls keine Subparagraphen vorhanden."
+    )
+
+    subparagraphs: List[ExaminationItem] = Field(
+        [],
+        description="Liste der Subparagraphen mit den zu prüfenden Punkten. Leere Liste, falls keine Subparagraphen vorhanden.",
+    )
+
+
+class Schema(BaseModel):
+    """
+    Schema der Paragraphen in einem Urteil.
+    """
+
+    items: List[Paragraph] = Field([], description="Liste der Paragraphen des Urteils.")
 
     def to_yaml(self) -> str:
         """Convert the schema to a YAML string."""
-
         return yaml.dump(self.model_dump(), allow_unicode=True, sort_keys=False)
 
     def to_json(self):
@@ -56,10 +86,10 @@ class Schema(BaseModel):
 
 
 class AgentResponse(BaseModel):
-    response: Schema
+    schematic: Schema
     debug_info: Optional[str] = Field(
         None,
-        description="Gib hier Debug-Informationen an, wenn du die Aufgabe nicht erfüllen kannst.",
+        description="Gib hier Informationen an, wenn du die Aufgabe nicht oder nur eingeschränkt oder nur teilweise erfüllen kannst.",
     )
 
 
@@ -99,25 +129,28 @@ def main():
 
         return full_text
 
-    INSTRUCTIONS = load_prompt("multi/schema_single.md")
-
     openai = init_chat_model(
         "openai:gpt-4.1-mini",
         temperature=0.0,
     )
 
-    # anthropic = init_chat_model(
-    #     "anthropic:claude-3-5-haiku-latest",
+    # gemini = init_chat_model(
+    #     model="gemini-2.5-pro",
+    #     model_provider="google_genai",
     #     temperature=0.0,
     # )
 
-    INSTRUCTIONS = langsmith_client.pull_prompt("schema_single", include_model=False)
+    # INSTRUCTIONS = load_prompt("multi/schema_single.md")
+    # INSTRUCTIONS = langsmith_client.pull_prompt("schema_single", include_model=False)
+    INSTRUCTIONS = langsmith_client.pull_prompt(
+        "schema_structured_all_paras", include_model=False
+    )
 
     agent = create_react_agent(
         model=openai,
         tools=[load_pdf],
         prompt=INSTRUCTIONS.messages[0].prompt.template,
-        response_format=Schema,
+        response_format=AgentResponse,
     )
 
     name = "A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf"
@@ -128,7 +161,7 @@ def main():
             "messages": [
                 {
                     "role": "user",
-                    "content": f"Hier ist der Name des Urteils: {name}. Erstelle jetzt ein Schema für die abstrakten Erwägungen:",
+                    "content": f"Hier ist der Name des Urteils: {name}. Erstelle jetzt das Schema für das Urteil.",
                 }
             ]
         }
@@ -137,10 +170,9 @@ def main():
     print(response["messages"][-1].content)
     # save as markdown file
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
-    # with open(f"output/{now}_schema_{name}_aerw.md", "w", encoding="utf-8") as f:
-    #     # f.write(response["messages"][-1].content)
+    schema = response["structured_response"].schematic
 
-    schema = response["structured_response"]
+    print(f"Debug info:{response['structured_response'].debug_info}")
 
     with open(f"output/{now}_schema_{name}_aerw.yaml", "w", encoding="utf-8") as f:
         f.write(schema.to_yaml())
