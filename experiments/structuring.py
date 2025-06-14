@@ -28,6 +28,18 @@ def get_level(number: str) -> int:
     )
 
 
+def add_missing_top_levels(paragraphs: List[Paragraph]) -> List[Paragraph]:
+    """Add missing top-level paragraphs for subparagraphs without parents."""
+    top_levels = {p.number for p in paragraphs if p.number.endswith(".")}
+    for p in paragraphs:
+        if not p.number.endswith(".") and "." in p.number:
+            top = p.number.split(".")[0] + "."
+            if top not in top_levels:
+                paragraphs.append(Paragraph(number=top, text=""))
+                top_levels.add(top)
+    return paragraphs
+
+
 def create_paragraph_struct(
     list_of_paragraphs: List[Paragraph],
 ) -> List[ParagraphStruct]:
@@ -47,6 +59,10 @@ def create_paragraph_struct(
         Paragraph(number=clean_paragraph_number(p.number), text=p.text)
         for p in list_of_paragraphs
     ]
+
+    # Add missing top-level paragraphs for subparagraphs without parents
+    cleaned_paragraphs = add_missing_top_levels(cleaned_paragraphs)
+
     # Sort paragraphs using the cleaned numbers
     sorted_paragraphs = sorted(cleaned_paragraphs, key=lambda p: p.number)
 

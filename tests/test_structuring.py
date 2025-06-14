@@ -13,6 +13,8 @@ from src.models.extraction import Paragraph, ParagraphStruct
                 Paragraph(number="1.1.1.", text="Subsection 1.1.1"),
                 Paragraph(number="1.1", text="Subsection 1.1"),
                 Paragraph(number="2", text="Conclusion"),
+                Paragraph(number="3.1", text="Subsection 3.1"),
+                Paragraph(number="3.2.", text="Subsection 3.2"),
                 Paragraph(number="1.1.2", text="Subsection 1.1.2"),
                 Paragraph(number="1.2.", text="Subsection 1.2"),
             ],
@@ -43,6 +45,18 @@ from src.models.extraction import Paragraph, ParagraphStruct
                     ],
                 ),
                 ParagraphStruct(number="2.", text="Conclusion", subparagraphs=[]),
+                ParagraphStruct(
+                    number="3.",
+                    text="",
+                    subparagraphs=[
+                        ParagraphStruct(
+                            number="3.1", text="Subsection 3.1", subparagraphs=[]
+                        ),
+                        ParagraphStruct(
+                            number="3.2", text="Subsection 3.2", subparagraphs=[]
+                        ),
+                    ],
+                ),
             ],
         ),
         # Test case 2: Alphabetic numbering
