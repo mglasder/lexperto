@@ -9,16 +9,16 @@ from src.models.extraction import Paragraph
         # Test case 1: Numeric numbering
         (
             [
-                Paragraph(number="1", text="Introduction"),
+                Paragraph(number="1.", text="Introduction"),
+                Paragraph(number="1.1.1.", text="Subsection 1.1.1"),
                 Paragraph(number="1.1", text="Subsection 1.1"),
-                Paragraph(number="1.1.1", text="Subsection 1.1.1"),
-                Paragraph(number="1.1.2", text="Subsection 1.1.2"),
-                Paragraph(number="1.2", text="Subsection 1.2"),
                 Paragraph(number="2", text="Conclusion"),
+                Paragraph(number="1.1.2", text="Subsection 1.1.2"),
+                Paragraph(number="1.2.", text="Subsection 1.2"),
             ],
             [
                 ParagraphStruct(
-                    number="1",
+                    number="1.",
                     text="Introduction",
                     subparagraphs=[
                         ParagraphStruct(
@@ -26,37 +26,62 @@ from src.models.extraction import Paragraph
                             text="Subsection 1.1",
                             subparagraphs=[
                                 ParagraphStruct(
-                                    number="1.1.1", text="Subsection 1.1.1", subparagraphs=[]
+                                    number="1.1.1",
+                                    text="Subsection 1.1.1",
+                                    subparagraphs=[],
                                 ),
                                 ParagraphStruct(
-                                    number="1.1.2", text="Subsection 1.1.2", subparagraphs=[]
+                                    number="1.1.2",
+                                    text="Subsection 1.1.2",
+                                    subparagraphs=[],
                                 ),
                             ],
                         ),
-                        ParagraphStruct(number="1.2", text="Subsection 1.2", subparagraphs=[]),
+                        ParagraphStruct(
+                            number="1.2", text="Subsection 1.2", subparagraphs=[]
+                        ),
                     ],
                 ),
-                ParagraphStruct(number="2", text="Conclusion", subparagraphs=[]),
+                ParagraphStruct(number="2.", text="Conclusion", subparagraphs=[]),
             ],
         ),
         # Test case 2: Alphabetic numbering
         (
             [
-                Paragraph(number="A", text="First Section"),
+                Paragraph(number="A.", text="First Section"),
                 Paragraph(number="A.a", text="Subsection A.a"),
-                Paragraph(number="A.b", text="Subsection A.b"),
-                Paragraph(number="B", text="Second Section"),
+                Paragraph(number="A.b.", text="Subsection A.b"),
+                Paragraph(number="A.a.a.", text="Subsection A.a"),
+                Paragraph(number="A.a.b", text="Subsection A.a"),
+                Paragraph(number="B,", text="Second Section"),
             ],
             [
                 ParagraphStruct(
-                    number="A",
+                    number="A.",
                     text="First Section",
                     subparagraphs=[
-                        ParagraphStruct(number="A.a", text="Subsection A.a", subparagraphs=[]),
-                        ParagraphStruct(number="A.b", text="Subsection A.b", subparagraphs=[]),
+                        ParagraphStruct(
+                            number="A.a",
+                            text="Subsection A.a",
+                            subparagraphs=[
+                                ParagraphStruct(
+                                    number="A.a.a",
+                                    text="Subsection A.a",
+                                    subparagraphs=[],
+                                ),
+                                ParagraphStruct(
+                                    number="A.a.b",
+                                    text="Subsection A.a",
+                                    subparagraphs=[],
+                                ),
+                            ],
+                        ),
+                        ParagraphStruct(
+                            number="A.b", text="Subsection A.b", subparagraphs=[]
+                        ),
                     ],
                 ),
-                ParagraphStruct(number="B", text="Second Section", subparagraphs=[]),
+                ParagraphStruct(number="B.", text="Second Section", subparagraphs=[]),
             ],
         ),
     ],
