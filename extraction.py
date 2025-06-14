@@ -34,6 +34,8 @@ INSTRUCT_PARAGRAPHS = langsmith_client.pull_prompt(
     "extract_paragraphs", include_model=False
 )
 
+LLM_MODEL = "openai:gpt-4o-mini"
+
 SV_PARA_LOGIC = """
 A.
 A.a.
@@ -175,6 +177,10 @@ def load_pdf(name: str) -> str:
 
     return full_text
 
+def load_html(name: str) -> str:
+    with open(f"urteile_html/{name}.html", "r", encoding="utf-8") as f:
+        return f.read()
+
 
 class InputState(BaseModel):
     pdf_doc: str = Field(description="Der Text des Urteils.")
@@ -192,7 +198,7 @@ class GraphState(TypedDict):
 
 def section_extraction_node(state: InputState) -> SectionText:
     openai = init_chat_model(
-        "openai:gpt-4.1-mini",
+        LLM_MODEL,
         temperature=0.0,
     )
 
@@ -221,7 +227,7 @@ def section_extraction_node(state: InputState) -> SectionText:
 
 def create_paragraph_extraction_node(section_name: str, content_field: str, numbering_logic: str, example_input: str, example_output: str):
     def node(state: SectionText) -> GraphState:
-        openai = init_chat_model("openai:gpt-4.1-mini", temperature=0.0)
+        openai = init_chat_model(LLM_MODEL, temperature=0.0)
         
         agent = create_react_agent(
             model=openai,
@@ -259,7 +265,7 @@ paragraph_extraction_erw_node = create_paragraph_extraction_node(
 
 def paragraph_extraction_ent_node(state: SectionText) -> GraphState:
     openai = init_chat_model(
-        "openai:gpt-4.1-mini",
+        LLM_MODEL,
         temperature=0.0,
     )
 
@@ -359,5 +365,5 @@ if __name__ == "__main__":
     #     print(f"Processing {name}...")
     #     main(name)
     #     print(f"Finished processing {name}.\n")
-
-    main(name="test")
+    name = "A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf"
+    main(name)
