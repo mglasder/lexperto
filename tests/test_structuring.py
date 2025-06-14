@@ -1,6 +1,6 @@
 import pytest
-from experiments.structuring import create_paragraph_struct, ParagraphStruct
-from src.models.extraction import Paragraph
+from experiments.structuring import create_paragraph_struct
+from src.models.extraction import Paragraph, ParagraphStruct
 
 
 @pytest.mark.parametrize(

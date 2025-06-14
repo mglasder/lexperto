@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, Optional
+from typing import List, Optional, Union
 
 import yaml
 from pydantic import BaseModel, Field
@@ -63,13 +63,19 @@ class Paragraph(BaseSchema):
     text: Optional[str]
 
 
+class ParagraphStruct(BaseSchema):
+    number: Optional[str]
+    text: Optional[str]
+    subparagraphs: List["ParagraphStruct"] = []
+
+
 class ParagraphList(BaseSchema):
     paragraphs: List[Paragraph] = []
 
 
 class Section(BaseSchema):
     name: str
-    content: List[Paragraph]
+    content: List[Union[Paragraph, ParagraphStruct]] = []
 
 
 class CourtDecision(BaseSchema):
