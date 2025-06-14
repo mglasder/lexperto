@@ -9,10 +9,32 @@ class ParagraphStruct(BaseSchema):
     subparagraphs: List["ParagraphStruct"] = []
 
 
+def clean_paragraph_number(number: str) -> str:
+    """Clean paragraph number according to rules:
+    - Top level paragraphs must end with a dot (e.g., "1.", "A.")
+    - Lower level paragraphs must not end with a dot (e.g., "1.1", "A.a")
+    """
+    # Remove any trailing dots and commas
+    number = number.rstrip('.,')
+    
+    # If it's a top level paragraph (no dots in the middle), add a dot at the end
+    if '.' not in number[:-1]:  # Check if there are no dots except possibly at the end
+        return number + '.'
+    return number
+
+
+def get_level(number: str) -> int:
+    """
+    Helper: get the level of a paragraph (number of dots, top-level has 1 dot at the end)
+    """
+    # Remove trailing dot for counting
+    return number.rstrip('.').count('.') + 1 if number.endswith('.') else number.count('.') + 1
+
+
 def create_paragraph_struct(
     list_of_paragraphs: List[Paragraph],
 ) -> List[ParagraphStruct]:
-    """ "
+    """
     1. loop over the paragraphs in sv
     2. for each top level paragraph (A., B., C., etc.)
         a. Create a ParagraphStruct with the number and text
@@ -23,52 +45,42 @@ def create_paragraph_struct(
     if not list_of_paragraphs:
         return []
 
-    # Sort paragraphs using the custom sort key
-    sorted_paragraphs = sorted(list_of_paragraphs, key=lambda p: p.number)
-    
-    # Helper function to check if a paragraph is a child of another
-    def is_child(child_num: str, parent_num: str) -> bool:
-        if not parent_num:
-            return True
-        # Split by dots and compare parts
-        child_parts = child_num.split('.')
-        parent_parts = parent_num.split('.')
-        if len(child_parts) <= len(parent_parts):
-            return False
-        return all(child_parts[i] == parent_parts[i] for i in range(len(parent_parts)))
+    # Clean paragraph numbers
+    cleaned_paragraphs = [
+        Paragraph(number=clean_paragraph_number(p.number), text=p.text)
+        for p in list_of_paragraphs
+    ]
+    # Sort paragraphs using the cleaned numbers
+    sorted_paragraphs = sorted(cleaned_paragraphs, key=lambda p: p.number)
 
-    # Helper function to build the tree recursively
-    def build_tree(paragraphs: List[Paragraph], parent_num: str = "") -> List[ParagraphStruct]:
+    # Recursive function to build the tree
+    def build_tree(paragraphs, parent_level=1, parent_number=None):
         result = []
-        i = 0
-        while i < len(paragraphs):
-            current = paragraphs[i]
-            
-            # Skip if this paragraph is not a direct child of the parent
-            if not is_child(current.number, parent_num):
-                i += 1
-                continue
-                
-            # Find all direct children of current paragraph
-            children = []
-            j = i + 1
-            while j < len(paragraphs) and is_child(paragraphs[j].number, current.number):
-                if len(paragraphs[j].number.split('.')) == len(current.number.split('.')) + 1:
-                    children.append(paragraphs[j])
-                j += 1
-            
-            # Create the current paragraph structure with its children
-            current_struct = ParagraphStruct(
-                number=current.number,
-                text=current.text,
-                subparagraphs=build_tree(paragraphs[i+1:j], current.number)
-            )
-            result.append(current_struct)
-            i = j
-            
+        paragraph_idx = 0
+        while paragraph_idx < len(paragraphs):
+            paragraph = paragraphs[paragraph_idx]
+            paragraph_level = get_level(paragraph.number)
+            # If we're at the expected level (top-level or sub-level)
+            if (parent_level == 1 and paragraph.number.endswith('.')) or (parent_level > 1 and not paragraph.number.endswith('.')):
+                # Find all children (next level deeper)
+                child_paragraphs = []
+                child_idx = paragraph_idx + 1
+                while child_idx < len(paragraphs) and get_level(paragraphs[child_idx].number) > paragraph_level:
+                    child_paragraphs.append(paragraphs[child_idx])
+                    child_idx += 1
+                # Recursively build children
+                struct = ParagraphStruct(
+                    number=paragraph.number,
+                    text=paragraph.text,
+                    subparagraphs=build_tree(child_paragraphs, parent_level=paragraph_level+1, parent_number=paragraph.number)
+                )
+                result.append(struct)
+                paragraph_idx = child_idx
+            else:
+                paragraph_idx += 1
         return result
 
-    return build_tree(sorted_paragraphs)
+    return build_tree(sorted_paragraphs, parent_level=1)
 
 
 def main():
@@ -82,6 +94,8 @@ def main():
             sv = section
 
     sv_struct = create_paragraph_struct(sv.content)
+
+    print(sv_struct)
 
 
 if __name__ == "__main__":
