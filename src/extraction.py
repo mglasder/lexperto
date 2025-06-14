@@ -1,8 +1,5 @@
 import os
 from datetime import datetime
-from operator import add
-from typing import TypedDict, Any
-from typing_extensions import Annotated
 
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
@@ -11,10 +8,10 @@ from langgraph.graph import StateGraph
 from langgraph.prebuilt import create_react_agent
 import logging
 from langsmith import Client
-from pydantic import Field, BaseModel
 
 from models.extraction import Section, Paragraph, ParagraphList, CourtDecision
-from utils import load_pdf, load_html
+from models.state import InputState, SectionTextState, GraphState
+from utils import load_pdf
 
 logging.getLogger("pdfminer").setLevel(logging.ERROR)
 
@@ -158,21 +155,7 @@ EXAMPLE_OUTPUT_ERW = [
 ]
 
 
-class InputState(BaseModel):
-    pdf_doc: str = Field(description="Der Text des Urteils.")
-
-
-class SectionText(BaseModel):
-    sachverhalt: str = Field(description="Die Paragraphen des Sachverhalt")
-    erwaegungen: str = Field(description="Die Paragraphen der Erwägungen")
-    entscheid: str = Field(description="Die Paragraphen der Entscheidung")
-
-
-class GraphState(TypedDict):
-    sections: Annotated[list[Any], add]
-
-
-def section_extraction_node(state: InputState) -> SectionText:
+def section_extraction_node(state: InputState) -> SectionTextState:
     openai = init_chat_model(
         LLM_MODEL,
         temperature=0.0,
@@ -182,8 +165,8 @@ def section_extraction_node(state: InputState) -> SectionText:
         model=openai,
         prompt=INSTRUCT_EXTRACTION.template,
         response_format=(
-            INSTRUCT_PARSING.format(struct=SectionText.model_fields),
-            SectionText,
+            INSTRUCT_PARSING.format(struct=SectionTextState.model_fields),
+            SectionTextState,
         ),
         tools=[],
     )
@@ -209,7 +192,7 @@ def create_paragraph_extraction_node(
     example_input: str,
     example_output: str,
 ):
-    def node(state: SectionText) -> GraphState:
+    def node(state: SectionTextState) -> GraphState:
         openai = init_chat_model(LLM_MODEL, temperature=0.0)
 
         agent = create_react_agent(
@@ -250,7 +233,7 @@ paragraph_extraction_erw_node = create_paragraph_extraction_node(
 )
 
 
-def paragraph_extraction_ent_node(state: SectionText) -> GraphState:
+def paragraph_extraction_ent_node(state: SectionTextState) -> GraphState:
     openai = init_chat_model(
         LLM_MODEL,
         temperature=0.0,
@@ -329,7 +312,7 @@ def main(name: str):
 
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    with open(f"data/output/{now}_schema_{name}.yaml", "w", encoding="utf-8") as f:
+    with open(f"../data/output/{now}_schema_{name}.yaml", "w", encoding="utf-8") as f:
         f.write(decision.to_yaml())
 
 
