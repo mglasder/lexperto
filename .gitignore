@@ -114,5 +114,6 @@ logs/
 .DS_Store
 .idea/
 urteile/
+urteile_html
 run_logs/
 output/
