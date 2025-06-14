@@ -9,12 +9,12 @@ from langchain.chat_models import init_chat_model
 from langgraph.constants import START, END
 from langgraph.graph import StateGraph
 from langgraph.prebuilt import create_react_agent
-import pdfplumber
 import logging
 from langsmith import Client
 from pydantic import Field, BaseModel
 
 from models.extraction import Section, Paragraph, ParagraphList, CourtDecision
+from utils import load_pdf, load_html
 
 logging.getLogger("pdfminer").setLevel(logging.ERROR)
 
@@ -156,31 +156,6 @@ EXAMPLE_OUTPUT_ERW = [
         "text": "Duis aute irure dolor in exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     },
 ]
-
-
-def load_pdf(name: str) -> str:
-    """Load a PDF file as text.
-
-    Args:
-        name (str): The name of the PDF file without extension.
-    Returns:
-        str: The text content of the PDF file.
-    """
-
-    with pdfplumber.open(f"dataurteile/DBA-CH-FR/{name}.pdf") as pdf:
-        full_text = ""
-        for page in pdf.pages:
-            # Extract text from each page, preserving line breaks
-            text = page.extract_text()
-            if text:
-                full_text += text + "\n\n"
-
-    return full_text
-
-
-def load_html(name: str) -> str:
-    with open(f"urteile_html/{name}.html", "r", encoding="utf-8") as f:
-        return f.read()
 
 
 class InputState(BaseModel):
@@ -377,5 +352,5 @@ if __name__ == "__main__":
     #     main(name)
     #     print(f"Finished processing {name}.\n")
     name = "A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf"
-    name = "test"
+    # name = "test"
     main(name)

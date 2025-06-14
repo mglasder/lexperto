@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import List
 
 from docx import Document
+import pdfplumber
 
 from src.models.items import BasePromptItem
 
@@ -80,3 +81,35 @@ def create_word_document(
     if save:
         save_output_word(doc, test=test)
     return doc
+
+
+def load_pdf(name: str) -> str:
+    """Load a PDF file as text.
+
+    Args:
+        name (str): The name of the PDF file without extension.
+    Returns:
+        str: The text content of the PDF file.
+    """
+
+    with pdfplumber.open(f"../data/urteile/DBA-CH-FR/{name}.pdf") as pdf:
+        full_text = ""
+        for page in pdf.pages:
+            # Extract text from each page, preserving line breaks
+            text = page.extract_text()
+            if text:
+                full_text += text + "\n\n"
+
+    return full_text
+
+
+def load_html(name: str) -> str:
+    """Load an HTML file as text.
+
+    Args:
+        name (str): The name of the HTML file without extension.
+    Returns:
+        str: The text content of the HTML file.
+    """
+    with open(f"urteile_html/{name}.html", "r", encoding="utf-8") as f:
+        return f.read()
