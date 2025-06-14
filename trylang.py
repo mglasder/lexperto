@@ -22,51 +22,54 @@ from langsmith import Client
 langsmith_client = Client()
 
 
-class ExaminationItem(BaseModel):
-    """Ein einzelner Prüfungspunkt innerhalb eines Paragraphen."""
-
-    title: str = Field(
-        description="Ein konziser und präziser Titel des zu prüfenden Punktes."
-    )
-    description: List[str] = Field(
-        description="Liste mit Beschreibungen des zu prüfenen Punktes. Jeder str ist eine Stichpunkt."
-    )
-    citation: str = Field(description="Wortwörtliches Zitat aus dem Urteil.")
-    number: str = Field(description="Nummer des (Subparagraphen. z.B.: 1.1")
-
-    # class Config:
-    #     arbitrary_types_allowed = True
+# class ExaminationItem(BaseModel):
+#     """Ein einzelner Subparagraph innerhalb eines Paragraphen, dieser kann auch Subparagraphen haben."""
+#
+#     number: str = Field(description="Nummer des (Subparagraphen. z.B.: 1.1")
+#     title: str = Field(
+#         description="Ein konziser und präziser Titel, der den gesamten zu prüfenden Punkt inkl. Subparagraphen beschreibt."
+#     )
+#     description: List[str] = Field(
+#         description="Liste mit Beschreibungen, die den gesamten zu prüfenden Paragraphen inkl. Subparagraphen zusammenfasst. Jeder str ist eine Stichpunkt."
+#     )
+#     citation: str = Field(
+#         description="Wortwörtliches Zitat des zu prüfenden Punktes aus dem Urteil, OHNE Subparagraphen."
+#     )
+#
+#     subparagraph: List["ExaminationItem"] = Field(
+#         [],
+#         description="Liste der Subparagraphen mit den zu prüfenden Punkten. Leere Liste, falls keine Subparagraphen vorhanden.",
+#     )
+#
+#     # class Config:
+#     #     arbitrary_types_allowed = True
 
 
 class Paragraph(BaseModel):
     """
-    Ein Paragraph innerhalb des Urteils (Ebene 1., 2., ...). Dieser kann aus mehreren Subparagraphen
-    (1.1, 1.1.1, 1.1.2, 1.2, ...) bestehen, die je einen Subprüfungspunkt enthalten. Die einzelnen Subparagraphen
-    innerhalb eines Paragraphen bilden eine logisch zusammenhängende Einheit.
-
-    Enthält der Paragraph Subparagraphen, so hat er in der Regel selber keinen Text.
-    Enthält der Paragraph keine Subparagrpahen, so enthält er den gesamten Text.
+    Ein Paragraph oder Subparagrpah innerhalb des Urteils (1., 1.1, 1.1.2, etc.). Dieser kann weitere Subparagraphen enthalten.
+    Diese werden hier nicht beachtet, sondern nur der aktuelle Paragraph bzw. Subparagraph selber.
     """
 
-    number: int = Field(
-        -1,
-        description="Nummer des Paragraphen als Integer, -1 falls nicht extrahierbar.",
+    number: Optional[str] = Field(
+        None,
+        description="Nummer des Paragraphen als str (1., 1.1, 1.1.1, 1.1.2, 2., etc.), None falls nicht extrahierbar.",
     )
     title: str = Field(
-        description="Ein konziser und präziser Titel, der den gesamten zu prüfenden Punkt inkl. Subparagraphen beschreibt."
+        description="Ein konziser und präziser Titel, der den gesamten zu prüfenden Punkt ohne Subparagraphen beschreibt."
     )
     description: List[str] = Field(
-        description="Liste mit Beschreibungen, die den gesamten zu prüfenden Punkt inkl. Subparagraphen zusammenfasst. Jeder str ist eine Stichpunkt."
+        description="Liste mit Beschreibungen, die den gesamten zu prüfenden Punkt ohne Subparagraphen zusammenfasst. Jeder str ist eine Stichpunkt."
     )
 
     citation: Optional[str] = Field(
-        description="Wortwörtliches Zitat des Paragrpahen, falls keine Subparagraphen vorhanden."
+        description="Wortwörtliches Zitat des Paragraphen. NUR der Text dieser Ebene, OHNE Subparagraphen."
     )
 
-    subparagraphs: List[ExaminationItem] = Field(
-        [],
-        description="Liste der Subparagraphen mit den zu prüfenden Punkten. Leere Liste, falls keine Subparagraphen vorhanden.",
-    )
+    # subparagraphs: List["Paragraph"] = Field(
+    #     [],
+    #     description="Liste der Subparagraphen mit den zu prüfenden Punkten. Leere Liste, falls keine Subparagraphen vorhanden.",
+    # )
 
 
 class Schema(BaseModel):
@@ -74,7 +77,9 @@ class Schema(BaseModel):
     Schema der Paragraphen in einem Urteil.
     """
 
-    items: List[Paragraph] = Field([], description="Liste der Paragraphen des Urteils.")
+    paragraphs: List[Paragraph] = Field(
+        [], description="Liste der Paragraphen des Urteils."
+    )
 
     def to_yaml(self) -> str:
         """Convert the schema to a YAML string."""
@@ -86,7 +91,7 @@ class Schema(BaseModel):
 
 
 class AgentResponse(BaseModel):
-    schematic: Schema
+    response: Schema
     debug_info: Optional[str] = Field(
         None,
         description="Gib hier Informationen an, wenn du die Aufgabe nicht oder nur eingeschränkt oder nur teilweise erfüllen kannst.",
@@ -161,7 +166,7 @@ def main():
             "messages": [
                 {
                     "role": "user",
-                    "content": f"Hier ist der Name des Urteils: {name}. Erstelle jetzt das Schema für das Urteil.",
+                    "content": f"Hier ist der Name des Urteils: {name}. Erstelle jetzt das Schema für das gesamte Urteil und alle Paragraphen (1, 2, ...) bis zum Ende.",
                 }
             ]
         }
@@ -170,7 +175,7 @@ def main():
     print(response["messages"][-1].content)
     # save as markdown file
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
-    schema = response["structured_response"].schematic
+    schema = response["structured_response"].response
 
     print(f"Debug info:{response['structured_response'].debug_info}")
 
