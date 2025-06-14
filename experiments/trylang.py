@@ -8,7 +8,7 @@ from langgraph.prebuilt import create_react_agent
 import pdfplumber
 from pydantic import BaseModel, Field
 
-from helpers import load_prompt
+from src.utils import load_prompt
 
 import logging
 

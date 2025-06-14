@@ -6,9 +6,9 @@ from agents import function_tool, Runner, Agent, FileSearchTool, ModelSettings, 
 from dotenv import load_dotenv
 from pydantic import BaseModel
 
-from helpers import get_instr, load_prompt, read_word
-from lexperto import create_sachverhalt
-from models.prompt import PromptBuilder
+from src.utils import get_instr, load_prompt, read_word
+from experiments.lexperto import create_sachverhalt
+from src.models.prompt import PromptBuilder
 
 load_dotenv()
 

@@ -9,8 +9,8 @@ from openai.types import Reasoning
 from pydantic import BaseModel, Field
 from tqdm import tqdm
 
-from helpers import get_instr
-from models.prompt import PromptBuilder
+from src.utils import get_instr
+from src.models.prompt import PromptBuilder
 
 load_dotenv()
 

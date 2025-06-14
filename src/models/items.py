@@ -80,12 +80,12 @@ class AbstrakteErwItem(BasePromptItem):
 
 if __name__ == "__main__":
 
-    # Load all YAML files from folder: "prompts/aerw/
+    # Load all YAML files from folder: "prompts/production/aerw/
     import os
     import glob
     from pathlib import Path
 
-    folder_path = Path("../prompts/sach/")
+    folder_path = Path("../prompts/production/sach/")
 
     yaml_files = glob.glob(os.path.join(folder_path, "*.yaml"))
     # sort by numbering in filename

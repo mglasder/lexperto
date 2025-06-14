@@ -1,13 +1,18 @@
 import pytest
 from pathlib import Path
+import os
 
 
 def test_load_items_to_examine_from_id_is_correct():
-    from models.items import AbstrakteErwItem
-    from helpers import load_items_to_examine_from
+    from src.models.items import AbstrakteErwItem
+    from src.utils import load_items_to_examine_from
+
+    # Get the absolute path to the prompts directory
+    base_dir = Path(__file__).parent.parent
+    prompts_dir = base_dir / "prompts" / "production" / "aerw"
 
     items = load_items_to_examine_from(
-        "../prompts-test/aerw", item_cls=AbstrakteErwItem
+        str(prompts_dir), item_cls=AbstrakteErwItem
     )
 
     ids = [item.id for item in items]
@@ -17,12 +22,12 @@ def test_load_items_to_examine_from_id_is_correct():
         "aerw_007_gehoer",
     ]
     for id_ in expected_ids:
-        assert id_ in ids, f"Expected ID {id} not found in loaded items."
+        assert id_ in ids, f"Expected ID {id_} not found in loaded items."
 
 
 def test_load_yaml_to_abstrakteerwitem():
     """Test loading a YAML file into an AbstrakteErwItem instance."""
-    from models.items import AbstrakteErwItem, SearchType
+    from src.models.items import AbstrakteErwItem, SearchType
     
     # Create a test YAML file
     test_yaml = """

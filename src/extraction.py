@@ -89,7 +89,7 @@ A.
 A.a. lorem ipsum dolor sit amet, consectetur adipiscing elit.
 A.b. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 B. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-B.a. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+B.a. Sonderzeichen, wie in Mütter, Spaß, müssen übernommen werden. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 B.b. Duis aute irure dolor in exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 """
 
@@ -99,7 +99,7 @@ Das ist der Sachverhalt:
 1.1 lorem ipsum dolor sit amet, consectetur adipiscing elit.
 1.2 Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-2.1 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+2.1 Sonderzeichen, wie in Mütter, Spaß, müssen übernommen werden. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 2.2 Duis aute irure dolor in exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 """
 
@@ -122,7 +122,7 @@ EXAMPLE_OUTPUT_SV = [
     },
     {
         "number": "B.a",
-        "text": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "text": "Sonderzeichen, wie in Mütter, Spaß, müssen übernommen werden. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     },
     {
         "number": "B.b",
@@ -149,7 +149,7 @@ EXAMPLE_OUTPUT_ERW = [
     },
     {
         "number": "2.1",
-        "text": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "text": "Sonderzeichen, wie in Mütter, Spaß, müssen übernommen werden. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     },
     {
         "number": "2.2",
@@ -167,7 +167,7 @@ def load_pdf(name: str) -> str:
         str: The text content of the PDF file.
     """
 
-    with pdfplumber.open(f"urteile/DBA-CH-FR/{name}.pdf") as pdf:
+    with pdfplumber.open(f"dataurteile/DBA-CH-FR/{name}.pdf") as pdf:
         full_text = ""
         for page in pdf.pages:
             # Extract text from each page, preserving line breaks
@@ -176,6 +176,7 @@ def load_pdf(name: str) -> str:
                 full_text += text + "\n\n"
 
     return full_text
+
 
 def load_html(name: str) -> str:
     with open(f"urteile_html/{name}.html", "r", encoding="utf-8") as f:
@@ -225,10 +226,17 @@ def section_extraction_node(state: InputState) -> SectionText:
 
     return response["structured_response"]
 
-def create_paragraph_extraction_node(section_name: str, content_field: str, numbering_logic: str, example_input: str, example_output: str):
+
+def create_paragraph_extraction_node(
+    section_name: str,
+    content_field: str,
+    numbering_logic: str,
+    example_input: str,
+    example_output: str,
+):
     def node(state: SectionText) -> GraphState:
         openai = init_chat_model(LLM_MODEL, temperature=0.0)
-        
+
         agent = create_react_agent(
             model=openai,
             prompt=INSTRUCT_PARAGRAPHS.format(
@@ -245,14 +253,18 @@ def create_paragraph_extraction_node(section_name: str, content_field: str, numb
             tools=[],
         )
 
-        response = agent.invoke({
-            "messages": [{"role": "user", "content": getattr(state, content_field)}]
-        })
+        response = agent.invoke(
+            {"messages": [{"role": "user", "content": getattr(state, content_field)}]}
+        )
 
-        section = Section(name=section_name.lower(), content=response["structured_response"].paragraphs)
+        section = Section(
+            name=section_name.lower(),
+            content=response["structured_response"].paragraphs,
+        )
         return {"sections": [section]}
-    
+
     return node
+
 
 paragraph_extraction_sv_node = create_paragraph_extraction_node(
     "Sachverhalt", "sachverhalt", SV_PARA_LOGIC, EXAMPLE_INPUT_SV, EXAMPLE_OUTPUT_SV
@@ -327,12 +339,11 @@ def main(name: str):
     builder.add_edge("paragraph_extraction_ent", "combine")
     builder.add_edge("combine", END)
 
-
     if name.lower() == "test":
         pdf_doc = TEST_PDF_CONTENT
     else:
         pdf_doc = load_pdf(name)
-    
+
     input_state = InputState(pdf_doc=pdf_doc)
     graph = builder.compile()
     result = graph.invoke(input_state)
@@ -343,7 +354,7 @@ def main(name: str):
 
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    with open(f"output/{now}_schema_{name}.yaml", "w", encoding="utf-8") as f:
+    with open(f"data/output/{now}_schema_{name}.yaml", "w", encoding="utf-8") as f:
         f.write(decision.to_yaml())
 
 
@@ -366,4 +377,5 @@ if __name__ == "__main__":
     #     main(name)
     #     print(f"Finished processing {name}.\n")
     name = "A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf"
+    name = "test"
     main(name)

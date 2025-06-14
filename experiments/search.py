@@ -76,8 +76,8 @@ DBA_CH_FR_DOCUMENTS = [
 ]
 
 
-from helpers import get_instr
-from models.prompt import PromptBuilder
+from src.utils import get_instr
+from src.models.prompt import PromptBuilder
 
 MOST_RECENT_SEARCH_AGENT = agent = Agent(
     name="MostRecentSearchAgent",

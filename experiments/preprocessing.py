@@ -5,7 +5,7 @@ from docx import Document
 from dotenv import load_dotenv
 from tqdm import tqdm
 
-from models.prompt import PromptBuilder
+from src.models.prompt import PromptBuilder
 
 load_dotenv()
 
