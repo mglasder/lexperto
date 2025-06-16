@@ -63,9 +63,7 @@ class Paragraph(BaseSchema):
     text: Optional[str]
 
 
-class ParagraphStruct(BaseSchema):
-    number: Optional[str]
-    text: Optional[str]
+class ParagraphStruct(Paragraph):
     subparagraphs: List["ParagraphStruct"] = []
 
 
@@ -87,7 +85,7 @@ class ParagraphList(BaseSchema):
 
 class Section(BaseSchema):
     name: str
-    content: List[Union[Paragraph, ParagraphStruct, ParagraphStructAnnotated]] = []
+    content: List[Paragraph] = []
 
 
 class CourtDecision(BaseSchema):
