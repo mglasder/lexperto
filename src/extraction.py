@@ -31,7 +31,7 @@ INSTRUCT_PARAGRAPHS = langsmith_client.pull_prompt(
     "extract_paragraphs", include_model=False
 )
 
-LLM_MODEL = "openai:gpt-4o-mini"
+LLM_MODEL = "openai:gpt-4.1-mini"
 
 SV_PARA_LOGIC = """
 A.
