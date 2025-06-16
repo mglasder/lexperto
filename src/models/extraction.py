@@ -69,13 +69,25 @@ class ParagraphStruct(BaseSchema):
     subparagraphs: List["ParagraphStruct"] = []
 
 
+class ParagraphStructAnnotated(ParagraphStruct):
+    """ParagraphStruct mit Annotationen des Schemas."""
+    title: str = Field(
+        description="Präziser und kompakter Titel für den Inhalt dieses Paragraphen und seine Unterabschnitte."
+    )
+    description: List[str] = Field(
+        default_factory=list,
+        description="Beschreibung, was in diesem Paragraphen und Subparagraphen zu prüfen ist (WAS, NICHT WIE). Jede string ist ein Stichpunkt."
+    )
+    subparagraphs: List["ParagraphStructAnnotated"] = []
+
+
 class ParagraphList(BaseSchema):
     paragraphs: List[Paragraph] = []
 
 
 class Section(BaseSchema):
     name: str
-    content: List[Union[Paragraph, ParagraphStruct]] = []
+    content: List[Union[Paragraph, ParagraphStruct, ParagraphStructAnnotated]] = []
 
 
 class CourtDecision(BaseSchema):
