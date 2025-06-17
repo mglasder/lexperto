@@ -110,21 +110,7 @@ def create_annotation_node(section_name: str):
                             ]
                         }
                     )
-                    logger.debug(
-                        f"Full LLM response for paragraph {para.number}: {response}"
-                    )
-                    if response is None:
-                        logger.error(
-                            f"LLM agent returned None for paragraph {para.number}"
-                        )
-                        raise ValueError("LLM agent returned None")
-                    if "structured_response" not in response:
-                        logger.error(
-                            f"LLM response missing 'structured_response' key: {response}"
-                        )
-                        raise ValueError(
-                            "LLM response missing 'structured_response' key"
-                        )
+
                     logger.debug(f"Received annotation for paragraph {para.number}")
                     annotated_para = ParagraphStructAnnotated(
                         number=para.number,
@@ -156,16 +142,10 @@ def create_annotation_node(section_name: str):
             s if s.name.lower() != section_name.lower() else annotated_section
             for s in state.decision.content
         ]
-        result = {
-            "decision": CourtDecision(meta=state.decision.meta, content=new_content)
-        }
         new_state = state.model_copy(
             update={
                 "decision": CourtDecision(meta=state.decision.meta, content=new_content)
             }
-        )
-        logger.debug(
-            f"Returning from annotation node for section: {section_name} -> {type(new_state)}"
         )
         return new_state
 
@@ -216,28 +196,18 @@ def process_subparagraph(
 
 def main(decision: CourtDecision, debug: bool = False) -> CourtDecision:
     """Run the annotation process on a court decision.
-    
+
     Args:
         decision: The court decision to annotate
         debug: Whether to enable debug logging (default: False)
     """
     if debug:
         logger.setLevel(logging.DEBUG)
-    
+
     logger.info("Starting annotation process...")
-    
-    # Debug print to show input decision structure
-    logger.debug("Input decision structure:")
-    logger.debug(f"Decision type: {type(decision)}")
-    logger.debug(f"Decision attributes: {dir(decision)}")
-    logger.debug(f"Type of decision.content: {type(decision.content)}")
-    logger.debug(
-        f"Value of decision.content: {repr(decision.content)[:500]}"
-    )
-    
     # Create the graph
     workflow = StateGraph(AnnotationState)
-    
+
     # Add nodes for each section
     logger.info("Adding nodes for each section...")
     for section_name in ["entscheid", "erwägungen", "sachverhalt"]:
@@ -245,7 +215,7 @@ def main(decision: CourtDecision, debug: bool = False) -> CourtDecision:
         workflow.add_node(
             f"annotate_{section_name}", create_annotation_node(section_name)
         )
-    
+
     # Add edges
     logger.info("Adding edges...")
     workflow.add_edge("annotate_entscheid", "annotate_erwägungen")
@@ -254,41 +224,60 @@ def main(decision: CourtDecision, debug: bool = False) -> CourtDecision:
     logger.info("Connecting annotate_erwägungen to annotate_sachverhalt")
     workflow.add_edge("annotate_sachverhalt", END)
     logger.info("Connecting annotate_sachverhalt to END")
-    
+
     # Set the entry point
     workflow.set_entry_point("annotate_entscheid")
-    
+
     logger.info("Compiling graph...")
     graph = workflow.compile()
     logger.info("Creating input state...")
     input_state = AnnotationState(decision=decision)
     logger.info("Invoking graph...")
     result = graph.invoke(input_state)
-    logger.debug(f"Graph result type: {type(result)}")
-    logger.debug(f"Graph result: {result}")
-    
+
     return result["decision"]
 
 
 if __name__ == "__main__":
+
+    class SectionStructured(Section):
+        """A section with structured paragraphs."""
+
+        is_structured: bool = False
+
+        def structure(self):
+            """Structure the section content into ParagraphStruct."""
+            if not self.is_structured:
+                self.content = create_paragraph_struct(self.content)
+                self.is_structured = True
+
+    class CourtDecisionStructured(CourtDecision):
+        """A structured court decision with annotated paragraphs."""
+
+        content: List[SectionStructured]
+
+        def structure(self):
+            """Structure the decision content into annotated paragraphs."""
+            for section in self.content:
+                section.structure()
+
     logger.info("Loading decision from YAML...")
     # Load a decision from YAML
     input_path = "../data/output/20250614_113847_schema_A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf.yaml"
-    decision = CourtDecision.from_yaml_file(input_path)
+    decision = CourtDecisionStructured.from_yaml_file(input_path)
     logger.info(f"Loaded decision with {len(decision.content)} sections")
+    decision.structure()
 
     # Run annotation
     logger.info("Running annotation...")
-    annotated_decision = main(decision, debug=False)  # Set to True for debug logging
-    logger.info(f"Annotation result type: {type(annotated_decision)}")
-    logger.debug(f"Annotation result: {annotated_decision}")
-    
+    annotated_decision = main(decision, debug=True)  # Set to True for debug logging
+
     # Save the result
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_path = f"../data/output/{now}_schema_A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf_annotated.yaml"
-    
+
     logger.info(f"Saving to {output_path}...")
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(annotated_decision.to_yaml())
-    
+
     logger.info("Annotation completed. Result saved to YAML file.")
