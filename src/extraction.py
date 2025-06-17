@@ -336,5 +336,5 @@ if __name__ == "__main__":
     #     main(name)
     #     print(f"Finished processing {name}.\n")
     name = "A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf"
-    # name = "test"
+    name = "test"
     main(name)

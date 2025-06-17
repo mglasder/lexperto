@@ -69,12 +69,13 @@ class ParagraphStruct(Paragraph):
 
 class ParagraphStructAnnotated(ParagraphStruct):
     """ParagraphStruct mit Annotationen des Schemas."""
+
     title: str = Field(
         description="Präziser und kompakter Titel für den Inhalt dieses Paragraphen und seine Unterabschnitte."
     )
     description: List[str] = Field(
         default_factory=list,
-        description="Beschreibung, was in diesem Paragraphen und Subparagraphen zu prüfen ist (WAS, NICHT WIE). Jede string ist ein Stichpunkt."
+        description="Beschreibung, was in diesem Paragraphen und Subparagraphen zu prüfen ist (WAS, NICHT WIE). Jede string ist ein Stichpunkt.",
     )
     subparagraphs: List["ParagraphStructAnnotated"] = []
 
