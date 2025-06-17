@@ -1,14 +1,39 @@
 from enum import Enum
-from typing import List, Optional
+from typing import List, Optional, TYPE_CHECKING
 
 import yaml
 from pydantic import BaseModel, Field
 
+if TYPE_CHECKING:
+    from typing import ForwardRef
+
 
 class BaseSchema(BaseModel):
     def to_yaml(self) -> str:
-        """Convert the schema to a YAML string."""
-        return yaml.dump(self.model_dump(), allow_unicode=True, sort_keys=False)
+        """Convert the schema to a YAML string.
+
+        By explicitly disabling all exclusion flags we make sure that *every* field
+        – including those that are optional, have default values, or have been
+        set to ``None`` – is taken over into the dictionary that is finally
+        serialised.  This guarantees that annotations (``title``,
+        ``description`` …) which are added programmatically after object
+        creation are retained in the YAML output.
+        """
+        data = self.model_dump(
+            exclude_none=False,  # keep fields that are ``None``
+            exclude_unset=False,  # keep fields that were not explicitly set
+            exclude_defaults=False,  # keep fields that equal their default value
+        )
+
+        # ``default_flow_style=False`` enforces the more readable block style
+        # (instead of inline lists like ``[a, b]``) which is helpful when
+        # manually inspecting the generated files.
+        return yaml.dump(
+            data,
+            allow_unicode=True,
+            sort_keys=False,
+            default_flow_style=False,
+        )
 
     def to_json(self):
         """Convert the schema to a JSON string."""
@@ -78,6 +103,9 @@ class ParagraphStructAnnotated(ParagraphStruct):
         description="Beschreibung, was in diesem Paragraphen und Subparagraphen zu prüfen ist (WAS, NICHT WIE). Jede string ist ein Stichpunkt.",
     )
     subparagraphs: List["ParagraphStructAnnotated"] = []
+
+    class Config:
+        arbitrary_types_allowed = True
 
 
 class ParagraphList(BaseSchema):
