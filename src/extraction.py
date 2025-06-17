@@ -9,7 +9,8 @@ from langgraph.prebuilt import create_react_agent
 import logging
 from langsmith import Client
 
-from models.extraction import Section, Paragraph, ParagraphList, CourtDecision
+from models.extraction import Section, Paragraph, ParagraphList
+from src.structuring import CourtDecision
 from models.state import InputState, SectionTextState, GraphState
 from utils import load_pdf
 

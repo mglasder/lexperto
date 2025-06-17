@@ -4,7 +4,8 @@ from pathlib import Path
 
 import yaml
 import pytest
-from src.models.extraction import SectionName, MetaData, Paragraph, Section, CourtDecision
+from src.models.extraction import SectionName, MetaData, Paragraph, Section
+from src.structuring import CourtDecision
 import os
 
 

@@ -13,19 +13,16 @@ from langsmith import Client
 from pydantic import BaseModel
 
 from models.extraction import (
-    CourtDecision,
     Section,
     ParagraphStruct,
     ParagraphStructAnnotated,
+    CourtDecision,
 )
-from models.state import GraphState
-from structuring import create_paragraph_struct
+from src.structuring import create_paragraph_struct
 
 # Basic logging setup
 logging.basicConfig(
-    level=logging.INFO,
-    format='%(levelname)s: %(message)s',
-    stream=sys.stdout
+    level=logging.INFO, format="%(levelname)s: %(message)s", stream=sys.stdout
 )
 
 # Suppress pdfminer logging
