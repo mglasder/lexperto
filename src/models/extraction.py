@@ -1,11 +1,8 @@
 from enum import Enum
-from typing import List, Optional, TYPE_CHECKING
+from typing import List, Optional
 
 import yaml
 from pydantic import BaseModel, Field
-
-if TYPE_CHECKING:
-    from typing import ForwardRef
 
 
 class BaseSchema(BaseModel):
