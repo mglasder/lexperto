@@ -12,13 +12,38 @@ from langgraph.graph import StateGraph
 from langsmith import Client
 from pydantic import BaseModel
 
-from models.extraction import (
+from src.models.extraction import (
     Section,
     ParagraphStruct,
     ParagraphStructAnnotated,
     CourtDecision,
 )
 from src.structuring import create_paragraph_struct
+
+
+class SectionStructured(Section):
+    """A section with structured paragraphs."""
+
+    is_structured: bool = False
+    content: List[Union[ParagraphStruct, ParagraphStructAnnotated]] = []
+
+    def structure(self):
+        """Structure the section content into ParagraphStruct."""
+        if not self.is_structured:
+            self.content = create_paragraph_struct(self.content)
+            self.is_structured = True
+
+
+class CourtDecisionStructured(CourtDecision):
+    """A structured court decision with annotated paragraphs."""
+
+    content: List[Union[SectionStructured, ParagraphStructAnnotated]]
+
+    def structure(self):
+        """Structure the decision content into annotated paragraphs."""
+        for section in self.content:
+            section.structure()
+
 
 # Basic logging setup
 logging.basicConfig(
@@ -258,28 +283,6 @@ def main(decision: CourtDecision, debug: bool = False) -> CourtDecision:
 
 
 if __name__ == "__main__":
-
-    class SectionStructured(Section):
-        """A section with structured paragraphs."""
-
-        is_structured: bool = False
-
-        def structure(self):
-            """Structure the section content into ParagraphStruct."""
-            if not self.is_structured:
-                self.content = create_paragraph_struct(self.content)
-                self.is_structured = True
-
-    class CourtDecisionStructured(CourtDecision):
-        """A structured court decision with annotated paragraphs."""
-
-        content: List[Union[SectionStructured, ParagraphStructAnnotated]]
-
-        def structure(self):
-            """Structure the decision content into annotated paragraphs."""
-            for section in self.content:
-                section.structure()
-
     logger.info("Loading decision from YAML...")
     # Load a decision from YAML
     input_path = "../data/output/20250614_113847_schema_A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf.yaml"
@@ -290,8 +293,6 @@ if __name__ == "__main__":
     # Run annotation
     logger.info("Running annotation...")
     annotated_decision = main(decision, debug=True)  # Set to True for debug logging
-    # TODO: annotated_decision_yaml is missing the annotations, while annotated_decision has them -> why? -> fix this
-    annotated_decision_yaml = annotated_decision.to_yaml()
 
     # Save the result
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -299,6 +300,6 @@ if __name__ == "__main__":
 
     logger.info(f"Saving to {output_path}...")
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write(annotated_decision_yaml)
+        f.write(annotated_decision.to_yaml())
 
     logger.info("Annotation completed. Result saved to YAML file.")
