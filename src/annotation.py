@@ -1,6 +1,7 @@
+import json
 import os
 from datetime import datetime
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Union
 import logging
 import sys
 
@@ -8,7 +9,6 @@ from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langgraph.constants import START, END
 from langgraph.graph import StateGraph
-from langgraph.prebuilt import create_react_agent
 from langsmith import Client
 from pydantic import BaseModel
 
@@ -58,9 +58,10 @@ class AnnotationResult(BaseModel):
 def create_annotation_node(section_name: str):
     """Create a node that annotates paragraphs in a section."""
 
-    def node(state: AnnotationState) -> Dict[str, Any]:
+    def node(state: AnnotationState) -> AnnotationState:
         logger.debug(f"Entering annotation node for section: {section_name}")
-        openai = init_chat_model(LLM_MODEL, temperature=0.0)
+        agent = init_chat_model(LLM_MODEL, temperature=0.0)
+        agent.with_structured_output(ParagraphStructAnnotated)
         try:
             section = next(
                 s
@@ -73,12 +74,15 @@ def create_annotation_node(section_name: str):
         except StopIteration:
             logger.error(f"Section {section_name} not found in decision")
             raise
-        agent = create_react_agent(
-            model=openai,
-            prompt=INSTRUCT_ANNOTATION.template,
-            response_format=ParagraphStructAnnotated,
-            tools=[],
-        )
+        # agent = create_react_agent(
+        #     model=openai,
+        #     prompt=INSTRUCT_ANNOTATION.template,
+        #     response_format=(
+        #         "Parse allen Text vollständig, wortwörtlich und ohne jede Änderung",
+        #         ParagraphStructAnnotated,
+        #     ),
+        #     tools=[],
+        # )
         annotated_paragraphs = []
         for i, para in enumerate(section.content):
             logger.debug(
@@ -100,23 +104,33 @@ def create_annotation_node(section_name: str):
                         ),
                     }
                     logger.debug(f"Requesting annotation for paragraph {para.number}")
+                    # response = agent.invoke(
+                    #     {
+                    #         "messages": [
+                    #             {
+                    #                 "role": "system",
+                    #                 "content": INSTRUCT_ANNOTATION.template,
+                    #             },
+                    #             {
+                    #                 "role": "user",
+                    #                 "content": f"Annotate this paragraph from the {section_name} section:\n{context}",
+                    #             },
+                    #         ]
+                    #     }
+                    # )
+
                     response = agent.invoke(
-                        {
-                            "messages": [
-                                {
-                                    "role": "user",
-                                    "content": f"Annotate this paragraph from the {section_name} section:\n{context}",
-                                }
-                            ]
-                        }
+                        f"{INSTRUCT_ANNOTATION.template}\nAnnotate this paragraph from the {section_name} section:\n{context}"
                     )
+
+                    response_dict = json.loads(response.content)
 
                     logger.debug(f"Received annotation for paragraph {para.number}")
                     annotated_para = ParagraphStructAnnotated(
                         number=para.number,
                         text=para.text,
-                        title=response["structured_response"].title,
-                        description=response["structured_response"].description,
+                        title=response_dict["title"],
+                        description=response_dict["description"],
                         subparagraphs=[],
                     )
                     if para.subparagraphs:
@@ -134,7 +148,9 @@ def create_annotation_node(section_name: str):
             else:
                 logger.debug(f"Skipping non-ParagraphStruct content: {type(para)}")
                 annotated_paragraphs.append(para)
-        annotated_section = Section(name=section.name, content=annotated_paragraphs)
+        annotated_section = SectionStructured(
+            name=section.name, content=annotated_paragraphs, is_structured=True
+        )
         logger.debug(
             f"Created annotated section with {len(annotated_paragraphs)} paragraphs"
         )
@@ -144,7 +160,9 @@ def create_annotation_node(section_name: str):
         ]
         new_state = state.model_copy(
             update={
-                "decision": CourtDecision(meta=state.decision.meta, content=new_content)
+                "decision": CourtDecisionStructured(
+                    meta=state.decision.meta, content=new_content
+                )
             }
         )
         return new_state
@@ -167,22 +185,28 @@ def process_subparagraph(
         ),
     }
 
+    # response = agent.invoke(
+    #     {
+    #         "messages": [
+    #             {
+    #                 "role": "user",
+    #                 "content": f"Annotate this subparagraph from the {section_name} section:\n{context}",
+    #             }
+    #         ]
+    #     }
+    # )
+
     response = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": f"Annotate this subparagraph from the {section_name} section:\n{context}",
-                }
-            ]
-        }
+        f"{INSTRUCT_ANNOTATION.template}\nAnnotate this paragraph from the {section_name} section:\n{context}"
     )
+
+    response_dict = json.loads(response.content)
 
     annotated_para = ParagraphStructAnnotated(
         number=para.number,
         text=para.text,
-        title=response["structured_response"].title,
-        description=response["structured_response"].description,
+        title=response_dict["title"],
+        description=response_dict["description"],
         subparagraphs=[],
     )
 
@@ -209,7 +233,6 @@ def main(decision: CourtDecision, debug: bool = False) -> CourtDecision:
     workflow = StateGraph(AnnotationState)
 
     # Add nodes for each section
-    logger.info("Adding nodes for each section...")
     for section_name in ["entscheid", "erwägungen", "sachverhalt"]:
         logger.info(f"Adding node for section: {section_name}")
         workflow.add_node(
@@ -219,18 +242,14 @@ def main(decision: CourtDecision, debug: bool = False) -> CourtDecision:
     # Add edges
     logger.info("Adding edges...")
     workflow.add_edge("annotate_entscheid", "annotate_erwägungen")
-    logger.info("Connecting annotate_entscheid to annotate_erwägungen")
     workflow.add_edge("annotate_erwägungen", "annotate_sachverhalt")
-    logger.info("Connecting annotate_erwägungen to annotate_sachverhalt")
     workflow.add_edge("annotate_sachverhalt", END)
-    logger.info("Connecting annotate_sachverhalt to END")
 
     # Set the entry point
     workflow.set_entry_point("annotate_entscheid")
 
     logger.info("Compiling graph...")
     graph = workflow.compile()
-    logger.info("Creating input state...")
     input_state = AnnotationState(decision=decision)
     logger.info("Invoking graph...")
     result = graph.invoke(input_state)
@@ -254,7 +273,7 @@ if __name__ == "__main__":
     class CourtDecisionStructured(CourtDecision):
         """A structured court decision with annotated paragraphs."""
 
-        content: List[SectionStructured]
+        content: List[Union[SectionStructured, ParagraphStructAnnotated]]
 
         def structure(self):
             """Structure the decision content into annotated paragraphs."""
@@ -271,6 +290,8 @@ if __name__ == "__main__":
     # Run annotation
     logger.info("Running annotation...")
     annotated_decision = main(decision, debug=True)  # Set to True for debug logging
+    # TODO: annotated_decision_yaml is missing the annotations, while annotated_decision has them -> why? -> fix this
+    annotated_decision_yaml = annotated_decision.to_yaml()
 
     # Save the result
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -278,6 +299,6 @@ if __name__ == "__main__":
 
     logger.info(f"Saving to {output_path}...")
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write(annotated_decision.to_yaml())
+        f.write(annotated_decision_yaml)
 
     logger.info("Annotation completed. Result saved to YAML file.")
