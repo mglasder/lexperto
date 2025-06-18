@@ -1,0 +1,1309 @@
+meta: null
+content:
+- name: entscheid
+  content:
+  - number: '1.'
+    text: Die Beschwerde wird abgewiesen
+    subparagraphs: []
+    annotation:
+      title: Entscheid über die Beschwerde
+      description:
+      - Annahme oder Abweisung der Beschwerde
+  - number: '2.'
+    text: "Die Verfahrenskosten von Fr. 5\x019000.-- werden dem Beschwerdef\x055fhrer\
+      \ auf-erlegt. Der einbezahlte Kostenvorschuss in gleicher H\x024fe wird zur\
+      \ Bezah-lung der Verfahrenskosten verwendet."
+    subparagraphs: []
+    annotation:
+      title: Entscheidung über die Verfahrenskosten und Kostenvorschussverwendung
+      description:
+      - Auferlegung der Verfahrenskosten auf die beschwerdeführende Partei
+      - Verwendung des einbezahlten Kostenvorschusses zur Begleichung der Verfahrenskosten
+  - number: '3.'
+    text: "Es wird keine Parteientsch\x052digung zugesprochen."
+    subparagraphs: []
+    annotation:
+      title: Entscheidung über Parteientschädigung
+      description:
+      - Anspruch auf Parteientschädigung
+      - Zuständigkeit zur Zusprechung der Parteientschädigung
+      - Rechtsgrundlagen für die Gewährung oder Verweigerung der Parteientschädigung
+  - number: '4.'
+    text: "Dieses Urteil geht an den Beschwerdef\x055fhrer und die Vorinstanz."
+    subparagraphs: []
+    annotation:
+      title: Adressierung des Urteils an die Parteien und Vorinstanz
+      description:
+      - Bestimmung der Empfänger des Urteils
+      - Zustellung des Urteils an den Beschwerdeführer
+      - Zustellung des Urteils an die Vorinstanz
+  is_structured: true
+- name: erwägungen
+  content:
+  - number: '1.'
+    text: ''
+    subparagraphs:
+    - number: '1.1'
+      text: Dem vorliegenden Verfahren liegt ein Amtshilfeersuchen der ersuchenden
+        französischen Steuerbehörde vom 19. April 2023 gestützt auf Art. 28 des DBA
+        CH-FR zugrunde. Die Durchführung dieser Abkommensbestimmung richtet sich –
+        unter Vorbehalt abweichender Regelungen im DBA CH-FR – nach dem Bundesgesetz
+        vom 28. September 2012 über die internationale Amtshilfe in Steuersachen (StAhiG,
+        SR 651.1; vgl. Art. 1 Abs. 1 und 2 sowie Art. 24 StAhiG e contrario).
+      subparagraphs: []
+      annotation:
+        title: Anwendbarkeit der Rechtsgrundlagen auf das Amtshilfeersuchen
+        description:
+        - Vorliegen eines Amtshilfeersuchens der ausländischen Steuerbehörde
+        - Rechtsgrundlage des Amtshilfeersuchens im Doppelbesteuerungsabkommen zwischen
+          der Schweiz und Frankreich
+        - Anwendbarkeit des Bundesgesetzes über die internationale Amtshilfe in Steuersachen
+          auf das Verfahren
+        - Vorrang und Subsidiarität der Abkommensbestimmungen gegenüber dem Bundesgesetz
+    - number: '1.2'
+      text: Das Bundesverwaltungsgericht ist zur Beurteilung von Beschwerden gegen
+        Schlussverfügungen der ESTV betreffend die internationale Amtshilfe in Steuersachen
+        zuständig (vgl. Art. 19 Abs. 5 StAhiG i.V.m. Art. 31 ff. des Bundesgesetzes
+        vom 17. Juni 2005 über das Bundesverwaltungsgericht [Verwaltungsgerichtsgesetz,
+        VGG, SR 173.32]). Das Verfahren vor dem Bundesverwaltungsgericht richtet sich
+        nach dem Bundesgesetz vom 20. Dezember 1968 über das Verwaltungsverfahren
+        (Verwaltungsverfahrensgesetz, VwVG, SR 172.021), soweit das VGG nichts anderes
+        bestimmt (Art. 37 VGG).
+      subparagraphs: []
+      annotation:
+        title: Zuständigkeit und Verfahrensrecht des Bundesverwaltungsgerichts bei
+          Beschwerden gegen Schlussverfügungen der ESTV in der internationalen Amtshilfe
+        description:
+        - Zuständigkeit des Bundesverwaltungsgerichts für Beschwerden gegen Schlussverfügungen
+          der ESTV in Steuersachen
+        - Anwendbarkeit des Bundesgesetzes über das Bundesverwaltungsgericht auf das
+          Verfahren
+        - Anwendbarkeit des Verwaltungsverfahrensgesetzes auf das Verfahren vor dem
+          Bundesverwaltungsgericht
+        - Vorrang der Bestimmungen des Verwaltungsgerichtsgesetzes gegenüber dem Verwaltungsverfahrensgesetz
+    - number: '1.3'
+      text: Der Beschwerdeführer hat am vorinstanzlichen Verfahren teilgenommen und
+        ist als Adressat der angefochtenen Schlussverfügung und als Person, die vom
+        Amtshilfeersuchen betroffen ist, zur Beschwerdeführung legitimiert (vgl. Art.
+        48 Abs. 1 VwVG und Art. 19 Abs. 2 StAhiG). Auf die form- und fristgerecht
+        (vgl. Art. 50 Abs. 1 und Art. 52 Abs. 1 VwVG i.V.m. Art. 19 Abs. 5 StAhiG)
+        eingereichte Beschwerde ist einzutreten.
+      subparagraphs: []
+      annotation:
+        title: Prüfung der Legitimation und Zulässigkeit der Beschwerde
+        description:
+        - Teilnahme des Beschwerdeführers am vorinstanzlichen Verfahren
+        - Legitimation des Beschwerdeführers als Adressat der Schlussverfügung
+        - Legitimation des Beschwerdeführers als vom Amtshilfeersuchen betroffene
+          Person
+        - Form- und fristgerechte Einreichung der Beschwerde
+        - Zulässigkeit des Eintritts in die Beschwerde
+    - number: '1.4'
+      text: Das Bundesverwaltungsgericht kann die angefochtene Schlussverfügung in
+        vollem Umfang überprüfen. Der Beschwerdeführer kann neben der Verletzung von
+        Bundesrecht und der unrichtigen oder unvollständigen Feststellung des rechtserheblichen
+        Sachverhalts auch die Unangemessenheit rügen (Art. 49 Bst. a bis c VwVG).
+      subparagraphs: []
+      annotation:
+        title: Umfang der Überprüfung durch das Bundesverwaltungsgericht
+        description:
+        - Überprüfung der Verletzung von Bundesrecht
+        - Überprüfung der unrichtigen oder unvollständigen Feststellung des rechtserheblichen
+          Sachverhalts
+        - Überprüfung der Unangemessenheit der angefochtenen Verfügung
+    annotation:
+      title: Verfahrensgrundlagen und Zuständigkeit im Amtshilfeverfahren
+      description:
+      - Rechtsgrundlage des Amtshilfeersuchens gemäss Doppelbesteuerungsabkommen zwischen
+        der Schweiz und Frankreich
+      - Anwendbarkeit des Bundesgesetzes über die internationale Amtshilfe in Steuersachen
+        auf das Verfahren
+      - Zuständigkeit des Bundesverwaltungsgerichts für Beschwerden gegen Schlussverfügungen
+        der Eidgenössischen Steuerverwaltung im Amtshilfeverfahren
+      - Anwendbares Verfahrensrecht vor dem Bundesverwaltungsgericht
+      - Legitimation des Beschwerdeführers zur Beschwerdeführung im Amtshilfeverfahren
+      - Formelle Voraussetzungen für das Eintreten auf die Beschwerde
+      - Umfang der Überprüfung der angefochtenen Schlussverfügung durch das Bundesverwaltungsgericht
+      - Prüfungsmassstäbe der Beschwerde, insbesondere Verletzung von Bundesrecht,
+        Sachverhaltsfeststellung und Unangemessenheit
+  - number: '2.'
+    text: ''
+    subparagraphs:
+    - number: '2.1'
+      text: 'Das vorliegende Amtshilfeersuchen betrifft die Steuerjahre 2018 bis 2021
+        und stützt sich auf Art. 28 DBA CH-FR (in der hier anwendbaren Fassung gemäss
+        Art. 7 des Zusatzabkommens vom 27. August 2009 [AS 2010 5683; nachfolgend:
+        Zusatzabkommen 2009]; Art. 11 Abs. 3 des Zusatzabkommens 2009) und auf Ziff.
+        XI des im DBA CH-FR integrierten Zusatzprotokolls in der Fassung gemäss Art.
+        1 der Vereinbarung vom 25. Juni 2014 über die Änderung des Zusatzprotokolls
+        zum revidierten Abkommen zwischen der Schweiz und Frankreich vom 9. September
+        1966 zur Vermeidung der Doppelbesteuerung auf dem Gebiet der Steuern vom Einkommen
+        und vom Vermögen und zur Vermeidung von Steuerbetrug und Steuerflucht (AS
+        2016 1195, nachfolgend: Vereinbarung 2014).'
+      subparagraphs:
+      - number: 2.2.1
+        text: 'Gemäss Ziff. XI Abs. 3 des Zusatzprotokolls muss das Amtshilfegesuch
+          folgende Informationen enthalten: die Identität der in eine Prüfung oder
+          Untersuchung einbezogenen Person, wobei diese Information mittels Angabe
+          des Namens der betreffenden Person oder weiterer Informationen, welche ihre
+          Identifikation ermöglichen, geliefert werden kann (Bst. a); die Zeitperiode,
+          für welche die Informationen verlangt werden (Bst. b); die Beschreibung
+          der verlangten Informationen sowie Angaben hinsichtlich der Form, in der
+          der ersuchende Staat diese Informationen vom ersuchten Staat zu erhalten
+          wünscht (Bst. c); den Steuerzweck, für den die Informationen verlangt werden
+          (Bst. d) und soweit bekannt, den Namen und die Adresse des mutmasslichen
+          Inhabers der verlangten Informationen (Bst. e). Diese Anforderungen gehen
+          den ähnlichen Bestimmungen in Art. 6 Abs. 2 StAhiG vor (so auch Art. 1 Abs.
+          2 StAhiG; statt vieler: Urteil des BVGer A-4143/2018 vom 28. Mai 2015 E.
+          2.2.1).'
+        subparagraphs: []
+        annotation:
+          title: Erforderliche Angaben im Amtshilfegesuch gemäss Zusatzprotokoll
+          description:
+          - Identität der in Prüfung oder Untersuchung einbezogenen Person
+          - Zeitperiode, für welche die Informationen verlangt werden
+          - Beschreibung der verlangten Informationen und gewünschte Form der Übermittlung
+          - Steuerzweck der Informationsanforderung
+          - Name und Adresse des mutmasslichen Inhabers der verlangten Informationen,
+            soweit bekannt
+          - Vorrang der Anforderungen des Zusatzprotokolls gegenüber ähnlichen Bestimmungen
+            im Steueramtshilfegesetz
+      - number: 2.2.2
+        text: Enthält ein Amtshilfeersuchen alle Informationen, die gemäss dem anwendbaren
+          Übereinkommen erforderlich sind, kann das Vorliegen einer sog. „fishing
+          expedition“ (vgl. hierzu E. 2.3.2) grundsätzlich verneint werden (vgl. Urteil
+          des BGer 2C_953/2020 vom 24. November 2021 E. 3.3; Urteil des BVGer A-5281/2021
+          vom 2. Mai 2022 E. 6.1).
+        subparagraphs: []
+        annotation:
+          title: Erfordernisse an die Vollständigkeit von Amtshilfeersuchen zur Vermeidung
+            von Fishing Expeditions
+          description:
+          - Vorliegen aller gemäss anwendbarem Übereinkommen erforderlichen Informationen
+            in Amtshilfeersuchen
+          - Abgrenzung von Fishing Expeditions bei vollständigen Amtshilfeersuchen
+      - number: 2.2.3
+        text: Die Auslegung von Amtshilfeersuchen muss im Lichte des von der ersuchenden
+          Behörde verfolgten Zwecks und in einer Weise erfolgen, die den wirksamen
+          Informationsaustausch zwischen den Vertragsparteien nicht behindert (vgl.
+          Ziff. XI Abs. 4 des Zusatzprotokolls). Dies gebietet ebenso der völkergewohnheitsrechtliche
+          Grundsatz, wonach Vertragsstaaten völkerrechtliche Verträge nach Treu und
+          Glauben zu erfüllen haben (pacta sunt servanda, kodifiziert in Art. 26 des
+          Wiener Übereinkommens vom 23. Mai 1969 über das Recht der Verträge [VRK,
+          SR 0.111]; vgl. BGE 147 II 116 E. 5.2; Urteil des BGer 2C_287/2019, 2C_288/2019
+          vom 13. Juli 2020 E. 3). Soweit vorliegend relevant, stellen die Grundsätze
+          des Wiener Übereinkommens kodifiziertes Völkergewohnheitsrecht dar; sie
+          sind von den schweizerischen Behörden zu beachten, obschon Frankreich nicht
+          Vertragsstaat des Wiener Übereinkommens ist (vgl. BGE 146 II 150 E. 5.3.1
+          m.w.H.).
+        subparagraphs: []
+        annotation:
+          title: Auslegung von Amtshilfeersuchen unter Beachtung völkerrechtlicher
+            Grundsätze
+          description:
+          - Zweckorientierte Auslegung von Amtshilfeersuchen im Interesse des wirksamen
+            Informationsaustauschs
+          - Beachtung des völkergewohnheitsrechtlichen Grundsatzes von Treu und Glauben
+            bei der Vertragserfüllung
+          - Anwendung des Grundsatzes pacta sunt servanda gemäß Art. 26 des Wiener
+            Übereinkommens über das Recht der Verträge
+          - Relevanz kodifizierten Völkergewohnheitsrechts für die Auslegung trotz
+            fehlender Vertragsstaatseigenschaft
+      - number: 2.3.1
+        text: Gemäss Art. 28 Abs. 1 Satz 1 DBA CH-FR tauschen die zuständigen Behörden
+          der beiden Vertragsstaaten unter sich diejenigen Informationen aus, die
+          zur Durchführung des Abkommens oder zur Anwendung oder Durchsetzung des
+          innerstaatlichen Rechts betreffend Steuern jeder Art und Bezeichnung, die
+          für Rechnung der Vertragsstaaten oder ihrer politischen Unterabteilungen
+          oder lokalen Körperschaften erhoben werden, voraussichtlich erheblich sind,
+          soweit die diesem Recht entsprechende Besteuerung nicht dem Abkommen widerspricht.
+          Der Informationsaustausch in Anwendung von Art. 28 DBA CH-FR ist nicht durch
+          Art. 1 DBA CH-FR (persönlicher Geltungsbereich) und Art. 2 DBA CH-FR (sachlicher
+          Geltungsbereich bzw. unter das Abkommen fallende Steuern) eingeschränkt
+          (Art. 28 Abs. 1 Satz 2 DBA CH-FR).
+        subparagraphs: []
+        annotation:
+          title: Rechtliche Grundlagen und Umfang des Informationsaustauschs nach
+            dem Doppelbesteuerungsabkommen Schweiz-Frankreich
+          description:
+          - Anwendungsbereich des Informationsaustauschs gemäss Art. 28 Abs. 1 Satz
+            1 DBA CH-FR
+          - Bedingungen für die Relevanz der auszutauschenden Informationen im Zusammenhang
+            mit der Durchführung des Abkommens oder der Anwendung innerstaatlichen
+            Steuerrechts
+          - Ausnahme vom persönlichen und sachlichen Geltungsbereich des Abkommens
+            für den Informationsaustausch gemäss Art. 28 Abs. 1 Satz 2 DBA CH-FR
+          - Bezug der Besteuerung auf die Vertragsstaaten oder deren politische Unterabteilungen
+            oder lokale Körperschaften
+      - number: 2.3.2
+        text: Gemäss Ziff. XI Abs. 2 des Zusatzprotokolls zum DBA CH-FR besteht der
+          Zweck der Verweisung auf „voraussichtlich erhebliche“ Informationen in Art.
+          28 Abs. 1 DBA CH-FR darin, einen möglichst breiten Informationsaustausch
+          in Steuersachen zu gewährleisten, ohne dass die Vertragsstaaten „fishing
+          expeditions“ (unzulässige Beweisausforschung) durchführen oder Informationen
+          verlangen können, deren Erheblichkeit für die Aufklärung der Steuerangelegenheiten
+          bestimmter Steuerpflichtiger wenig wahrscheinlich ist (vgl. Urteil des BVGer
+          A-4685/2021 vom 19. August 2022 E. 3.6). Insofern bildet das Verbot der
+          Beweisausforschung Ausdruck des Verhältnismässigkeitsgrundsatzes (vgl. Urteil
+          des BVGer A-4163/2019 vom 22. April 2020 E. 3.1.2).
+        subparagraphs: []
+        annotation:
+          title: Zweck und Schranken des Informationsaustauschs gemäss Zusatzprotokoll
+            zum Doppelbesteuerungsabkommen
+          description:
+          - Zweck der Verweisung auf voraussichtlich erhebliche Informationen in Art.
+            28 Abs. 1 DBA CH-FR
+          - Gewährleistung eines möglichst breiten Informationsaustauschs in Steuersachen
+          - Verbot unzulässiger Beweisausforschung (fishing expeditions)
+          - Begrenzung der Informationsanforderungen auf solche mit wahrscheinlicher
+            Relevanz für Steuerangelegenheiten
+          - Ausdruck des Verhältnismässigkeitsgrundsatzes im Verbot der Beweisausforschung
+      - number: 2.3.3
+        text: Wurde ein Gesuch zum Zweck der Beweisausforschung gestellt, wird gemäss
+          innerstaatlichem Recht darauf nicht eingetreten (Art. 7 Bst. a StAhiG).
+        subparagraphs: []
+        annotation:
+          title: Ausschluss der Amtshilfe bei Gesuchen zur Beweisausforschung nach
+            innerstaatlichem Recht
+          description:
+          - Anwendbarkeit des innerstaatlichen Rechts auf Amtshilfegesuche
+          - Ausschluss der Amtshilfe bei Gesuchen zum Zweck der Beweisausforschung
+          - Relevanz von Art. 7 Buchstabe a des Staatsanwaltschaftshilfegesetzes
+      - number: 2.3.4
+        text: Als nach Art. 28 Abs. 1 DBA CH-FR zur Anwendung oder Durchsetzung des
+          innerstaatlichen Rechts „voraussichtlich erheblich“ gelten Informationen,
+          die für den ersuchenden Staat notwendig sind, um eine in diesem Staat steuerpflichtige
+          Person dort korrekt zu besteuern (BGE 143 II 185 E. 3.3.1 und 141 II 436
+          E. 4.4.3; Urteil des BVGer A-4592/2018 vom 21. März 2019 E. 3.1.2). Um die
+          Durchsetzung des Steuerrechts des ersuchenden Staats zu ermöglichen, können
+          gemäss bundesgerichtlicher Rechtsprechung grundsätzlich sämtliche Informationen
+          relevant sein, die ein Vertragsstaat für die Steuerveranlagung seiner Steuerpflichtigen
+          benötigt (vgl. BGE 143 II 185 E. 3.3.3).
+        subparagraphs: []
+        annotation:
+          title: Relevanzkriterien für Informationen nach Art. 28 Abs. 1 DBA Schweiz-Frankreich
+          description:
+          - Definition des Begriffs „voraussichtlich erheblich“ im Kontext der Anwendung
+            oder Durchsetzung des innerstaatlichen Rechts
+          - Erforderlichkeit der Informationen für die korrekte Besteuerung einer
+            im ersuchenden Staat steuerpflichtigen Person
+          - Anwendbarkeit der bundesgerichtlichen Rechtsprechung zur Relevanz sämtlicher
+            Informationen für die Steuerveranlagung
+          - Bezugnahme auf einschlägige Rechtsprechung zur Konkretisierung der Informationsrelevanz
+      - number: 2.3.5
+        text: 'Die Voraussetzung der voraussichtlichen Erheblichkeit ist erfüllt,
+          wenn im Zeitpunkt der Einreichung des Amtshilfeersuchens eine vernünftige
+          Möglichkeit besteht, dass sich die verlangten Informationen als erheblich
+          erweisen werden (BGE 143 II 185 E. 3.3.2). Keine Rolle spielt demgegenüber,
+          ob sich diese Informationen nach deren Übermittlung für die ersuchende Behörde
+          als nicht erheblich herausstellen (vgl. BGE 144 II 206 E. 4.3 und 142 II
+          161 E. 2.1.1; zum Ganzen: Urteil des BVGer A-4603/2019 vom 17. August 2020
+          E. 2.3.3 m.w.H.).'
+        subparagraphs: []
+        annotation:
+          title: Voraussetzung der voraussichtlichen Erheblichkeit der verlangten
+            Informationen
+          description:
+          - Zeitpunktbezogene Prüfung der vernünftigen Möglichkeit der Erheblichkeit
+            bei Einreichung des Amtshilfeersuchens
+          - Unabhängigkeit der Erheblichkeitsprüfung von der späteren tatsächlichen
+            Bedeutung der Informationen für die ersuchende Behörde
+      - number: 2.3.6
+        text: 'Die voraussichtliche Erheblichkeit von Informationen muss sich bereits
+          aus dem Amtshilfeersuchen ergeben. Nach der Edition der verlangten Unterlagen
+          hat die ersuchte Behörde zu prüfen, ob die betreffenden Informationen für
+          die Erhebung der Steuer voraussichtlich erheblich sind. Dem „voraussichtlich“
+          kommt somit eine doppelte Bedeutung zu: der ersuchende Staat muss die Erheblichkeit
+          voraussehen und im Amtshilfeersuchen geltend machen und der ersuchte Staat
+          muss nur solche Informationen übermitteln, die voraussichtlich erheblich
+          sind (vgl. BGE 143 II 185 E. 3.3.2; Urteil des BVGer A-272/2017 vom 5. Dezember
+          2017 E. 2.2.2).'
+        subparagraphs: []
+        annotation:
+          title: Voraussichtliche Erheblichkeit von Informationen im Amtshilfeersuchen
+          description:
+          - Erfordernis der Darlegung der voraussichtlichen Erheblichkeit im Amtshilfeersuchen
+          - Prüfung der voraussichtlichen Erheblichkeit der verlangten Informationen
+            durch die ersuchte Behörde
+          - Doppelte Bedeutung des Begriffs „voraussichtlich“ im Kontext der Amtshilfe
+          - Begrenzung der Übermittlung auf Informationen mit voraussichtlicher Erheblichkeit
+      - number: 2.3.7
+        text: 'Ob eine Information tatsächlich erheblich ist, hängt im Wesentlichen
+          vom (Verfahrens-)Recht des ersuchenden Staates ab. Nach ständiger bundesgerichtlicher
+          Rechtsprechung bedeutet dies freilich nicht, dass sich der ersuchte Staat
+          im Rahmen des Amtshilfeverfahrens zum internen (Verfahrens-)Recht des ersuchenden
+          Staates zu äussern hätte. Entsprechend kann in der Regel nur der ersuchende
+          Staat abschliessend feststellen, ob eine Information tatsächlich erheblich
+          ist (vgl. BGE 143 II 185 E. 3.3.2 und 142 II 161 E. 2.1.1; Urteil des BGer
+          2C_918/2020 vom 28. Dezember 2021 E. 4.3; statt vieler: Urteil des BVGer
+          A-3584/2021 vom 27. Juli 2023 E. 2.7.6). Die Rolle des ersuchten Staates
+          beschränkt sich bei der Beurteilung der voraussichtlichen Erheblichkeit
+          daher auf eine Prüfung der Plausibilität des Ersuchens (vgl. BGE 144 II
+          29 E. 4.2.2 und 142 II 161 E. 2.1.1; Urteil des BGer 2C_282/2021 vom 15.
+          Juni 2022 E. 4.2.2; Urteile des BVGer A-4144/2018 vom 28. Mai 2019 E. 2.1.6
+          und A-846/2018 vom 30. August 2018 E. 2.1.4 m.w.H.). Dabei hat die ersuchte
+          Behörde nicht zu entscheiden, ob der im Ersuchen dargestellte Sachverhalt
+          gänzlich der Realität entspricht, sondern sie muss nur überprüfen, ob die
+          ersuchten Informationen einen Bezug zu diesem Sachverhalt haben und ob sie
+          möglicherweise dazu geeignet sind, im ausländischen Verfahren verwendet
+          zu werden (vgl. BGE 144 II 206 E. 4.3 und 142 II 161 E. 2.1.1; Urteile des
+          BGer 2C_282/2021 vom 15. Juni 2022 E. 4.2.2 und 2C_703/2020 vom 15. März
+          2021 E. 4.2.2; Urteile des BVGer A-4144/2018 vom 28. Mai 2019 E. 2.1.6 und
+          A-846/2018 vom 30. August 2018 E. 2.1.4 m.w.H.). Soweit das nationale Verfahrensrecht
+          des ersuchenden Staates einer Verwertung der im Amtshilfeverfahren ersuchten
+          Informationen entgegensteht, hat die betroffene Person dies im Prinzip vor
+          den Behörden des ersuchenden Staates geltend zu machen (BGE 144 II 206 E.
+          4.6 und 142 II 161 E. 2.2; Urteil des BGer 2C_918/2020 vom 28. Dezember
+          2021 E. 4.3 m.w.H; Urteil des BVGer A-232/2022 vom 16. Februar 2023 E. 2.3.4.2
+          m.w.H.).'
+        subparagraphs: []
+        annotation:
+          title: Prüfung der Erheblichkeit von Informationen im Amtshilfeverfahren
+          description:
+          - Abhängigkeit der Erheblichkeit von Informationen vom Verfahrensrecht des
+            ersuchenden Staates
+          - Abgrenzung der Zuständigkeit des ersuchten Staates bei der Beurteilung
+            der Erheblichkeit
+          - Prüfung der Plausibilität des Amtshilfegesuchs durch den ersuchten Staat
+          - Überprüfung des Bezugs der ersuchten Informationen zum dargestellten Sachverhalt
+          - Beurteilung der Eignung der ersuchten Informationen für das ausländische
+            Verfahren
+          - Zuständigkeit der Behörden des ersuchenden Staates für Einwände gegen
+            die Verwertbarkeit der Informationen
+      - number: 2.3.8
+        text: 'Die Übermittlung von Informationen zu Personen, die nicht formell betroffene
+          Personen sind, ist gemäss Art. 4 Abs. 3 StAhiG unzulässig, wenn diese Informationen
+          für die Beurteilung der Steuersituation der betroffenen Person nicht voraussichtlich
+          relevant sind oder wenn berechtigte Interessen von Personen, die nicht betroffene
+          Personen sind, das Interesse der ersuchenden Seite an der Übermittlung der
+          Informationen überwiegen (vgl. Urteile des BVGer A-4987/2021 vom 20. Mai
+          2022 E. 2.2.5; A-5447/2020 vom 6. Oktober 2021 E. 2.4.4).
+
+          Rechtsprechungsgemäss ist der Begriff der „nicht betroffenen Person“ nach
+          Art. 4 Abs. 3 StAhiG restriktiv zu verstehen (vgl. BGE 142 II 161 E. 4.6.1
+          f.). Damit sollen in Anwendung des Verhältnismässigkeitsprinzips Personen
+          geschützt werden, die nichts mit dem im Amtshilfeersuchen geschilderten
+          Sachverhalt zu tun haben, deren Namen also rein zufällig in den weiterzuleitenden
+          Dokumenten auftauchen („fruit d''un pur hasard“; vgl. statt vieler: Urteil
+          des BGer 2C_287/2019 vom 13. Juli 2020 E. 5; Urteil des BVGer A-4987/2021
+          vom 20. Mai 2022 E. 2.2.6 m.w.H.). In gewissen Konstellationen ist es unumgänglich,
+          auch über Personen Informationen zu erteilen, deren Steuerpflicht im ersuchenden
+          Staat nicht geltend gemacht wird (statt vieler: Urteil des BVGer A-4228/2018
+          vom 26. August 2019 E. 2.6.3). Können die ersuchten Informationen für die
+          Steuerpflicht der im ersuchenden Staat zu besteuernden Person voraussichtlich
+
+          Seite 9
+
+          erheblich sein und ist ihre Übermittlung unter Verhältnismässigkeitsgesichtspunkten
+          erforderlich, d.h. wenn die Aussonderung, Schwärzung oder anderweitige Unkenntlichmachung
+          der Informationen den Zweck des Amtshilfeersuchens vereiteln würde, so sind
+          sie dem ersuchenden Staat zu übermitteln (vgl. ausführlich mit Beispielen:
+          BGE 144 II 29 E. 4.2.2 ff. und 141 II 436 E. 4.2.3 f.; Urteil des BGer 2C_615/2018
+          vom 26. März 2019 E. 3.1; Urteil des BVGer A-4987/2021 vom 20. Mai 2022
+          E. 2.2.6 m.w.H.).'
+        subparagraphs: []
+        annotation:
+          title: Voraussetzungen und Schranken der Übermittlung von Informationen
+            zu nicht betroffenen Personen im Amtshilfeverfahren
+          description:
+          - Unzulässigkeit der Übermittlung von Informationen zu nicht betroffenen
+            Personen gemäss Art. 4 Abs. 3 StAhiG
+          - Relevanz der Informationen für die Beurteilung der Steuersituation der
+            betroffenen Person
+          - Abwägung zwischen berechtigten Interessen nicht betroffener Personen und
+            Interesse der ersuchenden Seite an der Informationsübermittlung
+          - Restriktive Auslegung des Begriffs der nicht betroffenen Person im Sinne
+            des Verhältnismässigkeitsprinzips
+          - Schutz von Personen, die nur zufällig in den Dokumenten erscheinen und
+            keinen Bezug zum Amtshilfeersuchen haben
+          - Ausnahmen, bei denen Informationen zu nicht betroffenen Personen übermittelt
+            werden, wenn diese für die Steuerpflicht der betroffenen Person erheblich
+            sind
+          - Erforderlichkeit der Übermittlung unter Verhältnismässigkeitsgesichtspunkten,
+            insbesondere wenn Aussonderung oder Schwärzung den Zweck des Amtshilfeersuchens
+            vereiteln würde
+      - number: 2.4.1
+        text: Ein wichtiges Element der internationalen Behördenzusammenarbeit bildet
+          das völkerrechtliche Vertrauensprinzip. Diesem Grundsatz nach besteht –
+          ausser bei offensichtlichem Rechtsmissbrauch oder bei berechtigten Fragen
+          im Zusammenhang mit dem Schutz des schweizerischen oder internationalen
+          Ordre public (vgl. Art. 7 StAhiG) – prinzipiell kein Anlass, an Sachverhaltsdarstellungen
+          und Erklärungen anderer Staaten zu zweifeln (vgl. BGE 146 II 150 E. 7.1
+          und 142 II 218 E. 3.1; Urteile des BVGer A-765/2019 vom 20. September 2020
+          E. 2.2 und A-381/2018 vom 21. November 2018 E. 4.2).
+        subparagraphs: []
+        annotation:
+          title: Grundsatz des völkerrechtlichen Vertrauensprinzips in der internationalen
+            Behördenzusammenarbeit
+          description:
+          - Anwendung des völkerrechtlichen Vertrauensprinzips bei der Beurteilung
+            von Sachverhaltsdarstellungen und Erklärungen anderer Staaten
+          - Ausnahmen vom Vertrauensprinzip bei offensichtlichem Rechtsmissbrauch
+          - Ausnahmen vom Vertrauensprinzip bei berechtigten Fragen zum Schutz des
+            schweizerischen oder internationalen Ordre public
+          - Relevanz von Art. 7 des Staatsanwaltschaftshilfegesetzes für die Prüfung
+            des Vertrauensprinzips
+      - number: 2.4.2
+        text: Aufgrund des völkerrechtlichen Vertrauensprinzips ist die ersuchte Behörde
+          an die Darstellung des Sachverhalts im Amtshilfeersuchen gebunden, sofern
+          diese nicht wegen offensichtlicher Fehler, Lücken oder Widersprüche sofort
+          entkräftet werden kann (BGE 142 II 218 E. 3.1 und 139 II 451 E. 2.2.1; Urteile
+          des BVGer A-2259/2021 vom 18. Februar 2022 E. 2.2 und A-3773/2018 vom 8.
+          Februar 2019 E. 2.6). Gleiches gilt für die vom ersuchenden Staat abgegebenen
+          Erklärungen. Werden diese sofort entkräftet, kann der ersuchte Staat ihnen
+          nicht mehr vertrauen (vgl. Urteile des BVGer A-2259/2021 vom 18. Februar
+          2022 E. 2.2 und A-7622/2016 vom 23. Mai 2017 E. 2.3). Das Vertrauensprinzip
+          schliesst indessen nicht aus, dass der ersuchte Staat vom ersuchenden Staat
+          zusätzliche Erklärungen verlangt, wenn ernsthafte Zweifel an der Einhaltung
+          der völkerrechtlichen Grundsätze bestehen (BGE 146 II 150 E. 7.1 und 144
+          II 206 E. 4.4).
+        subparagraphs: []
+        annotation:
+          title: Bindung an die Darstellung im Amtshilfeersuchen aufgrund des völkerrechtlichen
+            Vertrauensprinzips
+          description:
+          - Verbindlichkeit der Sachverhaltsdarstellung im Amtshilfeersuchen für die
+            ersuchte Behörde
+          - Ausnahmen bei offensichtlichen Fehlern, Lücken oder Widersprüchen in der
+            Sachverhaltsdarstellung
+          - Verbindlichkeit der Erklärungen des ersuchenden Staates
+          - Folgen der sofortigen Entkräftung der Darstellung oder Erklärungen für
+            das Vertrauen des ersuchten Staates
+          - Möglichkeit der Anforderung zusätzlicher Erklärungen bei ernsthaften Zweifeln
+            an der Einhaltung völkerrechtlicher Grundsätze
+      - number: 2.5.1
+        text: Informationen können im abkommensrechtlichen Sinne nur dann als voraussichtlich
+          erheblich qualifiziert werden (vgl. E. 2.3), wenn sie (unter anderem oder
+          ausschliesslich) Personen betreffen, deren unbeschränkte oder beschränkte
+          Steuerpflicht im ersuchenden Staat während der massgebenden Zeitspanne im
+          Ersuchen geltend gemacht wird (vgl. Urteil des BVGer A-1948/2019 vom 7.
+          November 2019 E. 2.4.3).
+        subparagraphs: []
+        annotation:
+          title: Voraussetzungen für die Qualifikation von Informationen als voraussichtlich
+            erheblich im abkommensrechtlichen Sinne
+          description:
+          - Erforderlichkeit, dass Informationen Personen betreffen
+          - Bezug der Personen zur unbeschränkten oder beschränkten Steuerpflicht
+            im ersuchenden Staat
+          - Geltendmachung der Steuerpflicht während der massgebenden Zeitspanne im
+            Ersuchen
+          - Anwendung der Kriterien zur Erheblichkeit von Informationen gemäss abkommensrechtlicher
+            Rechtsprechung
+      - number: 2.5.2
+        text: 'Der Umstand, dass eine betroffene Person in einem Staat als steuerlich
+          ansässig gilt, schliesst indes nicht aus, dass diese Ansässigkeit von einem
+          anderen Staat in Abrede gestellt wird, respektive dass in anderen Staaten
+          tatsächlich eine beschränkte Steuerpflicht gegeben ist. Die Bestimmung des
+          steuerlichen Wohnsitzes auf internationaler Ebene ist eine Grundsatzfrage,
+          die eine detaillierte Prüfung der Situation voraussetzt und vom ersuchten
+          Staat im Rahmen eines Amtshilfeverfahrens nicht geklärt werden kann. Ein
+          möglicher Ansässigkeitskonflikt ist daher nicht im Rahmen eines Amtshilfeverfahrens,
+          sondern in einem Verständigungsverfahren zu lösen (vgl. BGE 145 II 112 E.
+          2.2.2, 142 II 217 E. 3.6 f. und 142 II 161 E. 2.2.2; Urteil des BGer 2C_109/2022
+          vom 30. Januar 2023 E. 4.2.1).
+
+          Ein allfälliges Verfahren betreffend die Ansässigkeitsfrage der betroffenen
+          Person muss zudem noch nicht entschieden worden sein, bevor ein Amtshilfeersuchen
+          in Bezug auf die Besteuerung gestellt werden kann (Urteil des BVGer A-4917/2019
+          vom 22. Oktober 2020 E. 3.1.2).'
+        subparagraphs: []
+        annotation:
+          title: Abgrenzung der Zuständigkeit bei der Bestimmung des steuerlichen
+            Wohnsitzes im Amtshilfeverfahren
+          description:
+          - Anerkennung der unterschiedlichen Ansässigkeitsfeststellungen verschiedener
+            Staaten
+          - Begrenzung der Klärung des steuerlichen Wohnsitzes im Amtshilfeverfahren
+          - Notwendigkeit der detaillierten Prüfung der Ansässigkeitssituation auf
+            internationaler Ebene
+          - Zuständigkeit des Verständigungsverfahrens zur Lösung von Ansässigkeitskonflikten
+          - Unabhängigkeit des Amtshilfeersuchens von einem bereits abgeschlossenen
+            Ansässigkeitsverfahren
+      - number: 2.5.3
+        text: Das Bestehen einer Steuerpflicht in einem anderen Staat als dem ersuchenden
+          Staat stellt sodann weder die Vermutung des guten Glaubens des ersuchenden
+          Staates (vgl. E. 2.2.3 und 2.4) noch die wahrscheinliche Relevanz des Amtshilfeersuchens
+          (vgl. E. 2.3) in Frage. Dies gilt gemäss bundesgerichtlicher Rechtsprechung
+          insbesondere auch dann, wenn der ersuchende Staat in seinem Amtshilfeersuchen
+          die Steuerpflicht der betroffenen Person nicht gesondert begründet, aber
+          ansonsten alle Informationen angibt, die nach dem anwendbaren Abkommen bzw.
+          seinem Protokoll erforderlich sind (vgl. E. 2.2.1). Denn diese Informationen
+          beziehen sich insbesondere auf den angestrebten steuerlichen Zweck, weshalb
+          sie darauf schliessen lassen, dass der ersuchende Staat die betroffene Person
+          als zu seinen Steuerpflichtigen gehörend betrachtet. Die Ansässigkeit in
+          einem Drittstaat reicht somit auch nicht aus, damit die ersuchte Behörde
+          von der ersuchenden Behörde Erklärungen zu den Anknüpfungspunkten an die
+          geltend gemachte Ansässigkeit der betroffenen Person im ersuchenden Staat
+          verlangen kann (BGE 142 II 218 E. 3.1; Urteil des BGer 2C_953/2020 vom 24.
+          November 2021 E. 3.5 und E. 3.7). Deshalb ist es im Grundsatz unbehilflich,
+          wenn sich die betroffene Person im Rahmen des Amtshilfeverfahrens auf eine
+          (unbeschränkte) Steuerpflicht in einem anderen (als dem ersuchenden) Staat
+          beruft (vgl. BGE 142 II 161 E. 2.2 ff.; Urteil des BGer 2C_109/2022 vom
+          30. Januar 2023 E. 4.2.1; Urteil des BVGer A-4680/2021 vom 19. August 2022
+          E. 3.6 in fine).
+        subparagraphs: []
+        annotation:
+          title: Relevanz der Steuerpflicht in einem anderen Staat für die Beurteilung
+            des Amtshilfeersuchens
+          description:
+          - Auswirkungen der Steuerpflicht in einem anderen Staat auf die Vermutung
+            des guten Glaubens des ersuchenden Staates
+          - Einfluss der Steuerpflicht in einem anderen Staat auf die wahrscheinliche
+            Relevanz des Amtshilfeersuchens
+          - Bedeutung der vollständigen Angaben im Amtshilfeersuchen trotz fehlender
+            gesonderter Begründung der Steuerpflicht
+          - Folgen der Ansässigkeit in einem Drittstaat für die Anforderungen an die
+            ersuchte Behörde bezüglich Erklärungen zur Ansässigkeit
+          - Bewertung der Berufung der betroffenen Person auf eine Steuerpflicht in
+            einem anderen Staat im Amtshilfeverfahren
+      - number: 2.5.4
+        text: 'Die einzige Konstellation, in der es das Bundesgericht zulässt, dass
+          die Schweiz als ersuchter Staat eine unbeschränkte Steuerpflicht, auf die
+          sich der ersuchende Staat stützt, überprüft, ist diejenige, in der die betroffene
+          Person (auch) in der Schweiz unbeschränkt steuerpflichtig ist. In dieser
+          Situation einer potenziellen Doppelbesteuerung kann die Schweiz – ebenfalls
+          unter Berücksichtigung des Vertrauensprinzips (vgl. E. 2.4) – überprüfen,
+          ob der Anknüpfungspunkt an die vom ersuchenden Staat angewandte Steuer einem
+          der Kriterien zur Bestimmung der steuerlichen Ansässigkeit im DBA zwischen
+          der Schweiz und dem ersuchenden Staat entspricht. Hingegen hat die Schweiz
+          als ersuchter Staat nicht zu beurteilen, ob eine tatsächliche steuerliche
+          Doppelansässigkeit besteht oder nicht (BGE 145 II 112 E. 3 und 142 II 161
+          E. 2.2.2; Urteil des BGer 2C_953/2020 vom 24. November 2021 E. 3.6, publiziert
+          in SteuerRevue [StR] 77/2022 S. 166; Urteil des BVGer A-5281/2021 vom 2.
+          Mai 2022 E. 7.2.2; vgl. zum Ganzen: Urteil des BVGer A-4830/2021 vom 23.
+          Oktober 2023 E. 2.6).'
+        subparagraphs: []
+        annotation:
+          title: Überprüfung der unbeschränkten Steuerpflicht bei potenzieller Doppelbesteuerung
+          description:
+          - Zulässigkeit der Überprüfung der unbeschränkten Steuerpflicht durch die
+            Schweiz als ersuchter Staat
+          - Voraussetzung der unbeschränkten Steuerpflicht der betroffenen Person
+            in der Schweiz
+          - Anwendung des Vertrauensprinzips bei der Überprüfung der steuerlichen
+            Ansässigkeit
+          - Abgleich des Anknüpfungspunkts mit den Kriterien zur Bestimmung der steuerlichen
+            Ansässigkeit im Doppelbesteuerungsabkommen
+          - Abgrenzung der Zuständigkeit der Schweiz von der Beurteilung einer tatsächlichen
+            Doppelansässigkeit
+      annotation:
+        title: Rechtliche Grundlagen und Voraussetzungen des Amtshilfeersuchens im
+          Steuerbereich zwischen der Schweiz und Frankreich
+        description:
+        - Anwendbarkeit und Geltungsbereich der einschlägigen DBA-Bestimmungen und
+          Zusatzabkommen für die Steuerjahre 2018 bis 2021
+        - Formelle Anforderungen an den Inhalt des Amtshilfeersuchens gemäss Zusatzprotokoll
+          und innerstaatlichem Recht
+        - Abgrenzung zulässiger Amtshilfe von unzulässiger Beweisausforschung („fishing
+          expedition“)
+        - Auslegung von Amtshilfeersuchen unter Berücksichtigung des völkerrechtlichen
+          Treu und Glauben und des Informationsaustauschs
+        - Voraussetzungen für den Informationsaustausch gemäss Art. 28 DBA CH-FR,
+          insbesondere die voraussichtliche Erheblichkeit der verlangten Informationen
+        - Prüfung der voraussichtlichen Erheblichkeit der Informationen durch ersuchenden
+          und ersuchten Staat
+        - Beschränkungen bei der Übermittlung von Informationen zu nicht betroffenen
+          Personen unter Wahrung des Verhältnismässigkeitsprinzips
+        - Anwendung des völkerrechtlichen Vertrauensprinzips auf Sachverhaltsdarstellungen
+          und Erklärungen im Amtshilfeersuchen
+        - Voraussetzungen für die Berücksichtigung der Steuerpflicht der betroffenen
+          Person im ersuchenden Staat
+        - Abgrenzung der Zuständigkeit des ersuchten Staates bei Ansässigkeitskonflikten
+          und Doppelbesteuerung im Rahmen des Amtshilfeverfahrens
+    annotation:
+      title: Rechtsgrundlagen und Anwendungsbereich des Amtshilfeersuchens
+      description:
+      - Anwendbarkeit von Art. 28 des Doppelbesteuerungsabkommens zwischen der Schweiz
+        und Frankreich
+      - Relevanz des Zusatzabkommens vom 27. August 2009 und dessen Art. 7 sowie Art.
+        11 Abs. 3
+      - Geltung von Ziffer XI des im DBA integrierten Zusatzprotokolls in der Fassung
+        der Vereinbarung vom 25. Juni 2014
+      - Bezug des Amtshilfeersuchens auf die Steuerjahre 2018 bis 2021
+  - number: '3.'
+    text: Im vorliegenden Fall ist zunächst strittig und zu prüfen, ob das Amtshilfeersuchen
+      einer unzulässigen „fishing expedition“ entspricht (E. 3.1). Im Streit liegt
+      zudem, ob die Übermittlung von Daten vorgesehen ist, die von der ersuchenden
+      Behörde gar nicht verlangt worden sind (E. 3.2). Im Weiteren ist die Einhaltung
+      des Subsidiaritätsprinzips umstritten (E. 3.3). Zu prüfen ist schliesslich die
+      voraussichtliche Erheblichkeit der ersuchten Informationen (E. 3.4). In diesem
+      Zusammenhang sind auch die Schwärzungsanträge hinsichtlich verschiedener Personennamen
+      zu beurteilen (E. 3.5).
+    subparagraphs:
+    - number: 3.1.1
+      text: Der Beschwerdeführer macht geltend, aufgrund der fehlenden Ansässigkeit
+        in Frankreich komme das Gesuch um Amtshilfe einer untersagten Beweisausforschung
+        gleich. Weil seine Ansässigkeit in den Jahren 2018 bis 2021 nicht in Frankreich
+        gewesen sei, habe die französische Steuerbehörde keinen Grund, Informationen
+        zu seinem Einkommen und Vermögen anzufordern.
+      subparagraphs: []
+      annotation:
+        title: Prüfung der Zulässigkeit des Amtshilfegesuchs bei fehlender Ansässigkeit
+          im ersuchten Staat
+        description:
+        - Relevanz der Ansässigkeit des Gesuchstellers im ersuchten Staat für die
+          Zulässigkeit des Amtshilfegesuchs
+        - Abgrenzung zwischen zulässiger Amtshilfe und unzulässiger Beweisausforschung
+        - Berechtigtes Interesse der ersuchten Steuerbehörde an Informationen zum
+          Einkommen und Vermögen des Gesuchstellers
+    - number: 3.1.1
+      text: Dem Beschwerdeführer ist zunächst zu entgegnen, dass das Amtshilfegesuch
+        vom 19. April 2023 alle gemäss Ziff. XI Abs. 3 des Zusatzprotokolls erforderlichen
+        Informationen (vgl. E. 2.2.1) enthält. Damit kann das Vorliegen einer sog.
+        „fishing expedition“ grundsätzlich verneint werden (E. 2.2.2). Im Weiteren
+        hat die ersuchende Behörde verschiedene Anknüpfungspunkte für eine Ansässigkeit
+        des Beschwerdeführers in Frankreich geltend gemacht. Nach dem Vertrauensprinzip
+        ist darauf grundsätzlich abzustellen. Von einer „fishing expedition“ kann
+        keine Rede sein und die Vorinstanz ist zurecht auf das Amtshilfeersuchen eingetreten.
+        Die vom Beschwerdeführer ins Recht gelegten Urkunden, welche nachweisen sollen,
+        dass er in den Jahren 2018 bis 2021 keine Ansässigkeit in Frankreich gehabt
+        habe, sind unter dem Titel der voraussichtlichen Erheblichkeit der ersuchten
+        Informationen zu prüfen (E. 3.4).
+      subparagraphs: []
+      annotation:
+        title: Prüfung der Erforderlichkeit und Relevanz der im Amtshilfegesuch enthaltenen
+          Informationen
+        description:
+        - Vorliegen aller gemäss Zusatzprotokoll erforderlichen Informationen im Amtshilfegesuch
+        - Abgrenzung einer fishing expedition im Zusammenhang mit dem Amtshilfegesuch
+        - Beurteilung der Anknüpfungspunkte für eine Ansässigkeit des Beschwerdeführers
+          im ersuchenden Staat
+        - Anwendung des Vertrauensprinzips bei der Beurteilung des Amtshilfeersuchens
+        - Prüfung der voraussichtlichen Erheblichkeit der vom Beschwerdeführer vorgelegten
+          Urkunden
+    - number: 3.2.1
+      text: Der Beschwerdeführer bringt vor, die Vorinstanz wolle im Rahmen der Amtshilfe
+        Informationen an die ersuchende Behörde übermitteln, nach welchen diese in
+        ihrem Ersuchen gar nicht oder nicht mit letzter Präzision gefragt habe. Sie
+        wolle insoweit eine unzulässige spontane Amtshilfe leisten. Die ersuchende
+        Behörde habe nur nach Auszügen eines bestimmten Bankkontos gefragt und nicht
+        nach Auszügen bzw. Transaktionen allfälliger mit dem Konto verbundener Kreditkarten.
+      subparagraphs: []
+      annotation:
+        title: Abgrenzung des Umfangs der Amtshilfe gegenüber dem Ersuchen der ersuchenden
+          Behörde
+        description:
+        - Vorliegen eines Ersuchens der ersuchenden Behörde nach bestimmten Informationen
+        - Umfang der vom Ersuchen erfassten Informationen
+        - Übermittlung von Informationen, die nicht ausdrücklich oder präzise im Ersuchen
+          angefragt sind
+        - Abgrenzung zwischen zulässiger Amtshilfe und unzulässiger spontaner Amtshilfe
+    - number: 3.2.2
+      text: Die ersuchende Behörde hat gemäss dem Amtshilfeersuchen nach den Vermögensaufstellungen,
+        verschiedenen Formularen sowie den Kontoauszügen („les relevés“) des Kontos
+        Nr. (Kontonummer) für den Zeitraum 2018 bis 2021 gefragt. Die Vertragsstaaten
+        des DBA CH-F haben den Vertrag nach Treu und Glauben zu erfüllen und demnach
+        die Erklärungen ihres Vertragspartners nach Treu und Glauben zu interpretieren
+        (Art. 26 VRK). Dies hat in einer Weise erfolgen, die den wirksamen Informationsaustausch
+        zwischen den Vertragsparteien nicht behindert (oben E. 2.2.3). Die Auffassung
+        der Vorinstanz, dass die Auszüge der Kreditkarten (inkl. Eröffnungsformulare),
+        welche mit dem genannten Bankkonto verbunden sind, ebenfalls als ersucht zu
+        gelten haben, ist vor diesem Hintergrund zu bestätigen. Die einzelnen Transaktionen,
+        welche aus den Kreditkartenabrechnungen ersichtlich sind, zeigen die Verwendung
+        des Bankkontos näher auf. Dies ermöglicht der ersuchenden Behörde ein besseres
+        Bild über die Vermögensverhältnisse des Beschwerdeführers zu gewinnen. Im
+        Weiteren lassen sich aus den Kreditkartenauszügen allenfalls auch weitere
+        Hinweise des Beschwerdeführers auf seine Ansässigkeit in Frankreich ableiten.
+        Es handelt sich demnach bei der vorgesehenen Übermittlung der Kreditkartenauszüge
+        inkl. Eröffnungsformulare nicht um eine spontane Amtshilfe.
+      subparagraphs: []
+      annotation:
+        title: Auslegung und Umfang des Amtshilfeersuchens im Rahmen des Informationsaustauschs
+        description:
+        - Anforderungen an die Erfüllung des Doppelbesteuerungsabkommens nach Treu
+          und Glauben
+        - Auslegung der Erklärungen des Vertragspartners im Amtshilfeersuchen
+        - Berücksichtigung des wirksamen Informationsaustauschs zwischen den Vertragsparteien
+        - Einbeziehung der Kreditkartenauszüge und zugehörigen Eröffnungsformulare
+          als Teil des Amtshilfeersuchens
+        - Relevanz der Kreditkartentransaktionen zur Konkretisierung der Vermögensverhältnisse
+          des Beschwerdeführers
+        - Möglichkeit der Ableitung von Hinweisen zur Ansässigkeit des Beschwerdeführers
+          aus den Kreditkartenauszügen
+        - Abgrenzung der Übermittlung der Kreditkartenauszüge von einer spontanen
+          Amtshilfe
+    - number: 3.3.1
+      text: Der Beschwerdeführer macht geltend, er habe entgegen der Behauptung im
+        Ersuchen nie eine Aufforderung der französischen Behörden erhalten, Informationen
+        zum betreffenden Konto offenzulegen. Bis heute habe
+      subparagraphs: []
+      annotation:
+        title: Behauptung des Beschwerdeführers zur Nichterteilung einer Auskunftsaufforderung
+          durch ausländische Behörden
+        description:
+        - Vorbringen des Beschwerdeführers zur Existenz oder Nichtexistenz einer Auskunftsaufforderung
+        - Relevanz der behaupteten Auskunftsaufforderung für das Amtshilfegesuch
+    - number: 3.3.2
+      text: kein schriftlicher oder mündlicher Austausch zwischen ihm und der französischen
+        Steuerbehörde stattgefunden.
+      subparagraphs: []
+      annotation:
+        title: Fehlen eines Austauschs mit der ausländischen Steuerbehörde
+        description:
+        - Vorliegen eines schriftlichen Austauschs mit der französischen Steuerbehörde
+        - Vorliegen eines mündlichen Austauschs mit der französischen Steuerbehörde
+    - number: 3.3.2
+      text: Vorliegend hat die ersuchende Behörde erklärt, dass sie alle verfügbaren
+        Mittel auf ihrem Hoheitsgebiet ausgeschöpft habe, um die Informationen zu
+        erhalten, mit Ausnahme derjenigen, die unverhältnismässige Schwierigkeiten
+        verursachen würden (Ersuchen, Seite 4, Ziff. 14 Bst. d). Zudem hat sie im
+        Ersuchen ausgeführt, sie habe den Beschwerdeführer aufgefordert, Informationen
+        zum betreffenden Konto offenzulegen. Dieser Aufforderung sei er aber nicht
+        nachgekommen (Ersuchen, Seite 3, Ziff. 11). Zunächst darf davon ausgegangen
+        werden, dass die Frist zur Einreichung der Steuererklärung für die massgeblichen
+        Steuerperioden 2018 bis 2021 im Zeitpunkt des Amtshilfegesuches (Datum) verstrichen
+        war. Die Vorinstanz hat sich in der Folge zurecht mit den oben erwähnten Erklärungen
+        der ersuchenden Behörde begnügt, denn es liegen keine widersprüflichen Elemente
+        vor, aufgrund derer am guten Glauben des ersuchenden Staates zu zweifeln wäre
+        (Urteil des BGer 2C_716/2020 vom 18. Mai 2021 E 2.2.3). Der Einwand des Beschwerdeführers,
+        er sei in der relevanten Zeit gar nicht in Frankreich gewesen und es habe
+        deshalb auch kein Austausch zwischen ihm und der Steuerbehörde in Frankreich
+        stattfinden können, ist nicht stichhaltig. Das Ersuchen nennt zumindest eine
+        mutmassliche Adresse in Frankreich (Adresse) und die Frage nach dem Wohnsitz
+        ist nicht im Amtshilfeverfahren zu untersuchen (BGer 2C_953/2020 vom 24. November
+        2021 E. 3.5). Nach dem völkerrechtlichen Vertrauensprinzip ist davon auszugehen,
+        dass die ersuchende Behörde – wie in ihrem Ersuchen ausgeführt – den Beschwerdeführer
+        aufgefordert hat, Informationen zum betreffenden Konto offenzulegen. Ob der
+        Beschwerdeführer von der Aufforderung tatsächlich Kenntnis erhalten hat, ist
+        deshalb nicht im vorliegenden Verfahren zu klären. Das Subsidiaritätsprinzip
+        wurde eingehalten.
+      subparagraphs: []
+      annotation:
+        title: Prüfung der Erschöpfung der verfügbaren Mittel und des Subsidiaritätsprinzips
+          im Amtshilfeersuchen
+        description:
+        - Erklärung der ersuchenden Behörde zur Ausschöpfung aller verfügbaren Mittel
+          im Hoheitsgebiet
+        - Ausnahme von Mitteln, die unverhältnismässige Schwierigkeiten verursachen
+          würden
+        - Aufforderung des ersuchten Beschwerdeführers zur Offenlegung von Kontoinformationen
+        - Verstreichen der Frist zur Einreichung der Steuererklärung für die relevanten
+          Steuerperioden
+        - Beurteilung des guten Glaubens der ersuchenden Behörde anhand der vorliegenden
+          Erklärungen und fehlender widersprüchlicher Elemente
+        - Prüfung der Relevanz von Einwänden des Beschwerdeführers bezüglich seines
+          Aufenthaltsorts im Zusammenhang mit dem Amtshilfeverfahren
+        - Anwendung des völkerrechtlichen Vertrauensprinzips auf die Aufforderung
+          zur Informationsoffenlegung
+        - Nichtprüfung der tatsächlichen Kenntnisnahme des Beschwerdeführers von der
+          Aufforderung im Amtshilfeverfahren
+        - Einhaltung des Subsidiaritätsprinzips im Amtshilfeersuchen
+    - number: 3.4.1
+      text: 'Der Beschwerdeführer legt dar, er sei 2012 nach (46) (Überseegebiet des
+        Vereinigten Königreichs) ausgewandert und habe in der vorliegend relevanten
+        Zeit (2018 bis 2021) über keine persönliche, ständige und dauerhafte Wohnstätte
+        in Frankreich verfügt. Im Amtshilfeersuchen sei erwähnt, dass er Eigentümer
+        einer Liegenschaft an der (Adresse), sei. 80% dieser Liegenschaft hätten jedoch
+        seiner Ex-Frau gehört und im Rahmen der Scheidung seien ihr die restlichen
+        20% als Ausgleichszahlung zugesprochen worden. Er habe ab der Trennung im
+        Jahr 2015 zu keinem Zeitpunkt über die besagte Liegenschaft verfügen können.
+        Im
+
+        Amtshilfeersuchen sei ebenfalls erwähnt, dass er Eigentümer einer weiteren
+        Liegenschaft an der (Adresse), sei. Hierbei handle es sich aber bloss um einen
+        8 m2 grossen Abstellraum. Im Übrigen wisse er nicht, weshalb die ersuchende
+        Behörde vermute, er wohne an der (Adresse). Er sei in den Jahren 2018 bis
+        2021 keiner Erwerbstätigkeit in Frankreich nachgegangen. Er sei zwar einziger
+        Gesellschafter der SAS F._______ mit Sitz in (...), welche am (Datum) gegründet
+        worden sei. Seit der Gründung habe er jedoch von dieser Gesellschaft kein
+        Gehalt erhalten. Der Beschwerdeführer macht zusammengefasst geltend, die im
+        Ersuchen vorgebrachten Anhaltspunkte für eine Steuerpflicht in Frankreich
+        seien einer Plausibilitätsprüfung nicht zugänglich. Dem Amtshilfeersuchen
+        sei mangels voraussichtlicher Erheblichkeit der verlangten Informationen keine
+        Folge zu leisten.'
+      subparagraphs: []
+      annotation:
+        title: Darlegung der persönlichen und wirtschaftlichen Verhältnisse des Beschwerdeführers
+          im Zusammenhang mit der Steuerpflicht in Frankreich
+        description:
+        - Wohnsitzverhältnisse des Beschwerdeführers im relevanten Zeitraum
+        - Eigentumsverhältnisse an Liegenschaften in Frankreich
+        - Verfügbarkeit und Nutzung der Liegenschaften durch den Beschwerdeführer
+        - Erwerbstätigkeit und Einkünfte des Beschwerdeführers in Frankreich
+        - Beteiligung an und Einkünfte aus Gesellschaften mit Sitz in Frankreich
+        - Beurteilung der Plausibilität der im Amtshilfeersuchen vorgebrachten Anhaltspunkte
+          für eine Steuerpflicht
+        - Relevanz und Erheblichkeit der im Amtshilfeersuchen verlangten Informationen
+    - number: 3.4.2
+      text: Die Rolle des ersuchten Staates beschränkt sich bei der Beurteilung der
+        voraussichtlichen Erheblichkeit auf eine Prüfung der Plausibilität des Ersuchens.
+        Die ersuchte Behörde muss nur überprüfen, ob die ersuchten Informationen einen
+        Bezug zum im Amtshilfeersuchen geschilderten Sachverhalt haben und ob sie
+        möglicherweise dazu geeignet sind, im ausländischen Verfahren verwendet zu
+        werden (sog. Plausibilitätskontrolle, E. 2.3.7). Im vorliegenden Amtshilfeersuchen
+        geht Frankreich aufgrund verschiedener Anknüpfungspunkte von einer Steuerpflicht
+        in Frankreich betreffend die Jahre 2018 bis 2021 aus. Der Beschwerdeführer
+        verfüge über Eigentum an zwei Immobilien in (...), wohne mutmasslich an einer
+        Adresse in (46), sei Geschäftsführer einer Gesellschaft in Frankreich und
+        habe mehrere Bankkonten bei französischen Banken, die allesamt in (...) eröffnet
+        worden seien. Auf den im Ersuchen geschilderten Sachverhalt ist grundsätzlich
+        abzustellen (sog. völkerrechtliches Vertrauensprinzip, vgl. E. 2.4). Es kann
+        festgehalten werden, dass die ersuchten Informationen einen Bezug zum geschilderten
+        Sachverhalt im Amtshilfeersuchen haben. Die französischen Behörden gehen aufgrund
+        der Anknüpfungspunkte von einer Steuerpflicht in Frankreich aus und die ersuchten
+        Informationen sind möglicherweise geeignet, im Verfahren in Frankreich zur
+        Erhebung der geschuldeten Steuer verwendet zu werden.
+      subparagraphs: []
+      annotation:
+        title: Prüfung der Plausibilität des Amtshilfeersuchens durch den ersuchten
+          Staat
+        description:
+        - Beurteilung der voraussichtlichen Erheblichkeit der ersuchten Informationen
+        - Überprüfung des Bezugs der ersuchten Informationen zum im Amtshilfeersuchen
+          geschilderten Sachverhalt
+        - Eignung der ersuchten Informationen zur Verwendung im ausländischen Verfahren
+        - Anwendung des völkerrechtlichen Vertrauensprinzips bei der Beurteilung des
+          Ersuchens
+    - number: 3.4.3
+      text: 'Der Beschwerdeführer wendet ein, die Ausführungen im Amtshilfeersuchen
+        seien falsch und reicht verschiedene Beweismittel ein. Nach der Rechtsprechung
+        kann der ersuchte Staat den Erklärungen des ersuchenden Staats dann nicht
+        mehr vertrauen, wenn diese sofort entkräftet werden (vgl. statt vieler: Urteile
+        des BVGer A-2259/2021 vom 18. Februar 2022 E. 2.2). Es liegt dabei an der
+        betroffenen Person, den Sachverhalt mittels Urkunden klar und entscheidend
+        zu widerlegen (vgl. statt vieler: Urteil des A-2427/2024 vom 22. November
+        2024 E. 2.4.2 mit Hinweisen). Dies gelingt dem Beschwerdeführer indessen nicht.
+        Die von ihm eingereichte Trennungsurkunde vom (46) (Beschwerdebeilage 3) zeigt
+        bloss auf, dass G._______ seit dem (Datum) („date de la séparation“) vom Beschwerdeführer
+        getrennt ist. In keiner Weise enthält sie Angaben über einen Eigentumsübergang
+        an einer Liegenschaft. Es ist demnach weiterhin davon auszugehen, dass er
+        in den Jahren 2018 bis 2021 (Verkauf am [Datum]) über (Mit-)Eigentum an dieser
+        Liegenschaft (Adresse) verfügt hat. Zudem ist ein weiteres Eigentum an einem
+        Abstellraum (Adresse; Beschwerdebeilage 4) unbestritten. Insofern war der
+        Beschwerdeführer aufgrund der Eigentumsverhältnisse in Frankreich in der relevanten
+        Zeit zumindest beschränkt steuerpflichtig.
+
+        Im Übrigen führt selbst die Vollmacht des jetzigen Vertreters (Beschwerdebeilage
+        2) als Adresse des Beschwerdeführers die im Amtshilfeersuchen (als mutmasslich)
+        genannte Adresse (46) auf. Insofern bestätigt der Beschwerdeführer damit zumindest
+        einen aktuellen Bezug zu dieser Adresse in Frankreich. Weitere relevante Beweismittel
+        legte der Beschwerdeführer nicht ins Recht.
+
+        Der Beschwerdeführer konnte die Ausführungen der ersuchenden Behörde folglich
+        nicht sofort entkräften und es ist auf diese abzustellen. Es liegen demnach
+        Anknüpfungspunkte für seine Steuerpflicht in Frankreich vor. Auch eine mögliche
+        Steuerpflicht in (46) schliesst eine Steuerpflicht des Beschwerdeführers in
+        Frankreich nicht aus. Die Bestimmung der steuerlichen Ansässigkeit ist eine
+        materielle Frage, die eine detaillierte Prüfung der Situation voraussetzt
+        und von der Schweiz als ersuchter Staat im Rahme der Amtshilfe nicht behandelt
+        werden kann (Urteil des BGer 2C_953/2020 vom 24. November 2021 E. 3.7).'
+      subparagraphs: []
+      annotation:
+        title: Prüfung der Glaubwürdigkeit der Angaben im Amtshilfeersuchen und der
+          daraus folgenden Steuerpflicht
+        description:
+        - Glaubwürdigkeit der Ausführungen im Amtshilfeersuchen im Lichte eingereichter
+          Beweismittel
+        - Erfordernis der sofortigen Entkräftung der Angaben durch die betroffene
+          Person
+        - Beurteilung der vorgelegten Urkunden hinsichtlich Eigentumsverhältnissen
+          an Immobilien
+        - Feststellung der Steuerpflicht aufgrund bestehender Eigentumsverhältnisse
+          in Frankreich
+        - Berücksichtigung der aktuellen Adressangaben als Anknüpfungspunkt für Steuerpflicht
+        - Abgrenzung der Zuständigkeit der Schweiz bei der materiellen Bestimmung
+          der steuerlichen Ansässigkeit
+    - number: 3.4.4
+      text: 'Aus dem Verweis auf das Urteil des Bundesverwaltungsgerichts A-3374/2018
+        vom 3. April 2019 vermag der Beschwerdeführer nichts zu seinen Gunsten abzuleiten.
+        Im Unterschied zum Sachverhalt, der diesem Urteil zugrunde liegt, macht der
+        Beschwerdeführer keine unbeschränkte Steuerpflicht in der Schweiz geltend.
+        Denn die einzige Konstellation, in der die Rechtsprechung eine Vorabwägung
+        des steuerrechtlichen Wohnsitzes im Rahmen des Amtshilfeverfahrens ausnahmsweise
+        zulässt, bedingt, dass die betroffene Person in der Schweiz unbeschränkt steuerpflichtig
+        ist (statt vieler: Urteil des BGer 2C_109/2022 vom 30. Januar 2023 E. 4.5.3).'
+      subparagraphs: []
+      annotation:
+        title: Relevanz der unbeschränkten Steuerpflicht für die Vorabwägung im Amtshilfeverfahren
+        description:
+        - Abgrenzung des Sachverhalts im Vergleich zu früheren Urteilen
+        - Voraussetzung der unbeschränkten Steuerpflicht in der Schweiz für eine Vorabwägung
+          des steuerrechtlichen Wohnsitzes
+        - Bedeutung der unbeschränkten Steuerpflicht für die Zulässigkeit der Vorabwägung
+          im Amtshilfeverfahren
+    - number: '3.5'
+      text: Der Beschwerdeführer stellt schliesslich Schwärzungsanträge hinsichtlich
+        verschiedener Personen. Weil alle diese Personen hingegen nicht rein zufällig
+        („fruit d'un pur hasard“; E. 2.3.8) in den Auszügen des Kontos respektive
+        der Kreditkarten vermerkt sind, können sie gemäss der Rechtsprechung nicht
+        geschwärzt werden. Dies gilt auch für die Namen der in den Auszügen erwähnten
+        Anwälte. Es ist unbekannt, in welcher Beziehung der Beschwerdeführer mit diesen
+        Personen stand. Es kann nicht ausgeschlossen werden, dass es sich um geschäftliche
+        Beziehungen gehandelt hat und diese Informationen für die Steuerpflicht des
+        Beschwerdeführers in Frankreich voraussichtlich erheblich sein können.
+      subparagraphs: []
+      annotation:
+        title: Prüfung der Schwärzung von Personenangaben in Konto- und Kreditkartenauszügen
+        description:
+        - Anwendbarkeit der Rechtsprechung zur Schwärzung von nicht zufällig vermerkten
+          Personen
+        - Relevanz der Beziehung zwischen Beschwerdeführer und den genannten Personen
+        - Bedeutung der Informationen für die steuerliche Situation des Beschwerdeführers
+        - Ausnahme der Schwärzung für in den Auszügen erwähnte Anwälte
+    - number: '3.6'
+      text: Zusammenfassend ist der Sachverhalt genügend erstellt und die von der
+        Vorinstanz vorgesehene Übermittlung gemäss der Schlussverfügung vom 11. Oktober
+        2023 zu bestätigen. Die Beschwerde ist damit vollumfänglich abzuweisen.
+      subparagraphs: []
+      annotation:
+        title: Beurteilung der Sachverhaltserstellung und Bestätigung der Übermittlung
+        description:
+        - Genügende Erstellung des Sachverhalts
+        - Bestätigung der von der Vorinstanz vorgesehenen Übermittlung gemäss Schlussverfügung
+        - Entscheidung über den Ausgang der Beschwerde
+    annotation:
+      title: Prüfung der Zulässigkeit und Voraussetzungen des Amtshilfeersuchens im
+        Hinblick auf Beweisausforschung, Umfang der Datenübermittlung, Subsidiarität,
+        Erheblichkeit und Schwärzungsanträge
+      description:
+      - Vorliegen einer unzulässigen Beweisausforschung („fishing expedition“)
+      - Vorliegen und Zulässigkeit der Übermittlung von nicht ausdrücklich im Ersuchen
+        verlangten Daten
+      - Einhaltung des Subsidiaritätsprinzips durch die ersuchende Behörde
+      - Voraussichtliche Erheblichkeit der ersuchten Informationen für das ausländische
+        Verfahren
+      - Beurteilung der Schwärzungsanträge bezüglich personenbezogener Daten in den
+        übermittelten Dokumenten
+  - number: '4.'
+    text: ''
+    subparagraphs:
+    - number: '4.1'
+      text: Ausgangsgemäss hat der unterliegende Beschwerdeführer die Verfahrenskosten
+        zu tragen (Art. 63 Abs. 1 VwVG). Die Verfahrenskosten sind auf Fr. 5'9000.--
+        festzusetzen (vgl. Art. 2 Abs. 1 i.V.m. Art. 4 des Reglements vom 21. Februar
+        2008 über die Kosten und Entschädigungen vor dem Bundesverwaltungsgericht
+        [VGKE, SR 173.320.2]). Der einbezahlte Kostenvorschuss in gleicher Höhe ist
+        zur Bezahlung der Verfahrenskosten zu verwenden.
+      subparagraphs: []
+      annotation:
+        title: Festsetzung und Tragung der Verfahrenskosten
+        description:
+        - Zuständigkeit zur Tragung der Verfahrenskosten nach Art. 63 Abs. 1 VwVG
+        - Bemessung der Verfahrenskosten nach dem Reglement über Kosten und Entschädigungen
+          vor dem Bundesverwaltungsgericht
+        - Verwendung des einbezahlten Kostenvorschusses zur Begleichung der Verfahrenskosten
+    - number: '4.2'
+      text: Eine Parteientschädigung ist nicht zuzusprechen (vgl. Art. 64 Abs. 1 VwVG
+        e contrario und Art. 7 Abs. 1 VGKE e contrario sowie Art. 7 Abs. 3 VGKE).
+      subparagraphs: []
+      annotation:
+        title: Voraussetzungen für die Zusprechung einer Parteientschädigung
+        description:
+        - Anwendbarkeit der Bestimmungen des Verwaltungsverfahrensgesetzes und des
+          Verwaltungsgerichtskostenreglements auf Parteientschädigungen
+        - Prüfung der Voraussetzungen für den Ausschluss einer Parteientschädigung
+        - Relevanz der negativen Regelungen (e contrario) in Art. 64 Abs. 1 VwVG und
+          Art. 7 Abs. 1 und Abs. 3 VGKE
+    annotation:
+      title: Entscheidung über Verfahrenskosten und Parteientschädigung
+      description:
+      - Zuständigkeit und Verpflichtung zur Tragung der Verfahrenskosten
+      - Festsetzung der Höhe der Verfahrenskosten
+      - Verwendung des einbezahlten Kostenvorschusses zur Begleichung der Verfahrenskosten
+      - Entscheidung über die Zusprechung oder den Ausschluss einer Parteientschädigung
+  - number: '5.'
+    text: Dieser Entscheid auf dem Gebiet der internationalen Amtshilfe in Steuersachen
+      kann gemäss Art. 83 Bst. h des Bundesgesetzes vom 17. Juni 2005 über das Bundesgericht
+      (BGG, SR 173.110) innerhalb von 10 Tagen nur dann mit Beschwerde in öffentlich-rechtlichen
+      Angelegenheiten an das Bundesgericht weitergezogen werden, wenn sich eine Rechtsfrage
+      von grundsätzlicher Bedeutung stellt oder wenn es sich aus anderen Gründen um
+      einen besonders bedeutenden Fall im Sinn von Art. 84 Abs. 2 BGG handelt (Art.
+      84a und Art. 100 Abs. 2 Bst. b BGG). Ob dies der Fall ist, entscheidet das Bundesgericht.
+    subparagraphs: []
+    annotation:
+      title: Rekursmöglichkeiten gegen den Entscheid im Bereich der internationalen
+        Amtshilfe in Steuersachen
+      description:
+      - Anwendbarkeit der Beschwerdevorschriften des Bundesgesetzes über das Bundesgericht
+      - Frist für die Einreichung der Beschwerde in öffentlich-rechtlichen Angelegenheiten
+      - Voraussetzungen für die Zulassung der Beschwerde bei Rechtsfragen von grundsätzlicher
+        Bedeutung
+      - Voraussetzungen für die Zulassung der Beschwerde bei besonders bedeutenden
+        Fällen
+      - Zuständigkeit des Bundesgerichts zur Entscheidung über die Zulassung der Beschwerde
+  is_structured: true
+- name: sachverhalt
+  content:
+  - number: A.
+    text: ''
+    subparagraphs:
+    - number: A.a
+      text: 'Am (Datum) richtete die französische Steuerbehörde, die Direction Nationale
+        des Vérifications de Situations Fiscales (nachfolgend: ersuchende Behörde)
+        betreffend A._______ (nachfolgend: betroffene Person) gestützt auf Art. 28
+        des Abkommens vom 9. September 1966 zwischen der Schweiz und Frankreich zur
+        Vermeidung der Doppelbesteuerung auf dem Gebiet der Steuern vom Einkommen
+        und vom Vermögen und zur Vermeidung von Steuerbetrug und Steuerflucht (SR
+        0.672.934.91, DBA CH-FR) ein Amtshilfeersuchen an die Eidgenössische Steuerverwaltung
+        (ESTV; nachfolgend auch: Vorinstanz).'
+      subparagraphs: []
+      annotation:
+        title: Einleitung des Amtshilfeersuchens durch die französische Steuerbehörde
+        description:
+        - Identifikation der ersuchenden Behörde
+        - Bestimmung der betroffenen Person des Amtshilfeersuchens
+        - Rechtsgrundlage des Amtshilfeersuchens gemäss Art. 28 DBA Schweiz-Frankreich
+        - Adressierung des Amtshilfeersuchens an die Eidgenössische Steuerverwaltung
+    - number: A.b
+      text: 'Die ersuchende Behörde führte im Amtshilfeersuchen aus, die betroffene
+        Person werde von den französischen Steuerbehörden für die Jahre 2018 bis 2021
+        einer Steuerprüfung unterzogen. Die betroffene Person sei Eigentümerin einer
+        Immobilie in (ö) sowie zu 20% Miteigentümerin einer weiteren Immobilie in
+        (ö); letztere sei am (Datum) verkauft worden. Zudem sei die betroffene Person
+        seit (ö) Geschäftsführer und alleinige Gesellschafterin einer Unternehmung
+        mit Sitz in (ö) und verfüge über mehrere Bankkonten, welche in den (ö) Filialen
+        eröffnet worden seien. Aufgrund eines Überweisungsauftrags habe die französische
+        Behörde Kenntnis davon, dass die betroffene Person über das Schweizer Bankkonto
+        Nr. (Kontonummer) bei der Bank B._______ (nachfolgend: Bank 1) verfüge. Hinsichtlich
+        dieses Kontos ersuchte die französische Behörde um verschiedene Informationen.'
+      subparagraphs: []
+      annotation:
+        title: Darstellung der betroffenen Person und der angefragten Informationen
+          im Amtshilfeersuchen
+        description:
+        - Identifikation der betroffenen Person und deren steuerliche Prüfung durch
+          ausländische Behörden
+        - Eigentumsverhältnisse der betroffenen Person an Immobilien
+        - Funktion und Beteiligungsverhältnisse der betroffenen Person an Unternehmen
+        - Vorhandensein und Standort von Bankkonten der betroffenen Person
+        - Konkrete Angaben zu einem Schweizer Bankkonto und das damit verbundene Informationsersuchen
+    annotation:
+      title: Darstellung des Amtshilfeersuchens der französischen Steuerbehörde an
+        die Eidgenössische Steuerverwaltung
+      description:
+      - Identifikation der ersuchenden Behörde und der betroffenen Person
+      - Rechtsgrundlage des Amtshilfeersuchens gemäss Doppelbesteuerungsabkommen zwischen
+        der Schweiz und Frankreich
+      - Gegenstand und Zeitraum der steuerlichen Prüfung durch die französische Behörde
+      - Angaben zu Vermögenswerten und Beteiligungen der betroffenen Person
+      - Erwähnung der Geschäftsführertätigkeit und Gesellschaftsverhältnisse der betroffenen
+        Person
+      - Vorliegen von Bankkonten der betroffenen Person in der Schweiz und deren Identifikation
+      - Konkrete Informationsersuche der französischen Behörde bezüglich eines Schweizer
+        Bankkontos
+  - number: B.
+    text: ''
+    subparagraphs:
+    - number: B.a
+      text: Mit Editionsverfügung vom 25. April 2023 forderte die ESTV die Bank 1
+        auf, ihr die ersuchten Informationen zuzustellen sowie die im Ausland ansässige
+        betroffene Person über das laufende Amtshilfeverfahren zu informieren.
+      subparagraphs: []
+      annotation:
+        title: Anordnung der Informationsübermittlung und Benachrichtigung im Amtshilfeverfahren
+        description:
+        - Veranlassung der Übermittlung ersuchter Informationen durch die ESTV
+        - Anordnung der Benachrichtigung der im Ausland ansässigen betroffenen Person
+          über das Amtshilfeverfahren
+    - number: B.b
+      text: 'Mit Editionsverfügung von 16. Juni 2023 forderte die ESTV die C._______
+        (nachfolgend: Bank 2) auf, ihr Informationen zuzustellen.'
+      subparagraphs: []
+      annotation:
+        title: Anordnung der Informationsherausgabe durch die Eidgenössische Steuerverwaltung
+        description:
+        - Erlass einer Editionsverfügung durch die Eidgenössische Steuerverwaltung
+        - Adressierung der Editionsverfügung an die betroffene Bank
+        - Anforderung der Übermittlung von Informationen durch die Bank
+    - number: B.c
+      text: Die Banken 1 und 2 kamen der Aufforderung fristgerecht nach.
+      subparagraphs: []
+      annotation:
+        title: Erfüllung der Aufforderung durch die Banken
+        description:
+        - Fristgerechte Reaktion der Banken auf die Aufforderung
+        - Identifikation der beteiligten Banken bei der Erfüllung der Aufforderung
+    annotation:
+      title: Verfahren zur Informationsanforderung und Mitteilung im Amtshilfeverfahren
+      description:
+      - Erteilung von Editionsverfügungen zur Anforderung von Informationen durch
+        die ESTV
+      - Adressierung der Informationsanforderungen an betroffene Banken
+      - Anordnung der Information der im Ausland ansässigen betroffenen Person über
+        das Amtshilfeverfahren
+      - Fristgerechte Erfüllung der Editionsverfügungen durch die betroffenen Banken
+  - number: C.
+    text: ''
+    subparagraphs:
+    - number: C.a
+      text: Die ESTV erteilte der Vertretung der betroffenen Person am 18. Juli 2023
+        Akteneinsicht und die Möglichkeit zur Stellungnahme.
+      subparagraphs: []
+      annotation:
+        title: Erteilung von Akteneinsicht und Stellungnahmemöglichkeit durch die
+          ESTV
+        description:
+        - Gewährung von Akteneinsicht an die Vertretung der betroffenen Person
+        - Bereitstellung der Möglichkeit zur Stellungnahme durch die Vertretung
+    - number: C.b
+      text: Die Vertretung der betroffenen Person nahm am 10. August 2023 und 18.
+        September 2023 Stellung. Sie widersetzte sich der Amtshilfe.
+      subparagraphs: []
+      annotation:
+        title: Stellungnahme der betroffenen Person zur Amtshilfe
+        description:
+        - Einholung der Stellungnahme der Vertretung der betroffenen Person
+        - Datum der Stellungnahmen zur Amtshilfe
+        - Einwand gegen die Durchführung der Amtshilfe durch die betroffene Person
+    annotation:
+      title: Verfahrensablauf bei der Amtshilfe im Steuerverfahren
+      description:
+      - Erteilung der Akteneinsicht an die Vertretung der betroffenen Person
+      - Gewährung der Möglichkeit zur Stellungnahme durch die Vertretung
+      - Einreichung von Stellungnahmen durch die Vertretung der betroffenen Person
+      - Einlegung von Widerspruch gegen die Amtshilfe durch die Vertretung
+  - number: D.
+    text: Die ESTV erliess am 11. Oktober 2023 eine Schlussverfügung. Sie verfügte
+      die Leistung der ersuchten Amtshilfe (Dispo.-Ziff. 1). Sie übermittle die Informationen
+      zum Bankkonto bei der Bank 1 sowie Informationen zu vier Kreditkarten bei der
+      Bank 2 (Dispo.-Ziff. 2). Die ESTV werde die ersuchende Behörde darauf hinweisen,
+      dass die genannten Informationen im ersuchenden Staat nur in Verfahren gegen
+      die betroffene Person verwendet werden dürften (Dispo.-Ziff. 3).
+    subparagraphs: []
+    annotation:
+      title: Verfügung der Amtshilfe durch die Eidgenössische Steuerverwaltung
+      description:
+      - Erlass der Schlussverfügung durch die Eidgenössische Steuerverwaltung
+      - Anordnung der Leistung der ersuchten Amtshilfe
+      - Bestimmung der zu übermittelnden Informationen zu Bankkonten und Kreditkarten
+      - Hinweis an die ersuchende Behörde zur Verwendungsbeschränkung der übermittelten
+        Informationen
+  - number: E.
+    text: ''
+    subparagraphs:
+    - number: E.a
+      text: 'Am 10. November 2023 erhob die betroffene Person (nachfolgend auch: Beschwerdeführer)
+        gegen die Schlussverfügung der ESTV vom 11. Oktober 2023 Beschwerde an das
+        Bundesverwaltungsgericht mit folgenden Anträgen:
+
+        1. Es sei die Schlussverfügung der ESTV vom 11. Oktober 2023 aufzuheben und
+        es sei keine Amtshilfe zu leisten.
+
+        2. Subeventualiter sei die Sache an die ESTV zur Einholung des Nachweises
+        der Zustellung sowie Vornahme der gesetzeskonformen Anpassungen und Schwärzung
+        zurückzuweisen.
+
+        3. Sub-Subeventualiter seien die Informationen und die Annex 1 bis 4 wie folgt
+        zu schwärzen bzw. anzupassen und erst in revidierter Form oder gar nicht auszutauschen:
+
+        Antwort auf Frage a) hat wie folgt zu lauten:
+
+        "Selon les informations fournies par la banque B._______, Monsieur A._______
+        est titulaire et ayant droit économique du compte (Kontonummer) ouvert Ie
+        (Datum). Veuillez trouver, en annexe 1, les états de fortune et les relevés
+        de ledit compte et en annexe 2 le formulaire A. Ledit compte n''a pas été
+        clos pendant la période concerné."
+
+        Streichung von:
+
+        Aussi, Monsieur A._______ est titulaire de 4 cartes de crédit auprès C._______,
+        liés à la relation bancaire (Kontonummer) susmentionné, avec ces identifications:
+
+        VISA Gold n. (Kontonummer)
+
+        MC Gold n. (Kontonummer)
+
+        VISA Cl n. (Kontonummer)
+
+        MC Cl n. (Kontonummer)
+
+        Veuillez trouver, en annexe 3, les relevés de compte desdites cartes de crédit
+        et en annexe 4 les relatifs formulaires d''ouverture.
+
+        Annex 1
+
+        Schwärzung der Überweisungen betreffend folgende Personen:
+
+        D._______ (S. 8, S. 91, S. 124, S. 148, S. 149, S. 229, S. 242);
+
+        E._______ (S. 244);
+
+        Maître F._______ (S. 73, S. 82, S. 92),
+
+        Maître G._______ (S. 73, S. 92),
+
+        Maître H._______ (S. 73, S. 197, S. 243),
+
+        I._______ (S. 73, S. 92).
+
+        Annex 3
+
+        Annex 3 ist nicht auszutauschen.
+
+        Annex 4
+
+        Annex 4 ist nicht auszutauschen.
+
+        4. Alles unter Kosten- und Entschädigungsfolgen zulasten des Bundes.'
+      subparagraphs: []
+      annotation:
+        title: Darlegung der Beschwerdeanträge gegen die Schlussverfügung der ESTV
+        description:
+        - Antrag auf Aufhebung der Schlussverfügung der ESTV vom 11. Oktober 2023
+        - Antrag auf Verweigerung der Amtshilfe
+        - Antrag auf Rückweisung zur Einholung des Zustellungsnachweises und gesetzeskonformer
+          Anpassungen sowie Schwärzungen
+        - Antrag auf Schwärzung und Anpassung spezifischer Informationen und Annexdokumente
+        - Antrag auf Kosten- und Entschädigungsfolgen zulasten des Bundes
+    - number: E.b
+      text: Zur Begründung bringt der Beschwerdeführer insbesondere vor, er habe in
+        den Jahren 2018 bis 2021 in (ö) (Überseegebiet des Vereinigten Königreichs)
+        gelebt. Er habe in diesen Jahren über keine relevante Wohnstätte in Frankreich
+        verfügt. Das Zentrum seiner wirtschaftlichen Interessen habe sich in den Jahren
+        2018 bis 2021 nicht in Frankreich befunden. Entgegen der Behauptung im Ersuchen
+        habe er nie eine Aufforderung der französischen Steuerverwaltung erhalten,
+        Informationen zum Konto Nr. (Kontonummer) offenzulegen. Weil keine Ansässigkeit
+        bestehe, komme das Amtshilfeersuchen einer „abfishing expedition“ gleich.
+        Im Übrigen sei nach den Kreditkartenabrechnungen und Eröffnungsunterlagen
+        gar nicht gefragt worden. Insofern liege eine unzulässige spontane Amtshilfe
+        vor. Es sei zudem nicht ersichtlich, inwiefern Angaben über die Identität
+        von Zahlungsempfängern für die französischen Steuerbehörden relevant sein
+        könnten.
+      subparagraphs: []
+      annotation:
+        title: Vorbringen zur Wohnsitz- und Wirtschaftssitzfrage sowie zur Zulässigkeit
+          des Amtshilfeersuchens
+        description:
+        - Behauptung des fehlenden Wohnsitzes in Frankreich in den Jahren 2018 bis
+          2021
+        - Behauptung des fehlenden Zentrums der wirtschaftlichen Interessen in Frankreich
+          in den Jahren 2018 bis 2021
+        - Bestreitung des Erhalts einer Aufforderung zur Offenlegung von Kontoinformationen
+          durch die französische Steuerverwaltung
+        - Behauptung der Unzulässigkeit des Amtshilfeersuchens als „abfishing expedition“
+          mangels Ansässigkeit
+        - Behauptung der unzulässigen spontanen Amtshilfe aufgrund fehlender Nachfrage
+          zu Kreditkartenabrechnungen und Eröffnungsunterlagen
+        - Infragestellung der Relevanz von Angaben zur Identität von Zahlungsempfängern
+          für die französischen Steuerbehörden
+    annotation:
+      title: Darlegung der Beschwerdeanträge und Begründung der Beschwerdeführers
+        zur Amtshilfe
+      description:
+      - Einreichung der Beschwerde gegen die Schlussverfügung der Eidgenössischen
+        Steuerverwaltung
+      - Anträge auf Aufhebung der Schlussverfügung und Verweigerung der Amtshilfe
+      - Anträge auf Rückweisung zur Nachholung der Zustellungsnachweise und Anpassung
+        der Dokumente
+      - Anträge auf Schwärzung und Anpassung spezifischer Informationen und Annexunterlagen
+      - Begründung der fehlenden steuerlichen Ansässigkeit im relevanten Zeitraum
+      - Darlegung des fehlenden wirtschaftlichen Zentrums in Frankreich
+      - Bestreitung des Erhalts einer Aufforderung zur Offenlegung der Kontoinformationen
+      - Behauptung der unzulässigen spontanen Amtshilfe
+      - Infragestellung der Relevanz der Angaben zu Zahlungsempfängern für die französischen
+        Steuerbehörden
+  - number: F.
+    text: Am 4. Januar 2024 reicht die Vorinstanz die amtlichen Akten ein und verzichtet
+      auf eine Vernehmlassung. Sie verweist vollumfänglich auf ihre Schlussverfügung.
+      Auf die Vorgehen der Parteien sowie die Akten wird „sofern sie für den Entscheid
+      wesentlich sind“ in den Erwägungen näher eingegangen.
+    subparagraphs: []
+    annotation:
+      title: Verfahrensstand und Aktenlage vor Bundesverwaltungsgericht
+      description:
+      - Einreichung der amtlichen Akten durch die Vorinstanz
+      - Verzicht der Vorinstanz auf eine Vernehmlassung
+      - Verweis der Vorinstanz auf ihre Schlussverfügung
+      - Berücksichtigung des Verfahrensablaufs und der Akten im Entscheidungsprozess
+  is_structured: true
