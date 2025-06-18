@@ -92,7 +92,7 @@ def load_pdf(name: str) -> str:
         str: The text content of the PDF file.
     """
 
-    with pdfplumber.open(f"../data/urteile/DBA-CH-FR/{name}.pdf") as pdf:
+    with pdfplumber.open(name) as pdf:
         full_text = ""
         for page in pdf.pages:
             # Extract text from each page, preserving line breaks
