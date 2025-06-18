@@ -35,9 +35,25 @@ os.environ["LANGSMITH_TRACING"] = "true"  # overwrites dotenv
 logger = logging.getLogger(__name__)
 langsmith_client = Client()
 
-INSTRUCT_ANNOTATION = langsmith_client.pull_prompt(
-    "annotate_paragraphs", include_model=False
-)
+
+def load_annotation_prompt(prompt_path: Optional[str] = None) -> str:
+    """Load annotation prompt from LangSmith or local file.
+
+    Args:
+        prompt_path: Path to local prompt file. If None, downloads from LangSmith.
+
+    Returns:
+        Prompt template string.
+    """
+    if prompt_path:
+        with open(prompt_path, "r", encoding="utf-8") as f:
+            return f.read()
+    else:
+        prompt = langsmith_client.pull_prompt(
+            "annotate_paragraphs", include_model=False
+        )
+        return prompt.template
+
 
 CONFIG = {
     "llm_model": "openai:gpt-4.1-mini",
@@ -74,7 +90,7 @@ def _annotate_paragraph_recursively(
 
     logger.debug(f"Requesting annotation for paragraph {para.number}")
     response = agent.invoke(
-        f"{INSTRUCT_ANNOTATION.template}\nAnnotate this paragraph from the {section_name} section:\n{context}"
+        f"{INSTRUCT_ANNOTATION}\nAnnotate this paragraph from the {section_name} section:\n{context}"
     )
 
     try:
@@ -234,9 +250,18 @@ def main(decision: CourtDecision, debug: bool = False) -> CourtDecision:
 
 if __name__ == "__main__":
 
+    # Optionally specify a local prompt file instead of downloading from LangSmith
+    # prompt_path = "prompts/annotation/annotate_paragraphs_idunknown_vunknown_20250618_165519.txt"
+    prompt_path = None  # Use LangSmith
+
+    # Load prompt
+    global INSTRUCT_ANNOTATION
+    INSTRUCT_ANNOTATION = load_annotation_prompt(prompt_path)
+
     # Load a decision from YAML
     input_path = "data/output/20250614_113847_schema_A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf.yaml"
 
+    # Define decision schemas to process, should be in data/schemas/extracted/
     extracted_decisions = [
         # "20250618_110958_schema_A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf.yaml",
         "20250618_112146_schema_A-4685-2021_2022-08-19_8fb87126-b2c8-497f-be4a-da4a4b14285f.yaml",
