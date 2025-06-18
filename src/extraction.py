@@ -5,12 +5,10 @@ from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langgraph.constants import START, END
 from langgraph.graph import StateGraph
-from langgraph.prebuilt import create_react_agent
 import logging
 from langsmith import Client
 
-from models.extraction import Section, Paragraph, ParagraphList
-from src.structuring import CourtDecision
+from models.extraction import Section, Paragraph, ParagraphList, CourtDecision
 from models.state import InputState, SectionTextState, GraphState
 from utils import load_pdf
 
@@ -162,28 +160,13 @@ def section_extraction_node(state: InputState) -> SectionTextState:
         temperature=0.0,
     )
 
-    agent = create_react_agent(
-        model=openai,
-        prompt=INSTRUCT_EXTRACTION.template,
-        response_format=(
-            INSTRUCT_PARSING.format(struct=SectionTextState.model_fields),
-            SectionTextState,
-        ),
-        tools=[],
-    )
+    agent = openai.with_structured_output(SectionTextState)
 
     response = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": f"Hier ist das Urteil: {state.pdf_doc}. Extrahiere jetzt den Sachverhalt, die Erwägungen und den Entscheid.",
-                }
-            ]
-        }
+        f"{INSTRUCT_EXTRACTION.template}\n{INSTRUCT_PARSING.format(struct=SectionTextState.model_fields)}\nHier ist das Urteil: {state.pdf_doc}. Extrahiere jetzt den Sachverhalt, die Erwägungen und den Entscheid."
     )
 
-    return response["structured_response"]
+    return response
 
 
 def create_paragraph_extraction_node(
@@ -196,29 +179,27 @@ def create_paragraph_extraction_node(
     def node(state: SectionTextState) -> GraphState:
         openai = init_chat_model(LLM_MODEL, temperature=0.0)
 
-        agent = create_react_agent(
-            model=openai,
-            prompt=INSTRUCT_PARAGRAPHS.format(
-                section_name=section_name,
-                numbering_logic=numbering_logic,
-                paragraph_struct=Paragraph.model_fields,
-                example_input=example_input,
-                example_output=example_output,
-            ),
-            response_format=(
-                INSTRUCT_PARSING.format(struct=ParagraphList.model_json_schema()),
-                ParagraphList,
-            ),
-            tools=[],
+        agent = openai.with_structured_output(ParagraphList)
+
+        instruct_paragraphs = INSTRUCT_PARAGRAPHS.format(
+            section_name=section_name,
+            numbering_logic=numbering_logic,
+            paragraph_struct=Paragraph.model_fields,
+            example_input=example_input,
+            example_output=example_output,
+        )
+
+        instruct_parsing = INSTRUCT_PARSING.format(
+            struct=ParagraphList.model_json_schema()
         )
 
         response = agent.invoke(
-            {"messages": [{"role": "user", "content": getattr(state, content_field)}]}
+            f"{instruct_paragraphs}\n{instruct_parsing}\n{getattr(state, content_field)}"
         )
 
         section = Section(
             name=section_name.lower(),
-            content=response["structured_response"].paragraphs,
+            content=response.paragraphs,
         )
         return {"sections": [section]}
 
@@ -240,36 +221,23 @@ def paragraph_extraction_ent_node(state: SectionTextState) -> GraphState:
         temperature=0.0,
     )
 
-    agent = create_react_agent(
-        model=openai,
-        prompt=INSTRUCT_PARAGRAPHS.format(
-            section_name="Entscheid",
-            numbering_logic=ERW_PARA_LOGIC,
-            paragraph_struct=Paragraph.model_fields,
-            example_input=EXAMPLE_INPUT_ERW,
-            example_output=EXAMPLE_OUTPUT_ERW,
-        ),
-        response_format=(
-            INSTRUCT_PARSING.format(struct=ParagraphList.model_json_schema()),
-            ParagraphList,
-        ),
-        tools=[],
+    agent = openai.with_structured_output(ParagraphList)
+
+    instruct_paragraphs = INSTRUCT_PARAGRAPHS.format(
+        section_name="Entscheid",
+        numbering_logic=ERW_PARA_LOGIC,
+        paragraph_struct=Paragraph.model_fields,
+        example_input=EXAMPLE_INPUT_ERW,
+        example_output=EXAMPLE_OUTPUT_ERW,
     )
+
+    instruct_parsing = INSTRUCT_PARSING.format(struct=ParagraphList.model_json_schema())
 
     response = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": state.entscheid,
-                }
-            ]
-        }
+        f"{instruct_paragraphs}\n{instruct_parsing}\n{state.entscheid}"
     )
 
-    section = Section(
-        name="entscheid", content=response["structured_response"].paragraphs
-    )
+    section = Section(name="entscheid", content=response.paragraphs)
     return {"sections": [section]}
 
 
@@ -313,7 +281,9 @@ def main(name: str):
 
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    with open(f"../data/output/{now}_schema_{name}.yaml", "w", encoding="utf-8") as f:
+    with open(
+        f"/data/schemas/extracted/{now}_schema_{name}.yaml", "w", encoding="utf-8"
+    ) as f:
         f.write(decision.to_yaml())
 
 
@@ -336,5 +306,5 @@ if __name__ == "__main__":
     #     main(name)
     #     print(f"Finished processing {name}.\n")
     name = "A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf"
-    name = "test"
+    # name = "test"
     main(name)
