@@ -14,13 +14,12 @@ from langsmith import Client
 from pydantic import BaseModel, Field
 
 from src.models.extraction import (
-    Section,
     ParagraphStruct,
     ParagraphStructAnnotated,
     CourtDecision,
     ParagraphAnnotation,
 )
-from src.structuring import create_paragraph_struct
+from src.structuring import SectionStructured, CourtDecisionStructured
 
 # Basic logging setup
 logging.basicConfig(
@@ -44,30 +43,6 @@ CONFIG = {
     "llm_model": "openai:gpt-4.1-mini",
     "sections_in_order": ["sachverhalt", "erwägungen", "entscheid"],
 }
-
-
-class SectionStructured(Section):
-    """A section with structured paragraphs."""
-
-    is_structured: bool = False
-    content: List[Union[ParagraphStruct, ParagraphStructAnnotated]] = []
-
-    def structure(self):
-        """Structure the section content into ParagraphStruct."""
-        if not self.is_structured:
-            self.content = create_paragraph_struct(self.content)
-            self.is_structured = True
-
-
-class CourtDecisionStructured(CourtDecision):
-    """A structured court decision with annotated paragraphs."""
-
-    content: List[Union[Section, SectionStructured]]
-
-    def structure(self):
-        """Structure the decision content into annotated paragraphs."""
-        for section in self.content:
-            section.structure()
 
 
 class AnnotationState(BaseModel):
@@ -260,7 +235,7 @@ def main(decision: CourtDecision, debug: bool = False) -> CourtDecision:
 if __name__ == "__main__":
 
     # Load a decision from YAML
-    input_path = "../data/output/20250614_113847_schema_A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf.yaml"
+    input_path = "data/output/20250614_113847_schema_A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf.yaml"
     logger.info(f"Loading decision from {input_path}")
 
     decision = CourtDecisionStructured.from_yaml_file(input_path)
@@ -275,7 +250,7 @@ if __name__ == "__main__":
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = input_path.split("schema_")[-1].replace(".yaml", "")
     filename = filename + "_annotated.yaml"
-    output_path = f"../data/output/{now}{filename}"
+    output_path = f"data/output/{now}{filename}"
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(annotated_decision.to_yaml())

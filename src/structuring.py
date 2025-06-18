@@ -1,5 +1,5 @@
-from typing import List
-from src.models.extraction import Paragraph, Section, ParagraphStruct, CourtDecision
+from typing import List, Union
+from src.models.extraction import Paragraph, Section, ParagraphStruct, CourtDecision, ParagraphStructAnnotated
 
 
 def clean_paragraph_number(number: str) -> str:
@@ -103,6 +103,58 @@ def create_paragraph_struct(
         return result
 
     return build_tree(sorted_paragraphs, parent_level=1)
+
+
+class SectionStructured(Section):
+    """A section with structured paragraphs."""
+
+    is_structured: bool = False
+    content: List[Union[ParagraphStruct, ParagraphStructAnnotated]] = []
+
+    # def structure(self):
+    #     """Structure the section content into ParagraphStruct."""
+    #     if not self.is_structured:
+    #         self.content = create_paragraph_struct(self.content)
+    #         self.is_structured = True
+
+
+class CourtDecisionStructured(CourtDecision):
+    """A structured court decision with annotated paragraphs."""
+
+    content: List[Union[Section, SectionStructured]]
+
+    def structure(self):
+        """Structure the decision content into annotated paragraphs."""
+        new_content = []
+        for section in self.content:
+            if isinstance(section, SectionStructured) and not section.is_structured:
+                section.structure()
+                new_content.append(section)
+            elif isinstance(section, Section):
+                # Convert Section to SectionStructured using the new function
+                structured_section = create_section_struct(section)
+                new_content.append(structured_section)
+            else:
+                new_content.append(section)
+        self.content = new_content
+
+
+def create_section_struct(section: Section) -> SectionStructured:
+    """
+    Convert a Section to SectionStructured by converting its content from Paragraph to ParagraphStruct.
+    
+    Args:
+        section: The Section to convert
+        
+    Returns:
+        SectionStructured with structured content
+    """
+    structured_content = create_paragraph_struct(section.content)
+    return SectionStructured(
+        name=section.name,
+        content=structured_content,
+        is_structured=True
+    )
 
 
 def main():
