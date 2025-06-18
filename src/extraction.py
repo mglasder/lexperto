@@ -1,4 +1,5 @@
 import os
+import sys
 from datetime import datetime
 
 from dotenv import load_dotenv
@@ -12,12 +13,18 @@ from models.extraction import Section, Paragraph, ParagraphList, CourtDecision
 from models.state import InputState, SectionTextState, GraphState
 from utils import load_pdf
 
+# Basic logging setup
+logging.basicConfig(
+    level=logging.INFO, format="%(levelname)s: %(message)s", stream=sys.stdout
+)
+
+# Suppress pdfminer logging
 logging.getLogger("pdfminer").setLevel(logging.ERROR)
 
 load_dotenv()
 os.environ["LANGSMITH_TRACING"] = "true"  # overwrites dotenv
 
-
+logger = logging.getLogger(__name__)
 langsmith_client = Client()
 
 INSTRUCT_EXTRACTION = langsmith_client.pull_prompt(
@@ -155,6 +162,7 @@ EXAMPLE_OUTPUT_ERW = [
 
 
 def section_extraction_node(state: InputState) -> SectionTextState:
+    logger.debug("Entering section extraction node")
     openai = init_chat_model(
         LLM_MODEL,
         temperature=0.0,
@@ -162,10 +170,12 @@ def section_extraction_node(state: InputState) -> SectionTextState:
 
     agent = openai.with_structured_output(SectionTextState)
 
+    logger.debug("Invoking agent for section extraction")
     response = agent.invoke(
         f"{INSTRUCT_EXTRACTION.template}\n{INSTRUCT_PARSING.format(struct=SectionTextState.model_fields)}\nHier ist das Urteil: {state.pdf_doc}. Extrahiere jetzt den Sachverhalt, die Erwägungen und den Entscheid."
     )
 
+    logger.debug("Section extraction completed successfully")
     return response
 
 
@@ -177,6 +187,7 @@ def create_paragraph_extraction_node(
     example_output: str,
 ):
     def node(state: SectionTextState) -> GraphState:
+        logger.debug(f"Entering paragraph extraction node for section: {section_name}")
         openai = init_chat_model(LLM_MODEL, temperature=0.0)
 
         agent = openai.with_structured_output(ParagraphList)
@@ -193,6 +204,7 @@ def create_paragraph_extraction_node(
             struct=ParagraphList.model_json_schema()
         )
 
+        logger.debug(f"Invoking agent for paragraph extraction in {section_name}")
         response = agent.invoke(
             f"{instruct_paragraphs}\n{instruct_parsing}\n{getattr(state, content_field)}"
         )
@@ -201,6 +213,7 @@ def create_paragraph_extraction_node(
             name=section_name.lower(),
             content=response.paragraphs,
         )
+        logger.debug(f"Created section '{section_name}' with {len(response.paragraphs)} paragraphs")
         return {"sections": [section]}
 
     return node
@@ -216,6 +229,7 @@ paragraph_extraction_erw_node = create_paragraph_extraction_node(
 
 
 def paragraph_extraction_ent_node(state: SectionTextState) -> GraphState:
+    logger.debug("Entering paragraph extraction node for entscheid")
     openai = init_chat_model(
         LLM_MODEL,
         temperature=0.0,
@@ -233,23 +247,33 @@ def paragraph_extraction_ent_node(state: SectionTextState) -> GraphState:
 
     instruct_parsing = INSTRUCT_PARSING.format(struct=ParagraphList.model_json_schema())
 
+    logger.debug("Invoking agent for entscheid paragraph extraction")
     response = agent.invoke(
         f"{instruct_paragraphs}\n{instruct_parsing}\n{state.entscheid}"
     )
 
     section = Section(name="entscheid", content=response.paragraphs)
+    logger.debug(f"Created entscheid section with {len(response.paragraphs)} paragraphs")
     return {"sections": [section]}
 
 
 def combine_node(state: GraphState) -> CourtDecision:
-    return CourtDecision(
+    logger.debug("Entering combine node")
+    logger.debug(f"Combining {len(state['sections'])} sections")
+    
+    result = CourtDecision(
         meta=None,
         content=state["sections"],
     )
+    
+    logger.debug("Successfully created CourtDecision object")
+    return result
 
 
 def main(name: str):
+    logger.info(f"Starting extraction process for: {name}")
 
+    logger.debug("Building extraction graph")
     builder = StateGraph(GraphState, input=InputState, output=CourtDecision)
     builder.add_node("section_extraction", section_extraction_node)
     builder.add_node("paragraph_extraction_sv", paragraph_extraction_sv_node)
@@ -267,24 +291,34 @@ def main(name: str):
     builder.add_edge("combine", END)
 
     if name.lower() == "test":
+        logger.info("Using test PDF content")
         pdf_doc = TEST_PDF_CONTENT
     else:
+        logger.info(f"Loading PDF from file: {name}")
         pdf_doc = load_pdf(name)
 
     input_state = InputState(pdf_doc=pdf_doc)
     graph = builder.compile()
+    
+    logger.info("Invoking graph")
     result = graph.invoke(input_state)
 
     decision = CourtDecision(**result)
 
+    logger.info("Extraction completed successfully")
     print(decision.model_dump_json(indent=2))
 
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_path = f"/data/schemas/extracted/{now}_schema_{name}.yaml"
+    
+    logger.info(f"Saving result to: {output_path}")
+    try:
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(decision.to_yaml())
 
-    with open(
-        f"/data/schemas/extracted/{now}_schema_{name}.yaml", "w", encoding="utf-8"
-    ) as f:
-        f.write(decision.to_yaml())
+    except Exception as e:
+        logger.error(f"Failed to save result to {output_path}: {e}")
+        raise
 
 
 if __name__ == "__main__":
