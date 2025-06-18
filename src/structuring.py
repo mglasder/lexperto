@@ -1,5 +1,5 @@
 from typing import List
-from src.models.extraction import Paragraph, Section, ParagraphStruct
+from src.models.extraction import Paragraph, Section, ParagraphStruct, CourtDecision
 
 
 def clean_paragraph_number(number: str) -> str:

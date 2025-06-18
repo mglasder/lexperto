@@ -18,33 +18,9 @@ from src.models.extraction import (
     ParagraphStruct,
     ParagraphStructAnnotated,
     CourtDecision,
+    ParagraphAnnotation,
 )
 from src.structuring import create_paragraph_struct
-
-
-class SectionStructured(Section):
-    """A section with structured paragraphs."""
-
-    is_structured: bool = False
-    content: List[Union[ParagraphStruct, ParagraphStructAnnotated]] = []
-
-    def structure(self):
-        """Structure the section content into ParagraphStruct."""
-        if not self.is_structured:
-            self.content = create_paragraph_struct(self.content)
-            self.is_structured = True
-
-
-class CourtDecisionStructured(CourtDecision):
-    """A structured court decision with annotated paragraphs."""
-
-    content: List[Union[SectionStructured, ParagraphStructAnnotated]]
-
-    def structure(self):
-        """Structure the decision content into annotated paragraphs."""
-        for section in self.content:
-            section.structure()
-
 
 # Basic logging setup
 logging.basicConfig(
@@ -68,6 +44,30 @@ CONFIG = {
     "llm_model": "openai:gpt-4.1-mini",
     "sections_in_order": ["sachverhalt", "erwägungen", "entscheid"],
 }
+
+
+class SectionStructured(Section):
+    """A section with structured paragraphs."""
+
+    is_structured: bool = False
+    content: List[Union[ParagraphStruct, ParagraphStructAnnotated]] = []
+
+    def structure(self):
+        """Structure the section content into ParagraphStruct."""
+        if not self.is_structured:
+            self.content = create_paragraph_struct(self.content)
+            self.is_structured = True
+
+
+class CourtDecisionStructured(CourtDecision):
+    """A structured court decision with annotated paragraphs."""
+
+    content: List[Union[Section, SectionStructured]]
+
+    def structure(self):
+        """Structure the decision content into annotated paragraphs."""
+        for section in self.content:
+            section.structure()
 
 
 class AnnotationState(BaseModel):
@@ -103,18 +103,19 @@ def _annotate_paragraph_recursively(
     )
 
     try:
-        response_dict = json.loads(response.content)
-    except json.JSONDecodeError:
-        logger.error(f"Failed to decode JSON response for paragraph {para.number}")
+        annot = ParagraphAnnotation.from_response_str(response.content)
+    except json.JSONDecodeError as e:
+        logger.error(
+            f"Failed to decode JSON response for paragraph {para.number} - {e}"
+        )
         # Fallback to creating an un-annotated structure
-        response_dict = {"title": "Annotation Failed", "description": "JSONDecodeError"}
+        annot = ParagraphAnnotation(title="Annotation Failed", description=[str(e)])
 
     logger.debug(f"Received annotation for paragraph {para.number}")
     annotated_para = ParagraphStructAnnotated(
         number=para.number,
         text=para.text,
-        title=response_dict.get("title", "N/A"),
-        description=response_dict.get("description", "N/A"),
+        annotation=annot,
         subparagraphs=[],
     )
 
@@ -239,13 +240,12 @@ def main(decision: CourtDecision, debug: bool = False) -> CourtDecision:
     logger.info("Starting annotation process...")
     # Initialize agent
     agent = init_chat_model(CONFIG["llm_model"], temperature=0.0)
-    agent.with_structured_output(ParagraphStructAnnotated)
+    agent.with_structured_output(ParagraphAnnotation)
 
     # Build graph
     workflow = build_annotation_graph(decision, CONFIG["sections_in_order"])
     if not workflow.nodes:
-        logger.info("No nodes in the graph. Skipping execution.")
-        return decision
+        raise ValueError("No nodes in the graph. Cannot execute.")
 
     # Compile and run graph
     logger.info("Compiling graph...")
@@ -258,23 +258,26 @@ def main(decision: CourtDecision, debug: bool = False) -> CourtDecision:
 
 
 if __name__ == "__main__":
-    logger.info("Loading decision from YAML...")
+
     # Load a decision from YAML
     input_path = "../data/output/20250614_113847_schema_A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf.yaml"
+    logger.info(f"Loading decision from {input_path}")
+
     decision = CourtDecisionStructured.from_yaml_file(input_path)
     logger.info(f"Loaded decision with {len(decision.content)} sections")
     decision.structure()
 
     # Run annotation
-    logger.info("Running annotation...")
     annotated_decision = main(decision, debug=True)  # Set to True for debug logging
+    logger.info("Annotation completed.")
 
     # Save the result
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_path = f"../data/output/{now}_schema_A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf_annotated.yaml"
+    filename = input_path.split("schema_")[-1].replace(".yaml", "")
+    filename = filename + "_annotated.yaml"
+    output_path = f"../data/output/{now}{filename}"
 
-    logger.info(f"Saving to {output_path}...")
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(annotated_decision.to_yaml())
 
-    logger.info("Annotation completed. Result saved to YAML file.")
+    logger.info(f"Result saved to {output_path}")

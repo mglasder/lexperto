@@ -1,3 +1,4 @@
+import json
 from enum import Enum
 from typing import List, Optional
 
@@ -75,11 +76,6 @@ class MetaData(BaseSchema):
     stichworte: List[str] = []
 
 
-class AnnotationMixin(BaseSchema):
-    title: str
-    description: List[str] = []
-
-
 class Paragraph(BaseSchema):
     number: Optional[str]
     text: Optional[str]
@@ -89,16 +85,27 @@ class ParagraphStruct(Paragraph):
     subparagraphs: List["ParagraphStruct"] = []
 
 
-class ParagraphStructAnnotated(ParagraphStruct):
-    """ParagraphStruct mit Annotationen des Schemas."""
-
+class ParagraphAnnotation(BaseSchema):
     title: str = Field(
-        description="Präziser und kompakter Titel für den Inhalt dieses Paragraphen und seine Unterabschnitte."
+        description="Präziser und kompakter Titel für den Inhalt dieses Paragraphen und seine Subparagraphen."
     )
     description: List[str] = Field(
         default_factory=list,
-        description="Beschreibung, was in diesem Paragraphen und Subparagraphen zu prüfen ist (WAS, NICHT WIE). Jede string ist ein Stichpunkt.",
+        description="Liste der zu prüfenden Punkte (Fokus auf: WAS in diesem Paragraphen geprüft wird, nicht WIE)",
     )
+
+    @classmethod
+    def from_response_str(cls, response: str):
+        response_dict = json.loads(response)
+        title = response_dict.get("title", "")
+        description = response_dict.get("description", [])
+        return cls(title=title, description=description)
+
+
+class ParagraphStructAnnotated(ParagraphStruct):
+    """ParagraphStruct mit Annotationen des Schemas."""
+
+    annotation: Optional[ParagraphAnnotation]
     subparagraphs: List["ParagraphStructAnnotated"] = []
 
     class Config:

@@ -2,10 +2,14 @@ import json
 import shutil
 from pathlib import Path
 
-import yaml
 import pytest
-from src.models.extraction import SectionName, MetaData, Paragraph, Section
-from src.structuring import CourtDecision
+from src.models.extraction import (
+    SectionName,
+    MetaData,
+    Paragraph,
+    Section,
+    CourtDecision,
+)
 import os
 
 
