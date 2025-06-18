@@ -162,7 +162,7 @@ EXAMPLE_OUTPUT_ERW = [
 
 
 def section_extraction_node(state: InputState) -> SectionTextState:
-    logger.debug("Entering section extraction node")
+    logger.info("Entering section extraction node")
     openai = init_chat_model(
         LLM_MODEL,
         temperature=0.0,
@@ -170,12 +170,12 @@ def section_extraction_node(state: InputState) -> SectionTextState:
 
     agent = openai.with_structured_output(SectionTextState)
 
-    logger.debug("Invoking agent for section extraction")
+    logger.info("Invoking agent for section extraction")
     response = agent.invoke(
         f"{INSTRUCT_EXTRACTION.template}\n{INSTRUCT_PARSING.format(struct=SectionTextState.model_fields)}\nHier ist das Urteil: {state.pdf_doc}. Extrahiere jetzt den Sachverhalt, die Erwägungen und den Entscheid."
     )
 
-    logger.debug("Section extraction completed successfully")
+    logger.info("Section extraction completed successfully")
     return response
 
 
@@ -187,7 +187,7 @@ def create_paragraph_extraction_node(
     example_output: str,
 ):
     def node(state: SectionTextState) -> GraphState:
-        logger.debug(f"Entering paragraph extraction node for section: {section_name}")
+        logger.info(f"Entering paragraph extraction node for section: {section_name}")
         openai = init_chat_model(LLM_MODEL, temperature=0.0)
 
         agent = openai.with_structured_output(ParagraphList)
@@ -204,7 +204,7 @@ def create_paragraph_extraction_node(
             struct=ParagraphList.model_json_schema()
         )
 
-        logger.debug(f"Invoking agent for paragraph extraction in {section_name}")
+        logger.info(f"Invoking agent for paragraph extraction in {section_name}")
         response = agent.invoke(
             f"{instruct_paragraphs}\n{instruct_parsing}\n{getattr(state, content_field)}"
         )
@@ -213,7 +213,9 @@ def create_paragraph_extraction_node(
             name=section_name.lower(),
             content=response.paragraphs,
         )
-        logger.debug(f"Created section '{section_name}' with {len(response.paragraphs)} paragraphs")
+        logger.info(
+            f"Created section '{section_name}' with {len(response.paragraphs)} paragraphs"
+        )
         return {"sections": [section]}
 
     return node
@@ -229,7 +231,7 @@ paragraph_extraction_erw_node = create_paragraph_extraction_node(
 
 
 def paragraph_extraction_ent_node(state: SectionTextState) -> GraphState:
-    logger.debug("Entering paragraph extraction node for entscheid")
+    logger.info("Entering paragraph extraction node for entscheid")
     openai = init_chat_model(
         LLM_MODEL,
         temperature=0.0,
@@ -247,33 +249,33 @@ def paragraph_extraction_ent_node(state: SectionTextState) -> GraphState:
 
     instruct_parsing = INSTRUCT_PARSING.format(struct=ParagraphList.model_json_schema())
 
-    logger.debug("Invoking agent for entscheid paragraph extraction")
+    logger.info("Invoking agent for entscheid paragraph extraction")
     response = agent.invoke(
         f"{instruct_paragraphs}\n{instruct_parsing}\n{state.entscheid}"
     )
 
     section = Section(name="entscheid", content=response.paragraphs)
-    logger.debug(f"Created entscheid section with {len(response.paragraphs)} paragraphs")
+    logger.info(f"Created entscheid section with {len(response.paragraphs)} paragraphs")
     return {"sections": [section]}
 
 
 def combine_node(state: GraphState) -> CourtDecision:
-    logger.debug("Entering combine node")
-    logger.debug(f"Combining {len(state['sections'])} sections")
-    
+    logger.info("Entering combine node")
+    logger.info(f"Combining {len(state['sections'])} sections")
+
     result = CourtDecision(
         meta=None,
         content=state["sections"],
     )
-    
-    logger.debug("Successfully created CourtDecision object")
+
+    logger.info("Successfully created CourtDecision object")
     return result
 
 
 def main(name: str):
     logger.info(f"Starting extraction process for: {name}")
 
-    logger.debug("Building extraction graph")
+    logger.info("Building extraction graph")
     builder = StateGraph(GraphState, input=InputState, output=CourtDecision)
     builder.add_node("section_extraction", section_extraction_node)
     builder.add_node("paragraph_extraction_sv", paragraph_extraction_sv_node)
@@ -295,11 +297,11 @@ def main(name: str):
         pdf_doc = TEST_PDF_CONTENT
     else:
         logger.info(f"Loading PDF from file: {name}")
-        pdf_doc = load_pdf(name)
+        pdf_doc = load_pdf(f"data/urteile/DBA-CH-FR/{name}.pdf")
 
     input_state = InputState(pdf_doc=pdf_doc)
     graph = builder.compile()
-    
+
     logger.info("Invoking graph")
     result = graph.invoke(input_state)
 
@@ -309,8 +311,8 @@ def main(name: str):
     print(decision.model_dump_json(indent=2))
 
     now = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_path = f"/data/schemas/extracted/{now}_schema_{name}.yaml"
-    
+    output_path = f"data/schemas/extracted/{now}_schema_{name}.yaml"
+
     logger.info(f"Saving result to: {output_path}")
     try:
         with open(output_path, "w", encoding="utf-8") as f:
@@ -323,22 +325,19 @@ def main(name: str):
 
 if __name__ == "__main__":
 
-    # pdf_names = [
-    #     # "A-2453-2021_2023-05-03_20a30c89-9b9f-4a3e-bd6d-51981d2374ac",
-    #     # "A-3365-2022_2024-01-05_eaa8b27a-3ebf-4ed8-aaa2-2a05355e600a",
-    #     # "A-3961-2022_2024-04-08_1a1921c3-1aee-4a96-af47-3eb9d9867cf6",
-    #     # "A-4103-2022_2024-04-08_f75d644b-6831-48af-a6d7-f6fe9774a529",
-    #     # "A-4680-2021_2022-08-19_ada4e85a-f69e-4f60-8fbf-8525911370ff",
-    #     # "A-4681-2021_2022-08-19_932b40b1-701e-4c1c-b5c7-0536902f9e10",
-    #     "A-4685-2021_2022-08-19_8fb87126-b2c8-497f-be4a-da4a4b14285f",
-    #     "A-4830-2021_2023-10-23_9c13fc5c-089a-4835-a029-31f93416db9e",
-    #     "A-5153-2023_2024-11-11_f0d9086b-6def-4963-b3ec-5ff9beb6ffd0",
-    # ]
+    pdf_names = [
+        # "A-2453-2021_2023-05-03_20a30c89-9b9f-4a3e-bd6d-51981d2374ac",
+        # "A-3365-2022_2024-01-05_eaa8b27a-3ebf-4ed8-aaa2-2a05355e600a",
+        # "A-3961-2022_2024-04-08_1a1921c3-1aee-4a96-af47-3eb9d9867cf6",
+        # "A-4103-2022_2024-04-08_f75d644b-6831-48af-a6d7-f6fe9774a529",
+        # "A-4680-2021_2022-08-19_ada4e85a-f69e-4f60-8fbf-8525911370ff",
+        # "A-4681-2021_2022-08-19_932b40b1-701e-4c1c-b5c7-0536902f9e10",
+        "A-4685-2021_2022-08-19_8fb87126-b2c8-497f-be4a-da4a4b14285f",
+        "A-4830-2021_2023-10-23_9c13fc5c-089a-4835-a029-31f93416db9e",
+        "A-5153-2023_2024-11-11_f0d9086b-6def-4963-b3ec-5ff9beb6ffd0",
+    ]
 
-    # for name in pdf_names:
-    #     print(f"Processing {name}...")
-    #     main(name)
-    #     print(f"Finished processing {name}.\n")
-    name = "A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf"
-    # name = "test"
-    main(name)
+    # name = "A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf"
+
+    for name in pdf_names:
+        main(name)
