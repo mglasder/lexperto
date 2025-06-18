@@ -1,16 +1,17 @@
 import json
 import os
 from datetime import datetime
-from typing import List, Dict, Any, Optional, Union
+from typing import List, Optional, Union, Callable
 import logging
 import sys
 
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
-from langgraph.constants import START, END
+from langchain_core.language_models import BaseChatModel
+from langgraph.constants import END
 from langgraph.graph import StateGraph
 from langsmith import Client
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from src.models.extraction import (
     Section,
@@ -63,21 +64,70 @@ INSTRUCT_ANNOTATION = langsmith_client.pull_prompt(
     "annotate_paragraphs", include_model=False
 )
 
-LLM_MODEL = "openai:gpt-4.1-mini"
+CONFIG = {
+    "llm_model": "openai:gpt-4.1-mini",
+    "sections_in_order": ["sachverhalt", "erwägungen", "entscheid"],
+}
 
 
 class AnnotationState(BaseModel):
     """State for the annotation process."""
 
     decision: CourtDecision
-    current_section: Optional[str] = None
-    current_paragraph: Optional[ParagraphStruct] = None
+    agent: Optional[Callable] = Field(None, exclude=True)
+
+    class Config:
+        arbitrary_types_allowed = True
 
 
-class AnnotationResult(BaseModel):
-    """Result of the annotation process."""
+def _annotate_paragraph_recursively(
+    para: ParagraphStruct, agent: BaseChatModel, section_name: str
+) -> ParagraphStructAnnotated:
+    """
+    Recursively annotates a paragraph and its subparagraphs using the provided agent.
+    """
+    context = {
+        "section": section_name,
+        "paragraph_number": para.number,
+        "paragraph_text": para.text,
+        "subparagraphs": (
+            [{"number": sp.number, "text": sp.text} for sp in para.subparagraphs]
+            if para.subparagraphs
+            else []
+        ),
+    }
 
-    annotated_paragraph: ParagraphStructAnnotated
+    logger.debug(f"Requesting annotation for paragraph {para.number}")
+    response = agent.invoke(
+        f"{INSTRUCT_ANNOTATION.template}\nAnnotate this paragraph from the {section_name} section:\n{context}"
+    )
+
+    try:
+        response_dict = json.loads(response.content)
+    except json.JSONDecodeError:
+        logger.error(f"Failed to decode JSON response for paragraph {para.number}")
+        # Fallback to creating an un-annotated structure
+        response_dict = {"title": "Annotation Failed", "description": "JSONDecodeError"}
+
+    logger.debug(f"Received annotation for paragraph {para.number}")
+    annotated_para = ParagraphStructAnnotated(
+        number=para.number,
+        text=para.text,
+        title=response_dict.get("title", "N/A"),
+        description=response_dict.get("description", "N/A"),
+        subparagraphs=[],
+    )
+
+    if para.subparagraphs:
+        logger.debug(
+            f"Processing {len(para.subparagraphs)} subparagraphs for {para.number}"
+        )
+        annotated_para.subparagraphs = [
+            _annotate_paragraph_recursively(sp, agent, section_name)
+            for sp in para.subparagraphs
+        ]
+
+    return annotated_para
 
 
 def create_annotation_node(section_name: str):
@@ -85,8 +135,8 @@ def create_annotation_node(section_name: str):
 
     def node(state: AnnotationState) -> AnnotationState:
         logger.debug(f"Entering annotation node for section: {section_name}")
-        agent = init_chat_model(LLM_MODEL, temperature=0.0)
-        agent.with_structured_output(ParagraphStructAnnotated)
+        agent = state.agent
+
         try:
             section = next(
                 s
@@ -97,17 +147,9 @@ def create_annotation_node(section_name: str):
                 f"Found section '{section_name}' with {len(section.content)} paragraphs"
             )
         except StopIteration:
-            logger.error(f"Section {section_name} not found in decision")
-            raise
-        # agent = create_react_agent(
-        #     model=openai,
-        #     prompt=INSTRUCT_ANNOTATION.template,
-        #     response_format=(
-        #         "Parse allen Text vollständig, wortwörtlich und ohne jede Änderung",
-        #         ParagraphStructAnnotated,
-        #     ),
-        #     tools=[],
-        # )
+            logger.warning(f"Section '{section_name}' not found in decision. Skipping.")
+            return state
+
         annotated_paragraphs = []
         for i, para in enumerate(section.content):
             logger.debug(
@@ -115,64 +157,18 @@ def create_annotation_node(section_name: str):
             )
             if isinstance(para, ParagraphStruct):
                 try:
-                    context = {
-                        "section": section_name,
-                        "paragraph_number": para.number,
-                        "paragraph_text": para.text,
-                        "subparagraphs": (
-                            [
-                                {"number": sp.number, "text": sp.text}
-                                for sp in para.subparagraphs
-                            ]
-                            if para.subparagraphs
-                            else []
-                        ),
-                    }
-                    logger.debug(f"Requesting annotation for paragraph {para.number}")
-                    # response = agent.invoke(
-                    #     {
-                    #         "messages": [
-                    #             {
-                    #                 "role": "system",
-                    #                 "content": INSTRUCT_ANNOTATION.template,
-                    #             },
-                    #             {
-                    #                 "role": "user",
-                    #                 "content": f"Annotate this paragraph from the {section_name} section:\n{context}",
-                    #             },
-                    #         ]
-                    #     }
-                    # )
-
-                    response = agent.invoke(
-                        f"{INSTRUCT_ANNOTATION.template}\nAnnotate this paragraph from the {section_name} section:\n{context}"
+                    annotated_para = _annotate_paragraph_recursively(
+                        para, agent, section_name
                     )
-
-                    response_dict = json.loads(response.content)
-
-                    logger.debug(f"Received annotation for paragraph {para.number}")
-                    annotated_para = ParagraphStructAnnotated(
-                        number=para.number,
-                        text=para.text,
-                        title=response_dict["title"],
-                        description=response_dict["description"],
-                        subparagraphs=[],
-                    )
-                    if para.subparagraphs:
-                        logger.debug(
-                            f"Processing {len(para.subparagraphs)} subparagraphs for {para.number}"
-                        )
-                        annotated_para.subparagraphs = [
-                            process_subparagraph(sp, agent, section_name)
-                            for sp in para.subparagraphs
-                        ]
                     annotated_paragraphs.append(annotated_para)
                 except Exception as e:
                     logger.error(f"Error processing paragraph {para.number}: {e}")
+                    # Optionally re-raise or handle to avoid stopping the whole process
                     raise
             else:
                 logger.debug(f"Skipping non-ParagraphStruct content: {type(para)}")
                 annotated_paragraphs.append(para)
+
         annotated_section = SectionStructured(
             name=section.name, content=annotated_paragraphs, is_structured=True
         )
@@ -195,52 +191,39 @@ def create_annotation_node(section_name: str):
     return node
 
 
-def process_subparagraph(
-    para: ParagraphStruct, agent: Any, section_name: str
-) -> ParagraphStructAnnotated:
-    """Recursively process a subparagraph and its children."""
-    context = {
-        "section": section_name,
-        "paragraph_number": para.number,
-        "paragraph_text": para.text,
-        "subparagraphs": (
-            [{"number": sp.number, "text": sp.text} for sp in para.subparagraphs]
-            if para.subparagraphs
-            else []
-        ),
-    }
+def build_annotation_graph(
+    decision: CourtDecision, sections_in_order: List[str]
+) -> StateGraph:
+    """Builds the annotation graph based on sections found in the decision."""
+    workflow = StateGraph(AnnotationState)
+    decision_sections = {s.name.lower() for s in decision.content}
 
-    # response = agent.invoke(
-    #     {
-    #         "messages": [
-    #             {
-    #                 "role": "user",
-    #                 "content": f"Annotate this subparagraph from the {section_name} section:\n{context}",
-    #             }
-    #         ]
-    #     }
-    # )
+    # Determine the sequence of sections to process
+    process_sequence = [s for s in sections_in_order if s in decision_sections]
+    if not process_sequence:
+        logger.warning("No sections to process. Graph will be empty.")
+        return workflow
 
-    response = agent.invoke(
-        f"{INSTRUCT_ANNOTATION.template}\nAnnotate this paragraph from the {section_name} section:\n{context}"
-    )
+    logger.info(f"Processing sections in order: {process_sequence}")
 
-    response_dict = json.loads(response.content)
+    # Add nodes for each section to be processed
+    for section_name in process_sequence:
+        logger.info(f"Adding node for section: {section_name}")
+        workflow.add_node(
+            f"annotate_{section_name}", create_annotation_node(section_name)
+        )
 
-    annotated_para = ParagraphStructAnnotated(
-        number=para.number,
-        text=para.text,
-        title=response_dict["title"],
-        description=response_dict["description"],
-        subparagraphs=[],
-    )
+    # Set the entry point to the first section
+    workflow.set_entry_point(f"annotate_{process_sequence[0]}")
 
-    if para.subparagraphs:
-        annotated_para.subparagraphs = [
-            process_subparagraph(sp, agent, section_name) for sp in para.subparagraphs
-        ]
+    # Add edges to define the processing sequence
+    for i in range(len(process_sequence) - 1):
+        workflow.add_edge(
+            f"annotate_{process_sequence[i]}", f"annotate_{process_sequence[i+1]}"
+        )
+    workflow.add_edge(f"annotate_{process_sequence[-1]}", END)
 
-    return annotated_para
+    return workflow
 
 
 def main(decision: CourtDecision, debug: bool = False) -> CourtDecision:
@@ -254,28 +237,20 @@ def main(decision: CourtDecision, debug: bool = False) -> CourtDecision:
         logger.setLevel(logging.DEBUG)
 
     logger.info("Starting annotation process...")
-    # Create the graph
-    workflow = StateGraph(AnnotationState)
+    # Initialize agent
+    agent = init_chat_model(CONFIG["llm_model"], temperature=0.0)
+    agent.with_structured_output(ParagraphStructAnnotated)
 
-    # Add nodes for each section
-    for section_name in ["entscheid", "erwägungen", "sachverhalt"]:
-        logger.info(f"Adding node for section: {section_name}")
-        workflow.add_node(
-            f"annotate_{section_name}", create_annotation_node(section_name)
-        )
+    # Build graph
+    workflow = build_annotation_graph(decision, CONFIG["sections_in_order"])
+    if not workflow.nodes:
+        logger.info("No nodes in the graph. Skipping execution.")
+        return decision
 
-    # Add edges
-    logger.info("Adding edges...")
-    workflow.add_edge("annotate_entscheid", "annotate_erwägungen")
-    workflow.add_edge("annotate_erwägungen", "annotate_sachverhalt")
-    workflow.add_edge("annotate_sachverhalt", END)
-
-    # Set the entry point
-    workflow.set_entry_point("annotate_entscheid")
-
+    # Compile and run graph
     logger.info("Compiling graph...")
     graph = workflow.compile()
-    input_state = AnnotationState(decision=decision)
+    input_state = AnnotationState(decision=decision, agent=agent)
     logger.info("Invoking graph...")
     result = graph.invoke(input_state)
 
