@@ -6,7 +6,7 @@ This document outlines the implementation plan for creating a master schema syst
 
 ## Key Principles and Updates
 
-- **Core Goal**: Generate a master schema from the individual annotated input schema.
+- **Core Goal**: Generate a master schema from the individual annotated input schemas.
 
 - **Formulation Reuse**: For many paragraphs, the language is highly formalized and should be reused verbatim or with minimal changes. Each paragraph template in the master schema must reference its source paragraphs, so that the exact formulations can be looked up and reused in draft generation.
 - **Title/Description Abstraction**: The master schema's `title` and `description` fields are generic and abstract, but if paragraphs are nearly identical across decisions, these fields can be reused as-is. Otherwise, they should be abstracted to capture the general legal function of the paragraph.
@@ -15,6 +15,8 @@ This document outlines the implementation plan for creating a master schema syst
 ## Out of scope
 
 - **Court Decision Draft Generation**: Although the final goal is to generate a court decision draft given the master schema and other information input sources, this is out of scope for this part of the project.
+
+- **Ingnore Meta Data for now**: Meta data is ignored in phase 1.
 
 ## Master Schema Design
 
@@ -29,7 +31,6 @@ class MasterSchema(BaseSchema):
     last_updated: datetime
     source_decisions: List[str]
     sections: List[MasterSection]
-    metadata_template: MetaDataTemplate
 ```
 
 #### Master Section
@@ -40,18 +41,17 @@ class MasterSection(BaseSchema):
     paragraph_templates: List[ParagraphTemplate]
 ```
 
-#### Paragraph Template (Updated)
+#### Paragraph Template (Core Data Model)
 ```python
 class ParagraphTemplate(BaseSchema):
     number_pattern: str
-    title_template: str  # Abstract/generic, but reused if identical
-    description_template: List[str]  # Abstract/generic, but reused if identical
+    title_template: str  # Abstracted title for paragraph
+    description_template: List[str]  # Abstracted descriptions for paragraph
     required: bool = True  # True if present in all decisions
-    inclusion_criteria: Optional[str] = None  # Criteria for optional paragraphs
+    inclusion_criteria: List[str] = [] # Criteria for optional paragraphs, as true/false decision rules, empty list when required = True
     subparagraph_templates: List["ParagraphTemplate"] = []
-    legal_concepts: List[str] = []
     frequency: float = 1.0
-    source_paragraph_refs: List[SourceParagraphRef] = []  # References to source paragraphs for formulation lookup
+    similar_paragraph_refs: List[(float, SourceParagraphRef)] = []  # References to source paragraphs for formulation lookup, float is similarity score
 ```
 
 #### Source Paragraph Reference
@@ -60,15 +60,6 @@ class SourceParagraphRef(BaseSchema):
     decision_id: str
     section: str
     paragraph_number: str
-    text: str  # The actual formulation to be reused
-```
-
-#### Meta Data Template
-```python
-class MetaDataTemplate(BaseSchema):
-    required_fields: List[str] = []
-    optional_fields: List[str] = []
-    field_patterns: Dict[str, str] = {}
 ```
 
 ## Implementation Phases (Minimal, Iterative Approach)

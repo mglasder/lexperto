@@ -26,35 +26,46 @@ Implement a minimal, single-file prototype that demonstrates the core logic of m
 4. **Prompt/LLM ambiguity**: Use a clear, simple prompt; document LLM output and limitations.
 5. **Loss of source traceability**: Ensure every paragraph template in the master schema references its source(s).
 
-## Minimal Data Model (Python Pydantic Pseudocode)
-```python
-from pydantic import BaseModel, Field
-from typing import List, Optional
+### Core Data Models
+#### Master Schema Structure 
 
-class SourceParagraphRef(BaseModel):
+```python
+class MasterSchema(BaseSchema):
+    legal_type: str
+    version: str
+    created_date: datetime
+    last_updated: datetime
+    source_decisions: List[str]
+    sections: List[MasterSection]
+```
+
+#### Master Section
+```python
+class MasterSection(BaseSchema):
+    name: str  # "entscheid", "erwägungen", "sachverhalt"
+    order: int
+    paragraph_templates: List[ParagraphTemplate]
+```
+
+#### Paragraph Template (Core Data Model)
+```python
+class ParagraphTemplate(BaseSchema):
+    number_pattern: str
+    title_template: str  # Abstracted title for paragraph
+    description_template: List[str]  # Abstracted descriptions for paragraph
+    required: bool = True  # True if present in all decisions
+    inclusion_criteria: List[str] = [] # Criteria for optional paragraphs, as true/false decision rules, empty list when required = True
+    subparagraph_templates: List["ParagraphTemplate"] = []
+    frequency: float = 1.0
+    similar_paragraph_refs: List[(float, SourceParagraphRef)] = []  # References to source paragraphs for formulation lookup, float is similarity score
+```
+
+#### Source Paragraph Reference
+```python
+class SourceParagraphRef(BaseSchema):
     decision_id: str
     section: str
     paragraph_number: str
-    text: str
-
-class ParagraphTemplate(BaseModel):
-    number_pattern: str
-    title_template: str
-    description_template: List[str]
-    required: bool = True
-    inclusion_criteria: Optional[str] = None
-    subparagraph_templates: List['ParagraphTemplate'] = Field(default_factory=list)
-    source_paragraph_refs: List[SourceParagraphRef] = Field(default_factory=list)
-
-class MasterSection(BaseModel):
-    name: str
-    order: int
-    paragraph_templates: List[ParagraphTemplate]
-
-class MasterSchema(BaseModel):
-    legal_type: str
-    version: str
-    sections: List[MasterSection]
 ```
 
 ## Algorithmic Outline
@@ -70,49 +81,39 @@ class MasterSchema(BaseModel):
 - For each section across all input schemas:
   - Collect all paragraphs (with their numbers, text, titles, descriptions, and source references)
   - Use an LLM (via LangGraph/LangChain) to:
-    - Group/cluster paragraphs that are semantically similar (based on title, description, and/or text)
-    - For each group, propose a generic title and description for the master schema template
+    - Group/cluster paragraphs that are semantically similar (based on title, description, text and hierarchical position)
+    - For each group, propose an abstracted title and description for the master schema template
     - Indicate which source paragraphs belong to each group (for traceability)
   - Mark a paragraph as required if present in all input schemas, else optional (with inclusion_criteria = 'optional')
+  - If non-mandatory paragraph, formulate inclusion criteria as true/false decision rules
   - Recursively process subparagraphs if present
-- Assemble all section templates into a `MasterSchema` object
+- Assemble all paragraph templates into a `MasterSchema` object
 
-### 3. (Optional) LLM/Agent Demonstration for Template Generation
-- For one section or paragraph group, call an LLM/agent with a minimal prompt using LangGraph or LangChain:
-  - Example prompt: "Given these paragraph texts and annotations, group similar paragraphs and suggest a generic title and description for each group as a master schema template."
-  - Use the LLM output to define the `ParagraphTemplate` for each group
-  - Document the prompt and output in the code
 
-### 4. Output
+### 3. Expected Output
 - Print or serialize the resulting `MasterSchema` as yaml or JSON
-- Print all source paragraph references for each template to demonstrate traceability
 
-## Minimal Prompts (Example)
-- "Given the following annotated paragraphs, group them by similarity and suggest a generic title and description for each group as a master schema template."
-- Input: List of paragraph texts and their annotations
-- Output: For each group: title, description, and list of source paragraph references
 
 ## Implementation Checklist
 - [ ] Define minimal Pydantic models
 - [ ] Create 2-3 fake annotated input schemas (YAML files)
 - [ ] Load fake schemas as Pydantic models
-- [ ] Aggregate and cluster paragraphs using LLMs (LangGraph/LangChain)
+- [ ] Aggregate and cluster paragraphs using LLMs and logic (LangGraph/LangChain)
 - [ ] Generate master schema templates from LLM output
 - [ ] Demonstrate traceability of source paragraphs
-- [ ] Print/serialize the master schema and traceability info
+- [ ] Print/serialize the master schema
 
 ## Time Management
 - **Pydantic models & fake data**: 30 min
-- **LLM-based aggregation & clustering**: 60 min
-- **[optional] LLM/agent integration & prompt**: 30 min
+- **LLM-based aggregation & clustering**: 90 min
 - **Testing, output, and documentation**: 30 min
 - **Buffer**: 30 min
-- **Total**: ≤ 3 hours
+- **Total**: ≤ 4 hours
 
 ## Out of Scope
 - Real data or draft generation
-- Full LLM/agent pipeline or prompt engineering
-- Advanced validation, error handling, or extensibility
+- Full LLM/agent pipeline or extensive prompt engineering
+- Advanced validation, error handling
 
 ---
 This plan ensures a minimal, focused, and risk-aware implementation for Phase 1, providing a solid foundation for later phases. 
