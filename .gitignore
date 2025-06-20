@@ -118,3 +118,4 @@ urteile/
 urteile_html
 run_logs/
 output/
+.claude/*
