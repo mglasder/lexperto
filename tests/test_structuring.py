@@ -98,6 +98,246 @@ from src.models.extraction import Paragraph, ParagraphStruct
                 ParagraphStruct(number="B.", text="Second Section", subparagraphs=[]),
             ],
         ),
+        # Test case 3: Missing intermediate parents
+        (
+            [
+                Paragraph(number="1.1.1", text="Deep child"),
+                Paragraph(number="2.1", text="Second child"),
+            ],
+            [
+                ParagraphStruct(
+                    number="1.",
+                    text="",
+                    subparagraphs=[
+                        ParagraphStruct(
+                            number="1.1",
+                            text="",
+                            subparagraphs=[
+                                ParagraphStruct(
+                                    number="1.1.1",
+                                    text="Deep child",
+                                    subparagraphs=[],
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+                ParagraphStruct(
+                    number="2.",
+                    text="",
+                    subparagraphs=[
+                        ParagraphStruct(
+                            number="2.1",
+                            text="Second child",
+                            subparagraphs=[],
+                        ),
+                    ],
+                ),
+            ],
+        ),
+        # Test case 4: Deep hierarchy missing multiple parents
+        (
+            [
+                Paragraph(number="1.2.3.4", text="Deepest child"),
+            ],
+            [
+                ParagraphStruct(
+                    number="1.",
+                    text="",
+                    subparagraphs=[
+                        ParagraphStruct(
+                            number="1.2",
+                            text="",
+                            subparagraphs=[
+                                ParagraphStruct(
+                                    number="1.2.3",
+                                    text="",
+                                    subparagraphs=[
+                                        ParagraphStruct(
+                                            number="1.2.3.4",
+                                            text="Deepest child",
+                                            subparagraphs=[],
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+            ],
+        ),
+        # Test case 6: Multiple missing parents at different branches
+        (
+            [
+                Paragraph(number="1.1.1", text="A child"),
+                Paragraph(number="2.2.2", text="B child"),
+            ],
+            [
+                ParagraphStruct(
+                    number="1.",
+                    text="",
+                    subparagraphs=[
+                        ParagraphStruct(
+                            number="1.1",
+                            text="",
+                            subparagraphs=[
+                                ParagraphStruct(
+                                    number="1.1.1",
+                                    text="A child",
+                                    subparagraphs=[],
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+                ParagraphStruct(
+                    number="2.",
+                    text="",
+                    subparagraphs=[
+                        ParagraphStruct(
+                            number="2.2",
+                            text="",
+                            subparagraphs=[
+                                ParagraphStruct(
+                                    number="2.2.2",
+                                    text="B child",
+                                    subparagraphs=[],
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+            ],
+        ),
+        # Test case 7: Non-sequential numbering
+        (
+            [
+                Paragraph(number="1.", text="Top"),
+                Paragraph(number="1.3", text="Third child"),
+                Paragraph(number="1.3.2", text="Subchild"),
+            ],
+            [
+                ParagraphStruct(
+                    number="1.",
+                    text="Top",
+                    subparagraphs=[
+                        ParagraphStruct(
+                            number="1.3",
+                            text="Third child",
+                            subparagraphs=[
+                                ParagraphStruct(
+                                    number="1.3.2",
+                                    text="Subchild",
+                                    subparagraphs=[],
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+            ],
+        ),
+        # Test case 8: Already complete hierarchy
+        (
+            [
+                Paragraph(number="1.", text="Top"),
+                Paragraph(number="1.1", text="Child"),
+                Paragraph(number="1.1.1", text="Grandchild"),
+            ],
+            [
+                ParagraphStruct(
+                    number="1.",
+                    text="Top",
+                    subparagraphs=[
+                        ParagraphStruct(
+                            number="1.1",
+                            text="Child",
+                            subparagraphs=[
+                                ParagraphStruct(
+                                    number="1.1.1",
+                                    text="Grandchild",
+                                    subparagraphs=[],
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+            ],
+        ),
+        # Test case 9: Single paragraph, already top-level
+        (
+            [
+                Paragraph(number="1.", text="Top only"),
+            ],
+            [
+                ParagraphStruct(
+                    number="1.",
+                    text="Top only",
+                    subparagraphs=[],
+                ),
+            ],
+        ),
+        # Test case 10: Paragraphs with trailing commas or dots in input
+        (
+            [
+                Paragraph(number="1,", text="Comma"),
+                Paragraph(number="1.1.", text="Dot"),
+                Paragraph(number="2.", text="Normal"),
+            ],
+            [
+                ParagraphStruct(
+                    number="1.",
+                    text="Comma",
+                    subparagraphs=[
+                        ParagraphStruct(
+                            number="1.1",
+                            text="Dot",
+                            subparagraphs=[],
+                        ),
+                    ],
+                ),
+                ParagraphStruct(
+                    number="2.",
+                    text="Normal",
+                    subparagraphs=[],
+                ),
+            ],
+        ),
+        # Test case 11: Multiple subparagraphs under the same parent
+        (
+            [
+                Paragraph(number="1.1", text="First"),
+                Paragraph(number="1.2", text="Second"),
+                Paragraph(number="1.3", text="Third"),
+            ],
+            [
+                ParagraphStruct(
+                    number="1.",
+                    text="",
+                    subparagraphs=[
+                        ParagraphStruct(
+                            number="1.1",
+                            text="First",
+                            subparagraphs=[],
+                        ),
+                        ParagraphStruct(
+                            number="1.2",
+                            text="Second",
+                            subparagraphs=[],
+                        ),
+                        ParagraphStruct(
+                            number="1.3",
+                            text="Third",
+                            subparagraphs=[],
+                        ),
+                    ],
+                ),
+            ],
+        ),
+        # Test case 12: Empty input
+        (
+            [],
+            [],
+        ),
     ],
 )
 def test_create_paragraph_struct(paragraphs, expected):

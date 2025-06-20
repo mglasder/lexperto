@@ -29,14 +29,29 @@ def get_level(number: str) -> int:
 
 
 def add_missing_top_levels(paragraphs: List[Paragraph]) -> List[Paragraph]:
-    """Add missing top-level paragraphs for subparagraphs without parents."""
-    top_levels = {p.number for p in paragraphs if p.number.endswith(".")}
+    """Add missing parent paragraphs for any subparagraphs without parents at any level."""
+    existing_numbers = {p.number for p in paragraphs}
+    to_add = set()
+    # Collect all parent numbers that are missing
     for p in paragraphs:
-        if not p.number.endswith(".") and "." in p.number:
-            top = p.number.split(".")[0] + "."
-            if top not in top_levels:
-                paragraphs.append(Paragraph(number=top, text=""))
-                top_levels.add(top)
+        # Clean up the number for consistent parent detection
+        number = p.number.rstrip(".,")
+        parts = number.split(".")
+        for i in range(1, len(parts)):
+            parent = ".".join(parts[:i])
+            # Top-level parent should end with a dot
+            if i == 1:
+                parent_number = parent + "."
+            else:
+                parent_number = parent
+            if parent_number not in existing_numbers:
+                to_add.add(parent_number)
+    # Add missing parents with empty text
+    for number in to_add:
+        paragraphs.append(Paragraph(number=number, text=""))
+    # If we added any, we need to check again recursively (in case of multi-level missing)
+    if to_add:
+        return add_missing_top_levels(paragraphs)
     return paragraphs
 
 
