@@ -61,13 +61,13 @@ class SectionName(str, Enum):
 
 
 class MetaData(BaseSchema):
-    aktenzeichen: Optional[str]
-    entscheid_datum: Optional[str]
-    publikations_datum: Optional[str]
-    eingangsjahr: Optional[str]
-    abteilung: Optional[str]
-    sprache: Optional[str]
-    gegenstand: Optional[str]
+    aktenzeichen: Optional[str] = None
+    entscheid_datum: Optional[str] = None
+    publikations_datum: Optional[str] = None
+    eingangsjahr: Optional[str] = None
+    abteilung: Optional[str] = None
+    sprache: Optional[str] = None
+    gegenstand: Optional[str] = None
     gerichtsschreiber: List[str] = []
     richter: List[str] = []
     parteien: List[str] = []

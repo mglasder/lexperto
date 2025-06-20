@@ -1,0 +1,45 @@
+meta:
+  aktenzeichen: FAKE-002-2023
+content:
+  - name: sachverhalt
+    content:
+      - number: "A."
+        text: "This is the first paragraph of the sachverhalt in the second case."
+        annotation:
+          title: "Case Introduction" # Slightly different title
+          description: ["Summarize the case background."]
+        subparagraphs: []
+      - number: "B."
+        text: "This is the second paragraph of the sachverhalt in the second case."
+        annotation:
+          title: "Facts"
+          description: ["Detail the key facts of the case."]
+        subparagraphs: []
+  - name: erwägungen
+    content:
+      - number: "1."
+        text: "This is the main legal consideration in the second case."
+        annotation:
+          title: "Main Legal Reasoning"
+          description: ["Explain the core legal argument."]
+        subparagraphs: []
+      - number: "2."
+        text: "This is another legal consideration in the second case."
+        annotation:
+          title: "Secondary Legal Reasoning"
+          description: ["Explain a secondary legal point."]
+        subparagraphs: []
+      - number: "3." # Optional paragraph
+        text: "This is an optional third legal consideration."
+        annotation:
+          title: "Optional Consideration"
+          description: ["Explain an additional, optional legal point."]
+        subparagraphs: []
+  - name: entscheid
+    content:
+      - number: "1."
+        text: "The court decides as follows in the second case."
+        annotation:
+          title: "Decision"
+          description: ["State the final decision of the court."]
+        subparagraphs: [] 
