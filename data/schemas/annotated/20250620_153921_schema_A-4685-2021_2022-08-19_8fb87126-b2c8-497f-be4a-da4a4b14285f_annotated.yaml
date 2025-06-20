@@ -6,21 +6,18 @@ content:
     text: Die Beschwerde wird abgewiesen.
     subparagraphs: []
     annotation:
-      title: Entscheidung über die Beschwerde
+      title: Entscheid über die Beschwerde
       description:
-      - Vorliegen oder Fehlen von Gründen für die Gutheissung der Beschwerde
-      - Rechtliche Beurteilung der Beschwerdeanträge
-      - Endgültige Entscheidung über den Verfahrensausgang
+      - Annahme oder Abweisung der Beschwerde
   - number: '2.'
     text: Die Verfahrenskosten von Fr. 5'000.- werden der Beschwerdeführerin auferlegt.
       Der in gleicher Höhe geleistete Kostenvorschuss wird für die Be- zahlung der
       Verfahrenskosten verwendet.
     subparagraphs: []
     annotation:
-      title: Auferlegung und Verwendung der Verfahrenskosten
+      title: Entscheidung über die Auferlegung und Verwendung der Verfahrenskosten
       description:
-      - Festsetzung der Verfahrenskostenhöhe
-      - Zuweisung der Verfahrenskosten an die Partei
+      - Auferlegung der Verfahrenskosten auf die Beschwerdeführerin
       - Verwendung des geleisteten Kostenvorschusses zur Begleichung der Verfahrenskosten
   - number: '3.'
     text: Es wird keine Parteientschädigung zugesprochen.
@@ -60,10 +57,11 @@ content:
           der internationalen Amtshilfe in Steuersachen
         description:
         - Zuständigkeit des Bundesverwaltungsgerichts für Beschwerden gegen Schlussverfügungen
-          der ESTV
-        - Anwendung der gesetzlichen Grundlagen des Bundesgesetzes über die internationale
+          der Eidgenössischen Steuerverwaltung
+        - Anwendung der gesetzlichen Grundlagen zur internationalen Amtshilfe in Steuersachen
+        - Verweis auf einschlägige Bestimmungen des Bundesgesetzes über die internationale
           Amtshilfe in Steuersachen
-        - Bezug auf die Verfahrensvorschriften des Bundesgesetzes über das Bundesverwaltungsgericht
+        - Verweis auf einschlägige Bestimmungen des Bundesgesetzes über das Bundesverwaltungsgericht
     - number: '1.2'
       text: Das Rechtsmittelverfahren vor dem Bundesverwaltungsgericht richtet sich
         nach dem Bundesgesetz vom 20. Dezember 1968 über das Verwaltungsverfahren
@@ -74,29 +72,26 @@ content:
           vor dem Bundesverwaltungsgericht
         description:
         - Geltung des Bundesgesetzes über das Verwaltungsverfahren im Rechtsmittelverfahren
-        - Vorrang der speziellen Bestimmungen des Verwaltungsgerichtsgesetzes gegenüber
-          dem Verwaltungsverfahrensgesetz
+        - Vorrang der speziellen Bestimmungen des Bundesgesetzes über das Bundesverwaltungsgericht
+          gegenüber dem Verwaltungsverfahrensgesetz
     - number: '1.3'
       text: Die Beschwerdeführerin ist zur Erhebung der Beschwerde legitimiert (Art.
         19 Abs. 2 StAhiG, Art. 48 Abs. 1 VwVG). Auf die frist- und formgerecht eingereichte
         Beschwerde ist einzutreten (Art. 50 Abs. 1 VwVG, Art. 52 Abs. 1 VwVG).
       subparagraphs: []
       annotation:
-        title: Prüfung der Beschwerdelegitimation und des formellen Eintritts in die
-          Beschwerde
+        title: Prüfung der Beschwerdelegitimation und des Eintritts in die Beschwerde
         description:
-        - Legitimation der Beschwerdeführerin zur Erhebung der Beschwerde gemäss Art.
-          19 Abs. 2 StAhiG und Art. 48 Abs. 1 VwVG
-        - Fristgerechte Einreichung der Beschwerde
-        - Formgerechte Einreichung der Beschwerde
-        - Entscheidung über den Eintritt in die Beschwerde gemäss Art. 50 Abs. 1 VwVG
-          und Art. 52 Abs. 1 VwVG
+        - Legitimation der Beschwerdeführerin zur Erhebung der Beschwerde
+        - Einhaltung der Frist- und Formvorschriften für die Beschwerdeeinreichung
+        - Entscheidung über den Eintritt in die Beschwerde
     annotation:
       title: Zuständigkeit und Verfahrensgrundlagen des Bundesverwaltungsgerichts
-        bei Beschwerden in der internationalen Amtshilfe in Steuersachen
+        im Amtshilfeverfahren
       description:
       - Zuständigkeit des Bundesverwaltungsgerichts für Beschwerden gegen Schlussverfügungen
-        der ESTV im Bereich der internationalen Amtshilfe in Steuersachen
+        der Eidgenössischen Steuerverwaltung im Bereich der internationalen Amtshilfe
+        in Steuersachen
       - Anwendbarkeit der Verfahrensvorschriften des Bundesgesetzes über das Verwaltungsverfahren
         im Rechtsmittelverfahren vor dem Bundesverwaltungsgericht
       - Legitimation der Beschwerdeführerin zur Erhebung der Beschwerde
@@ -128,7 +123,7 @@ content:
         description:
         - Anwendung des Bundesrechts von Amtes wegen durch das Bundesverwaltungsgericht
         - Bindung an die Begründung der Begehren im Beschwerdeverfahren
-        - Prüfung der Beschwerde auch anhand anderer als der geltend gemachten Gründe
+        - Prüfung der Beschwerde auch aufgrund anderer als der geltend gemachten Gründe
         - Entscheidung über Gutheissung oder Abweisung der Beschwerde auf verschiedenen
           Rechtsgrundlagen
     annotation:
@@ -136,8 +131,9 @@ content:
         im Beschwerdeverfahren
       description:
       - Rüge der Verletzung von Bundesrecht einschließlich Ermessensüberschreitung
-        und -missbrauch
-      - Rüge unrichtiger oder unvollständiger Feststellung des rechtserheblichen Sachverhalts
+        oder -missbrauch
+      - Rüge der unrichtigen oder unvollständigen Feststellung des rechtserheblichen
+        Sachverhalts
       - Rüge der Unangemessenheit der angefochtenen Verfügung
       - Anwendung des Bundesrechts durch das Bundesverwaltungsgericht von Amtes wegen
       - Ungebundenheit des Bundesverwaltungsgerichts an die Begründung der Begehren
@@ -158,7 +154,8 @@ content:
         - Anwendbarkeit des Steueramtshilfegesetzes auf internationale Amtshilfe in
           Steuersachen
         - Inkrafttreten und Geltungsbeginn des Steueramtshilfegesetzes
-        - Vorrang abweichender Bestimmungen von anwendbaren Abkommen
+        - Vorrang abweichender Bestimmungen von anwendbaren Abkommen gegenüber dem
+          Steueramtshilfegesetz
     - number: '3.10'
       text: Die Anonymisierung von Urteilen im Bereich der internationalen Amtshilfe
         in Steuersachen entspricht der geltenden Praxis des Bundesverwaltungsgerichts
@@ -166,13 +163,13 @@ content:
         vom 21. Februar 2008 [SR 173.320.4]).
       subparagraphs: []
       annotation:
-        title: Praxis der Anonymisierung von Urteilen in der internationalen Amtshilfe
+        title: Anonymisierung von Urteilen im Bereich der internationalen Amtshilfe
           in Steuersachen
         description:
-        - Anwendung der Anonymisierung von Urteilen im Bereich der internationalen
-          Amtshilfe in Steuersachen
-        - Übereinstimmung der Anonymisierungspraxis mit dem Informationsreglement
-          des Bundesverwaltungsgerichts
+        - Anwendung der geltenden Praxis des Bundesverwaltungsgerichts zur Anonymisierung
+        - Rechtsgrundlage der Anonymisierung im Informationsreglement des Bundesverwaltungsgerichts
+        - Spezifische Anforderungen an die Anonymisierung bei internationalen Amtshilfeverfahren
+          in Steuersachen
     - number: '3.2'
       text: 'Das Amtshilfeersuchen der DSCF stützt sich auf Art. 28 DBA CH-FR (in
         der hier anwendbaren Fassung gemäss Art. 7 des Zusatzabkommens vom 27. August
@@ -185,16 +182,13 @@ content:
         und Steuerflucht (AS 2016 1195; nachfolgend: Vereinbarung 2014).'
       subparagraphs: []
       annotation:
-        title: Rechtsgrundlagen des Amtshilfeersuchens im DBA Schweiz-Frankreich und
-          zugehörigen Abkommen
+        title: Rechtsgrundlagen des Amtshilfeersuchens im Doppelbesteuerungsabkommen
+          zwischen der Schweiz und Frankreich
         description:
-        - Anwendbarkeit von Art. 28 DBA Schweiz-Frankreich in der Fassung des Zusatzabkommens
-          2009
+        - Anwendbarkeit von Art. 28 DBA CH-FR in der Fassung des Zusatzabkommens 2009
         - Relevanz von Art. 11 Abs. 3 des Zusatzabkommens 2009 für das Amtshilfeersuchen
-        - Bedeutung von Ziffer XI des Zusatzprotokolls im DBA Schweiz-Frankreich in
-          der Fassung der Vereinbarung 2014
-        - Verknüpfung der genannten Rechtsgrundlagen mit dem Amtshilfeersuchen der
-          französischen Steuerbehörde
+        - Bedeutung von Ziff. XI des Zusatzprotokolls im DBA CH-FR in der Fassung
+          der Vereinbarung 2014
     - number: '3.3'
       text: In den Übergangsbestimmungen sieht die Vereinbarung 2014 ihre Anwendung
         auf Informationsbegehren betreffend Kalender- oder Geschäftsjahre, die ab
@@ -210,12 +204,12 @@ content:
       annotation:
         title: Anwendung der Übergangsbestimmungen der Vereinbarung 2014 auf Informationsbegehren
         description:
-        - Anwendungsbereich der Vereinbarung 2014 für Informationsbegehren zu Kalender-
-          oder Geschäftsjahren ab dem 1. Januar 2010
-        - Ausnahmeregelung für Informationsbegehren über Sachverhalte ab dem 1. Februar
+        - Geltungsbeginn der Vereinbarung 2014 für Informationsbegehren zu Kalender-
+          oder Geschäftsjahren ab 1. Januar 2010
+        - Ausnahmeregelung für Informationsbegehren zu Sachverhalten ab 1. Februar
           2013
         - Beschränkung der Anwendung von Ziffer XI Absatz 3 Buchstabe a des Zusatzprotokolls
-          auf Gruppenersuchen ab dem 1. Februar 2013
+          auf Gruppenersuchen ab 1. Februar 2013
     - number: '3.4'
       text: ''
       subparagraphs:
@@ -251,24 +245,27 @@ content:
           sind» (sog. Subsidiaritätsprinzip; vgl. Art. 6 Abs. 2 Bst. g StAhiG).
         subparagraphs: []
         annotation:
-          title: Subsidiaritätsprinzip bei Amtshilfebegehren nach DBA CH-FR
+          title: Subsidiaritätsprinzip bei Amtshilfebegehren nach dem Zusatzprotokoll
+            zum DBA Schweiz-Frankreich
           description:
           - Voraussetzung der Ausschöpfung aller innerstaatlichen üblichen Mittel
-            zur Informationsbeschaffung vor Einreichung des Amtshilfebegehrens
+            zur Informationsbeschaffung vor Einreichen des Amtshilfebegehrens
           - Anwendung des Subsidiaritätsprinzips gemäss Ziff. XI Abs. 1 des Zusatzprotokolls
-            zum DBA CH-FR
-          - Bezug zu Art. 28 DBA CH-FR hinsichtlich des Zeitpunkts der Stellung des
-            Amtshilfebegehrens
-          - Verbindung zu Art. 6 Abs. 2 Buchstabe g des Bundesgesetzes über die internationale
-            Amtshilfe in Steuersachen
+            zum DBA Schweiz-Frankreich
+          - Bezug zu Art. 28 DBA Schweiz-Frankreich hinsichtlich des Zeitpunkts der
+            Einreichung des Amtshilfebegehrens
+          - Verbindung zum innerstaatlichen Recht, insbesondere Art. 6 Abs. 2 Buchstabe
+            g des Bundesgesetzes über die internationale Amtshilfe in Steuersachen
       annotation:
-        title: Formelle Anforderungen und Subsidiaritätsprinzip bei Amtshilfegesuchen
-          nach dem Zusatzprotokoll zum DBA Schweiz-Frankreich
+        title: Voraussetzungen und Form des Amtshilfegesuchs nach dem Zusatzprotokoll
+          zum DBA Schweiz-Frankreich
         description:
         - Erforderliche Angaben im Amtshilfegesuch gemäss Ziff. XI Abs. 3 des Zusatzprotokolls
-        - Auslegung der einzelnen Angaben zur Gewährleistung eines wirksamen Informationsaustauschs
-        - Anwendung des Subsidiaritätsprinzips gemäss Ziff. XI Abs. 1 des Zusatzprotokolls
-        - Voraussetzung der Ausschöpfung innerstaatlicher Mittel vor Einreichung des
+        - Auslegung der erforderlichen Angaben zur Gewährleistung eines wirksamen
+          Informationsaustauschs
+        - Subsidiaritätsprinzip bei der Einreichung des Amtshilfebegehrens gemäss
+          Ziff. XI Abs. 1 des Zusatzprotokolls
+        - Voraussetzung der Ausschöpfung innerstaatlicher Mittel vor Einleitung des
           Amtshilfebegehrens
     - number: '3.5'
       text: Gemäss Art. 28 Abs. 1 erster Satz DBA CH-FR tauschen die zuständigen Behörden
@@ -286,12 +283,12 @@ content:
         - Anwendungsbereich des Informationsaustauschs zwischen Vertragsstaaten
         - Voraussetzungen für den Austausch von Informationen im Rahmen des Abkommens
         - Relevanz der Informationen für die Durchführung des Abkommens
-        - Bezug der Informationen zur Anwendung oder Durchsetzung des innerstaatlichen
+        - Relevanz der Informationen für die Anwendung oder Durchsetzung des innerstaatlichen
           Steuerrechts
         - Beschränkung des Informationsaustauschs auf Steuern, die für Rechnung der
           Vertragsstaaten oder ihrer Unterabteilungen erhoben werden
-        - Ausschluss des Informationsaustauschs bei Widerspruch zur entsprechenden
-          Besteuerung im Abkommen
+        - Ausschluss des Informationsaustauschs bei Widerspruch zur Besteuerung nach
+          dem Abkommen
     - number: '3.6'
       text: Der Verweis auf «voraussichtlich erhebliche» Informationen in Art. 28
         Abs. 1 DBA CH-FR soll einen möglichst breiten Informationsaustausch in Steuersachen
@@ -324,23 +321,26 @@ content:
         2021 E. 3.5 mit Hinweisen auf BGE 142 II 161 und 142 II 218).
       subparagraphs: []
       annotation:
-        title: Voraussetzungen und Grenzen der voraussichtlichen Erheblichkeit von
-          Informationen im Amtshilfeersuchen
+        title: Prüfung der voraussichtlichen Erheblichkeit von Informationen im Amtshilfeersuchen
         description:
-        - Zweck des Verweises auf voraussichtlich erhebliche Informationen im bilateralen
-          Steuerabkommen
-        - Bedingungen für die Annahme der voraussichtlichen Erheblichkeit zum Zeitpunkt
-          der Gesuchseinreichung
-        - Rolle des ersuchenden Staates bei der Beurteilung der voraussichtlichen
-          Erheblichkeit
-        - Prüfungspflicht des ersuchten Staates hinsichtlich des Zusammenhangs und
-          der Eignung der verlangten Informationen (Plausibilitätsprüfung)
-        - Verweigerungsgründe des ersuchten Staates bei fehlender Sachdienlichkeit
+        - Bedeutung des Begriffs «voraussichtlich erhebliche» Informationen im Rahmen
+          des Informationsaustauschs nach Art. 28 Abs. 1 DBA CH-FR
+        - Voraussetzung der voraussichtlichen Erheblichkeit zum Zeitpunkt der Einreichung
+          des Amtshilfegesuchs
+        - Unabhängigkeit der Erheblichkeit von der tatsächlichen Relevanz nach Übermittlung
           der Informationen
-        - Abgrenzung von Amtshilfeersuchen zur Vermeidung von «fishing expeditions»
-        - Verhältnis des Verbots der «fishing expedition» zum Verhältnismässigkeitsgrundsatz
-        - Relevanz des steuerrechtlichen Wohnsitzes für die Beurteilung der voraussichtlichen
-          Erheblichkeit im Amtshilfeverfahren
+        - Zuständigkeit des ersuchenden Staates für die Beurteilung der voraussichtlichen
+          Erheblichkeit
+        - Prüfung durch den ersuchten Staat auf Zusammenhang und mögliche Verwendbarkeit
+          der verlangten Informationen (Plausibilitätsprüfung)
+        - Verweigerungsgründe des ersuchten Staates bei sicherer Unbrauchbarkeit der
+          Informationen für das ausländische Verfahren
+        - Abgrenzung von zulässiger Amtshilfe und unzulässiger «fishing expedition»
+          ohne konkreten Zusammenhang zum Steuerverfahren
+        - Verhältnis des Verbots der «fishing expedition» zum Grundsatz der Verhältnismässigkeit
+          nach Art. 5 Abs. 2 BV
+        - Untersuchungspflicht des ersuchten Staates bezüglich des steuerrechtlichen
+          Wohnsitzes im Amtshilfeverfahren
     - number: '3.7'
       text: Nach der bundesgerichtlichen Rechtsprechung sind sämtliche von den Informationsinhaberinnen
         erhaltenen Bankunterlagen grundsätzlich zu den erbetenen Informationen zu
@@ -356,15 +356,14 @@ content:
         Rechtsprechung als erfragt zu betrachten (BGE 147 II 116 E. 5.3.1 ff.).
       subparagraphs: []
       annotation:
-        title: Auslegung des Umfangs der erbetenen Informationen in Amtshilfeersuchen
+        title: Auslegung des Umfangs der erbetenen Bankinformationen in Amtshilfeersuchen
         description:
-        - Einbeziehung sämtlicher von Informationsinhaberinnen übermittelter Bankunterlagen
+        - Zählung sämtlicher von Informationsinhaberinnen übermittelter Bankunterlagen
           als erbetene Informationen
-        - Bedeutung des Ausdrucks "held by" im Amtshilfeersuchen hinsichtlich des
-          Informationsumfangs
+        - Bedeutung des Ausdrucks "held by" im Kontext des Umfangs des Amtshilfeersuchens
         - Berücksichtigung ausdrücklicher Hinweise der ersuchenden Behörde zur Ausweitung
           des Informationsumfangs
-        - Erfassung von Informationen zu wirtschaftlich berechtigten Konten, die nicht
+        - Einbezug von Informationen zu wirtschaftlich berechtigten Konten, die nicht
           direkt gehalten werden
     - number: '3.8'
       text: Nach Art. 28 Abs. 2 DBA CH-FR sind alle Informationen, die ein Vertragsstaat
@@ -384,19 +383,15 @@ content:
         zustimmt.
       subparagraphs: []
       annotation:
-        title: Geheimhaltung und Verwendung von Informationen nach dem Doppelbesteuerungsabkommen
-          zwischen der Schweiz und Frankreich
+        title: Geheimhaltung und Verwendung von Informationen nach Art. 28 Abs. 2
+          DBA Schweiz-Frankreich
         description:
-        - Geheimhaltungspflicht für erhaltene Informationen nach Art. 28 Abs. 2 DBA
-          CH-FR
-        - Zugangsberechtigung zu den Informationen für Personen und Behörden mit spezifischen
-          Aufgaben
-        - Zweckgebundene Verwendung der Informationen im Rahmen der Steuerveranlagung,
-          Vollstreckung, Strafverfolgung, Rechtsmittel und Aufsicht
-        - Erlaubnis zur Offenlegung der Informationen in öffentlichen Gerichtsverfahren
-          und Gerichtsentscheidungen
-        - Ausnahmeregelung für die Verwendung der Informationen zu anderen Zwecken
-          bei beidseitiger Rechtsgrundlage und Zustimmung der zuständigen Behörde
+        - Geheimhaltungspflicht für erhaltene Informationen nach Absatz 1
+        - Zugangsberechtigung zu den Informationen für bestimmte Personen und Behörden
+        - Zweckbindung der Verwendung der Informationen (Spezialitätsprinzip)
+        - Offenlegung der Informationen in öffentlichen Gerichtsverfahren und Gerichtsentscheidungen
+        - Ausnahmeregelung für Verwendung der Informationen zu anderen Zwecken mit
+          Zustimmung der zuständigen Behörde und nach beiderseitigem Recht
     - number: '3.9'
       text: Der Grundsatz von Treu und Glauben (Art. 26 des Wiener Übereinkommens
         vom 23. Mai 1969 über das Recht der Verträge [VRK, SR 0.111]) führt im Rahmen
@@ -419,38 +414,33 @@ content:
         E. 3.2; BVGE 2018 III/1 E. 2.9.1).
       subparagraphs: []
       annotation:
-        title: Grundsatz von Treu und Glauben und Vertrauensprinzip im Amtshilfeverfahren
+        title: Bindungswirkung des Treu und Glauben Grundsatzes im Amtshilfeverfahren
         description:
-        - Bindung des ersuchten Staates an die Angaben des ersuchenden Staates im
-          Rahmen der Amtshilfe
-        - Ausnahmen von der Bindung bei Fehlern, Lücken oder offensichtlichen Widersprüchen
-          in den Angaben
-        - Rolle des völkerrechtlichen Vertrauensprinzips als Grundlage des Amtshilfeverfahrens
+        - Verbindlichkeit der Angaben des ersuchenden Staates im Amtshilfeverfahren
+        - Ausnahmen bei Fehlern, Lücken oder offensichtlichen Widersprüchen in den
+          Angaben
+        - Grundlage des Amtshilfeverfahrens im völkerrechtlichen Vertrauensprinzip
         - Bedeutung des Vertrauensprinzips für die Anwendung des Spezialitätsprinzips
-        - Voraussetzung der Einhaltung des Spezialitätsprinzips durch Vertragspartner
+        - Voraussetzung der Einhaltung des Spezialitätsprinzips durch Vertragspartnerstaaten
           ohne ausdrückliche Zusicherung
-        - Überprüfung der Wahrung des Spezialitätsprinzips bei konkreten Anhaltspunkten
-          für zweckwidrige Verwendung
-        - Erfordernis der Einholung einer Zusicherung bei Zweifeln an der zweckentsprechenden
+        - Überprüfung der Zweckbindung bei konkreten Anhaltspunkten für missbräuchliche
           Verwendung
     annotation:
-      title: Rechtliche Grundlagen und Grundsätze der internationalen Amtshilfe in
-        Steuersachen
+      title: Rechtsgrundlagen und Grundsätze der internationalen Amtshilfe in Steuersachen
       description:
       - Anwendbarkeit des Steueramtshilfegesetzes und vorrangige Abkommensbestimmungen
-      - Rechtsgrundlagen des Amtshilfeersuchens im Doppelbesteuerungsabkommen zwischen
-        der Schweiz und Frankreich
+      - Rechtsgrundlagen der Amtshilfe im Doppelbesteuerungsabkommen zwischen der
+        Schweiz und Frankreich
       - Übergangsbestimmungen und Anwendungszeitpunkte der Vereinbarung über das Zusatzprotokoll
       - Informationsaustauschpflichten gemäss Doppelbesteuerungsabkommen
       - Voraussetzungen der voraussichtlichen Erheblichkeit der beantragten Informationen
-      - Abgrenzung und Verbot von ungezielten Beweiserhebungen (fishing expedition)
-      - Umfang der zu übermittelnden Bankunterlagen und Interpretation von Begriffen
-        im Amtshilfeersuchen
+      - Abgrenzung und Verbot von ungezielten Informationsbegehren (fishing expedition)
+      - Umfang der erbetenen Informationen und Einbezug wirtschaftlich berechtigter
+        Konten
       - Geheimhaltungspflichten und Spezialitätsprinzip bei der Verwendung übermittelter
         Informationen
       - Bindungswirkung der Angaben des ersuchenden Staates und Rolle des Vertrauensprinzips
         im Amtshilfeverfahren
-      - Praxis der Anonymisierung von Urteilen im Bereich der internationalen Amtshilfe
   - number: '4.'
     text: ''
     subparagraphs:
@@ -470,7 +460,7 @@ content:
         description:
         - Vorliegen konkreter Fragen im Amtshilfeersuchen
         - Bezug des Ersuchens auf eine identifizierte betroffene Person
-        - Bezug des Ersuchens auf eine im ersuchenden Staat laufende Untersuchung
+        - Bezug des Ersuchens auf eine laufende Untersuchung im ersuchenden Staat
         - Erfüllung der formellen Voraussetzungen gemäss Ziffer XI Absatz 3 des Zusatzprotokolls
         - Nichtvoraussetzung von Angaben zur Herkunft der Daten im Amtshilfeersuchen
     - number: '4.2'
@@ -497,21 +487,21 @@ content:
           Person bevollmächtigt ist.
         subparagraphs: []
         annotation:
-          title: Bestimmung und Umfang der erbetenen steuerlich erheblichen Informationen
+          title: Bestimmung und Umfang der für die Besteuerung erheblichen Informationen
             durch das ersuchende Staatsorgan
           description:
           - Zuständigkeit des ersuchenden Staats zur Bestimmung der voraussichtlich
-            steuerlich erheblichen Informationen
-          - Zweck der Amtshilfe zur Überprüfung der Einhaltung steuerlicher Deklarationspflichten
+            erheblichen Informationen für die Besteuerung
+          - Zweck der Informationsersuche zur Überprüfung der steuerlichen Deklarationspflichten
             der betroffenen Person
           - Vermutung der Nichtdeklaration ausländischer Konten durch die betroffene
             Person
           - Umfang der erbetenen Auskünfte über sämtliche Bankverbindungen der betroffenen
             Person
           - Einbeziehung sämtlicher von der Informationsinhaberin erhaltenen Bankunterlagen
-            als erbetene Informationen
-          - Berücksichtigung von Konten, bei denen die betroffene Person als Bevollmächtigteintrag
-            geführt wird
+            in den Informationsumfang
+          - Berücksichtigung von Konten, bei denen die betroffene Person nicht Inhaberin,
+            aber bevollmächtigt ist
       - number: 4.2.2
         text: Sämtliche von der DSCF im Zusammenhang mit der Besteuerung der betroffenen
           Person ersuchten Informationen erscheinen vorliegend auch grundsätzlich
@@ -548,13 +538,13 @@ content:
           Informationen gegeben.
         subparagraphs: []
         annotation:
-          title: Relevanz der Herkunft der Daten für die Rechtmässigkeit der Amtshilfe
+          title: Bewertung der Herkunft der Daten im Rahmen der Amtshilfe
           description:
-          - Bedeutung der Kenntnisquelle der ersuchenden Behörde für die Rechtmässigkeit
-            des Amtshilfeersuchens
-          - Bewertung unsubstantiierten Behauptungen zur Herkunft der Daten
+          - Relevanz der Kenntnisquelle der ersuchenden Behörde für die Rechtmässigkeit
+            der Amtshilfe
+          - Beurteilung unsubstantiierten Behauptungen zur Herkunft der Daten
           - Anwendung des völkerrechtlichen Vertrauensprinzips auf die Amtshilfe
-          - Beurteilung der Erheblichkeit der zur Übermittlung vorgesehenen Informationen
+          - Feststellung der voraussichtlichen Erheblichkeit der übermittelten Informationen
       - number: 4.2.4
         text: 'Wie die Beschwerdeführerin richtigerweise festhält, ist sie nicht die
           formell betroffene Person des Amtshilfeverfahrens. Bei ihr handelt es sich
@@ -568,29 +558,30 @@ content:
         annotation:
           title: Status und Rolle der Drittperson im Amtshilfeverfahren
           description:
-          - Feststellung der formell betroffenen Person im Amtshilfeverfahren
-          - Beurteilung der Drittperson als Inhaberin des fraglichen Kontos
-          - Relevanz der Vollmacht der betroffenen Person am Konto der Drittperson
-          - Abgrenzung zwischen zulässiger Drittbetroffenheit und unzulässiger Ausweitung
+          - Formelle Betroffenheit der Drittperson im Amtshilfeverfahren
+          - Relevanz der Drittperson aufgrund ihrer Kontoinhaberschaft
+          - Bedeutung der Vollmacht des Dritten auf dem Konto
+          - Abgrenzung zwischen zulässiger Berücksichtigung und unzulässiger Ausweitung
             des Amtshilfegesuchs
       annotation:
         title: Prüfung der Erheblichkeit und Geeignetheit der ersuchten Informationen
           im Amtshilfeverfahren
         description:
-        - Bestimmung der voraussichtlich erheblichen Informationen durch den ersuchenden
-          Staat
+        - Bestimmung der voraussichtlichen Erheblichkeit der Informationen durch den
+          ersuchenden Staat
         - Zweck der Amtshilfe im Hinblick auf die Überprüfung der steuerlichen Deklarationspflichten
           der betroffenen Person
-        - Umfang der ersuchten Auskünfte über Bankverbindungen und zugehörige Dokumente
-        - Geeignetheit der ersuchten Informationen zur Beeinflussung der Einkommensbesteuerung
+        - Umfang der ersuchten Informationen und deren Zusammenhang mit der Besteuerung
           der betroffenen Person
-        - Zusammenhang zwischen dem Sachverhalt und den ersuchten Informationen sowie
-          Dokumenten
-        - Bewertung der Herkunft der Informationen im Hinblick auf Rechtswidrigkeit
-          oder Verstoss gegen Treu und Glauben
-        - Anwendbarkeit des völkerrechtlichen Vertrauensprinzips auf die Amtshilfe
-        - Rechtsstellung der Drittperson als Kontoinhaberin und deren Einbezug in
-          das Amtshilfeersuchen
+        - Geeignetheit der ersuchten Informationen zur Beeinflussung der Einkommensbesteuerung
+          im ausländischen Steuerverfahren
+        - Rechtsgenügender Zusammenhang zwischen dem Sachverhalt und den ersuchten
+          Informationen sowie Dokumenten
+        - Bewertung der Herkunft der Informationen im Hinblick auf Rechtmässigkeit
+          und Treu und Glauben der ersuchenden Behörde
+        - Anwendung des völkerrechtlichen Vertrauensprinzips auf die ersuchten Informationen
+        - Status der Beschwerdeführerin als Drittperson und deren Beziehung zu den
+          ersuchten Dokumenten
         - Abgrenzung einer unzulässigen Ausweitung des Amtshilfeersuchens
     - number: '4.3'
       text: Sodann besteht mit Blick auf das völkerrechtliche Vertrauensprinzip (vgl.
@@ -623,21 +614,22 @@ content:
         zu verweigern wäre.
       subparagraphs: []
       annotation:
-        title: Prüfung der Ausschöpfung der üblichen Mittel im völkerrechtlichen Vertrauensprinzip
-          und Subsidiaritätsprinzip
+        title: Prüfung der Ausschöpfung der üblichen Mittel im Amtshilfeersuchen unter
+          Beachtung des völkerrechtlichen Vertrauensprinzips und Subsidiaritätsprinzips
         description:
         - Vorliegen einer Erklärung zur Ausschöpfung aller in Frankreich üblichen
           Mittel der Informationsbeschaffung im Amtshilfeersuchen
         - Vorliegen konkreter Anhaltspunkte für eine fehlende Ausschöpfung der üblichen
           Mittel durch die ersuchende Behörde
-        - Anwendbarkeit und Anforderungen des Subsidiaritätsprinzips auf die Ausschöpfung
-          der Mittel
+        - Anwendbarkeit und Reichweite des völkerrechtlichen Vertrauensprinzips auf
+          die Erklärung im Amtshilfeersuchen
+        - Anforderungen des Subsidiaritätsprinzips hinsichtlich der Ausschöpfung der
+          üblichen Mittel
         - Relevanz der Vermutung, dass die ersuchende Behörde ihren vertraglichen
           Verpflichtungen nachkommt und die üblichen Mittel ausgeschöpft hat
-        - Berücksichtigung besonderer Umstände der betroffenen Person bei der Prüfung
-          der Ausschöpfung der Mittel
-        - Beurteilung der vorgebrachten Argumente und Behauptungen gegen die Ausschöpfung
-          der üblichen Mittel
+        - Bedeutung des Alters der betroffenen Person für die Zulässigkeit des Amtshilfebegehrens
+        - Prüfung der vorgebrachten Argumente und Behauptungen der Beschwerdeführerin
+          zur Unzulässigkeit des Amtshilfegesuchs wegen nicht ausgeschöpfter Mittel
     - number: '4.4'
       text: Schliesslich entspricht die Anonymisierung von Urteilen im Bereich der
         internationalen Amtshilfe in Steuersachen der Praxis des Bundesverwaltungsgerichts,
@@ -654,7 +646,7 @@ content:
           Urteilen
         - Veröffentlichung anonymisierter Urteile auf der Internetseite des Bundesverwaltungsgerichts
         - Relevanz der Anonymisierung für das vorliegende Urteil
-        - Bewertung der Einwände der Beschwerdeführerin zur Anonymisierung
+        - Bewertung der Einwände der Beschwerdeführerin bezüglich der Anonymisierung
     - number: '4.5'
       text: Weitere Gründe, welche der Gewährung der Amtshilfe entgegenstehen könnten,
         sind nicht ersichtlich.
@@ -666,7 +658,7 @@ content:
           könnten
     annotation:
       title: Prüfung der formellen Voraussetzungen, Subsidiarität und Verfahrenspraxis
-        der Amtshilfe im vorliegenden Fall
+        bei der internationalen Amtshilfe
       description:
       - Vorliegen konkreter Fragen im Amtshilfeersuchen bezüglich einer identifizierten
         betroffenen Person
@@ -676,25 +668,20 @@ content:
         Behörde
       - Prüfung der Ausschöpfung der üblichen Mittel der Informationsbeschaffung im
         ersuchenden Staat
-      - Anwendung des Subsidiaritätsprinzips auf die Ausschöpfung der Mittel
-      - Beurteilung der Möglichkeit der Amtshilfe bei Verdacht auf nicht deklarierte
-        ausländische Bankkonten
-      - Berücksichtigung besonderer Umstände der betroffenen Person (z. B. hohes Alter)
-        im Zusammenhang mit der Amtshilfe
-      - Bewertung der Vorbringen der Beschwerdeführerin hinsichtlich der Verweigerung
-        der Amtshilfe wegen nicht ausgeschöpfter Mittel
+      - Anwendung des Subsidiaritätsprinzips bei der Verweigerung der Amtshilfe
+      - Beurteilung der Berechtigung des Amtshilfebegehrens trotz besonderer Umstände
+        der betroffenen Person
       - Praxis der Anonymisierung von Urteilen im Bereich der internationalen Amtshilfe
         in Steuersachen
-      - Beurteilung der Publikation des Urteils in anonymisierter Form
-      - Fehlen weiterer hindernder Gründe gegen die Gewährung der Amtshilfe
+      - Fehlen weiterer ablehnender Gründe gegen die Gewährung der Amtshilfe
   - number: '5.'
     text: Nach dem Gesagten sind die Voraussetzungen für die in der Schlussverfügung
       vom 23. September 2021 vorgesehene Amtshilfeleistung erfüllt. Die Beschwerde
       ist abzuweisen.
     subparagraphs: []
     annotation:
-      title: Zusammenfassung der Prüfung der Voraussetzungen der Amtshilfeleistung
-        und Entscheid über die Beschwerde
+      title: Entscheidung über die Erfüllung der Voraussetzungen der Amtshilfeleistung
+        und Beschwerdeabweisung
       description:
       - Erfüllung der Voraussetzungen für die Amtshilfeleistung gemäss Schlussverfügung
         vom 23. September 2021
@@ -722,19 +709,19 @@ content:
         (Art. 64 Abs. 1 VwVG e contrario und Art. 7 Abs. 1 VGKE e contrario).
       subparagraphs: []
       annotation:
-        title: Ausschluss der Parteientschädigung bei unterliegender Beschwerdeführerin
+        title: Ausschluss der Parteientschädigung bei unterliegender Partei
         description:
-        - Anwendbarkeit von Art. 64 Abs. 1 des Verwaltungsverfahrensgesetzes in der
-          Gegenrichtung
-        - Anwendbarkeit von Art. 7 Abs. 1 des Verwaltungsgerichtskostenreglements
-          in der Gegenrichtung
+        - Anwendung von Art. 64 Abs. 1 des Verwaltungsverfahrensgesetzes in der negativen
+          Form
+        - Anwendung von Art. 7 Abs. 1 des Verwaltungsgerichtskostenreglements in der
+          negativen Form
         - Voraussetzungen für den Ausschluss der Parteientschädigung bei unterliegender
-          Partei
+          Beschwerdeführerin
     annotation:
-      title: Entscheidung über Verfahrenskosten und Parteientschädigung
+      title: Entscheidungen zu Verfahrenskosten und Parteientschädigung
       description:
       - Festsetzung der Verfahrenskosten bei Verfahrensausgang
-      - Verwendung des einbezahlten Kostenvorschusses zur Deckung der Verfahrenskosten
+      - Verwendung des Kostenvorschusses zur Begleichung der Verfahrenskosten
       - Entscheidung über den Anspruch auf Parteientschädigung bei unterliegender
         Partei
   is_structured: true
@@ -760,8 +747,7 @@ content:
     annotation:
       title: Einleitung des Amtshilfeersuchens durch die französische Steuerbehörde
       description:
-      - Vorlage des Amtshilfeersuchens durch die Direction spécialisée de contrôle
-        fiscal Est
+      - Absendung des Amtshilfeersuchens durch die französische Steuerbehörde
       - Rechtsgrundlage des Amtshilfeersuchens im bilateralen Doppelbesteuerungsabkommen
         zwischen der Schweiz und Frankreich
       - Adressierung des Amtshilfeersuchens an die Eidgenössische Steuerverwaltung
@@ -777,10 +763,9 @@ content:
       title: Benennung der betroffenen Person und des Informationsinhabers im Amtshilfegesuch
       description:
       - Identifikation der vom Amtshilfegesuch betroffenen Person
-      - Bestimmung des Informationsinhabers in der Schweiz
-      - Angabe des Zwecks der Informationsbeschaffung im Zusammenhang mit der ausländischen
-        Steuererhebung
-      - Festlegung des relevanten Steuerzeitraums für die Amtshilfe
+      - Bezeichnung des Informationsinhabers in der Schweiz
+      - Angabe des Zwecks der Informationsbeschaffung
+      - Bestimmung des relevanten Steuerzeitraums für die Amtshilfe
   - number: C.
     text: "Die DSCF ersuchte die ESTV f\0fcr das im Ersuchen aufgef\0fchrte Konto\
       \ im\nWesentlichen um die \0dcbermittlung der folgenden Informationen f\0fcr\
@@ -805,17 +790,16 @@ content:
         Zeitraum
       description:
       - Übermittlung der Vermögensstände zu Beginn der Jahre 2011 bis 2020
-      - Übermittlung der Kontoauszüge mit Angaben zu Einzahlungen, Auszahlungen und
+      - Übermittlung der Kontoauszüge mit Angaben zu Einzahlungen, Abhebungen und
         erzielten Kapitalerträgen im Zeitraum 2011 bis 2020
       - Übermittlung von Formularen A, I, S, T oder vergleichbaren Dokumenten
-      - Angabe von Kontoschließungsdaten sowie Angaben zu Übertragungsbank, Zielkonto
-        und betroffenen Territorien bei Kontoschließung
+      - Angabe von Kontoschließungsdaten, Übertragungszielen und betroffenen Territorien
+        bei Kontoschließung
       - Übermittlung der Kontoauszüge des genannten Kontos im Zeitraum 2011 bis 2020
       - Übermittlung der Referenzen weiterer direkt oder indirekt gehaltener Bankkonten
-        sowie Konten mit Zeichnungsberechtigung des Steuerpflichtigen bei derselben
-        Bank
-      - Übermittlung der unter Punkt a) genannten Informationen für die unter Punkt
-        b) genannten Konten
+        sowie Konten mit Zeichnungsberechtigung
+      - Übermittlung der gleichen Informationen für weitere Konten wie unter Punkt
+        a) bei den in Punkt b) genannten Konten
   - number: D.
     text: "Mit der Editionsverf\0fcgung vom 25. Juni 2021 forderte die ESTV die Bank\n\
       auf, die ersuchten Informationen einzureichen sowie allf\0e4llige im Ausland\n\
@@ -827,9 +811,9 @@ content:
       title: Anordnung der Informationsübermittlung und Benachrichtigung im Amtshilfeverfahren
       description:
       - Anforderung der Einreichung ersuchter Informationen durch die Bank
-      - Anordnung zur Benachrichtigung im Ausland ansässiger Personen über das Amtshilfeverfahren
-      - Aufforderung zur Bezeichnung einer zur Zustellung bevollmächtigten Person
-        in der Schweiz
+      - Anordnung zur Information ausländischer Personen über das Amtshilfeverfahren
+      - Aufforderung zur Benennung einer zur Zustellung bevollmächtigten Person in
+        der Schweiz
   - number: E.
     text: "Die Bank kam der Aufforderung der ESTV in Bezug auf die Zustellung der\n\
       ersuchten Informationen mit dem Schreiben vom 14. Juli 2021 nur unvoll-\nst\0\
@@ -851,7 +835,7 @@ content:
       16. Juli 2021 zu.'
     subparagraphs: []
     annotation:
-      title: Übermittlung ausstehender Informationen an die Steuerbehörde
+      title: Übermittlung ausstehender Informationen an die Steuerverwaltung
       description:
       - Zeitpunkt der Übermittlung der Informationen an die Eidgenössische Steuerverwaltung
       - Art und Umfang der übermittelten Informationen
@@ -882,12 +866,11 @@ content:
       Seite 3\n\nA-4685/2021"
     subparagraphs: []
     annotation:
-      title: Feststellung der Voraussetzungen für die Amtshilfeleistung durch die
-        ESTV
+      title: Feststellung der Voraussetzungen für die Leistung der Amtshilfe durch
+        die ESTV
       description:
       - Vorliegen der gesetzlichen Voraussetzungen für die Amtshilfe
       - Beurteilung der von der DSCF erfragten Bankinformationen im Rahmen der Amtshilfe
-      - Zusammenfassende Schlussfolgerung der ESTV zur Amtshilfeleistung
   - number: J.
     text: "Am 25. Oktober 2021 erhob die beschwerdeberechtigte Person (nachfol-\n\
       gend: Beschwerdef\0fchrerin) Beschwerde beim Bundesverwaltungsgericht.\nSie\
@@ -902,9 +885,9 @@ content:
       description:
       - Erhebung der Beschwerde beim Bundesverwaltungsgericht
       - Antrag auf Aufhebung der Schlussverfügung der Eidgenössischen Steuerverwaltung
-      - Antrag auf Kosten- und Entschädigungsfolgen zugunsten der Beschwerdeführerin
-      - Antrag auf Wahrung der Anonymität im Verfahren vor dem Bundesverwaltungsgericht
-      - Antrag auf Anonymisierung des Urteils vor einer allfälligen Publikation
+      - Antrag auf Kosten- und Entschädigungsfolgen zulasten der Staatskasse
+      - Antrag auf Wahrung der Anonymität im Verfahren
+      - Antrag auf Anonymisierung des Urteils vor Publikation
   - number: K.
     text: "Am 23. Dezember 2021 reicht die Vorinstanz eine Vernehmlassung ein.\nAuf\
       \ die Parteivorbringen und die eingereichten Akten wird nachfolgend in-\nsoweit\
@@ -913,8 +896,8 @@ content:
     annotation:
       title: Verfahrensstand und Bezugnahme auf Parteivorbringen und Akten
       description:
-      - Datum der Einreichung der Vernehmlassung durch die Vorinstanz
-      - Berücksichtigung der Parteivorbringen im Verfahren
-      - Berücksichtigung der eingereichten Akten im Verfahren
-      - Bezugnahme auf entscheidwesentliche Verfahrensunterlagen für das Urteil
+      - Einreichung der Vernehmlassung durch die Vorinstanz
+      - Berücksichtigung der Parteivorbringen im Urteil
+      - Berücksichtigung der eingereichten Akten im Urteil
+      - Bezugnahme auf entscheidwesentliche Elemente des Vorbringens und der Akten
   is_structured: true
