@@ -4,72 +4,72 @@ content:
   - name: sachverhalt
     content:
       - number: "A."
-        text: "Dies ist der erste Absatz des Sachverhalts im vierten Fall."
+        text: "Der Kläger begehrt die Aufhebung eines Verwaltungsakts der Beklagten."
         annotation:
-          title: "Einleitung"
-          description: ["Zusammenfassung des komplexen Fallhintergrunds."]
+          title: "Antrag"
+          description: ["Klageantrag auf Aufhebung"]
         subparagraphs:
           - number: "A.a"
-            text: "Erste Unterkategorie der Einleitung."
+            text: "Der Antrag wurde am 10. Mai 2023 eingereicht."
             annotation:
-              title: "Unterkategorie Einleitung"
-              description: ["Detaillierung der ersten Unterkategorie."]
+              title: "Einreichung"
+              description: ["Antrag eingereicht"]
             subparagraphs:
               - number: "A.a.1"
-                text: "Weitere Unterteilung der ersten Unterkategorie."
+                text: "Die Einreichung erfolgte per Einschreiben."
                 annotation:
-                  title: "Detaillierte Unterteilung"
-                  description: ["Spezifische Details der Unterkategorie."]
+                  title: "Einreichungsart"
+                  description: ["Per Einschreiben"]
                 subparagraphs: []
       - number: "B."
-        text: "Dies ist der zweite Absatz des Sachverhalts mit komplexer Struktur."
+        text: "Der Verwaltungsakt betrifft die Ablehnung eines Baugenehmigungsantrags."
         annotation:
-          title: "Haupttatsachen"
-          description: ["Darstellung der wesentlichen Tatsachen des Falls."]
+          title: "Gegenstand"
+          description: ["Baugenehmigung abgelehnt"]
         subparagraphs:
           - number: "B.a"
-            text: "Erste Hauptkategorie der Tatsachen."
+            text: "Der Antrag betraf den Bau eines Einfamilienhauses."
             annotation:
-              title: "Hauptkategorie Tatsachen"
-              description: ["Detaillierung der ersten Hauptkategorie."]
+              title: "Bauvorhaben"
+              description: ["Einfamilienhaus"]
             subparagraphs: []
           - number: "B.b"
-            text: "Zweite Hauptkategorie der Tatsachen."
+            text: "Die Ablehnung erfolgte wegen fehlender Unterlagen."
             annotation:
-              title: "Zweite Hauptkategorie"
-              description: ["Detaillierung der zweiten Hauptkategorie."]
+              title: "Ablehnungsgrund"
+              description: ["Fehlende Unterlagen"]
             subparagraphs:
               - number: "B.b.1"
-                text: "Unterteilung der zweiten Hauptkategorie."
+                text: "Es fehlte der Nachweis der Grundstückseigentümerschaft."
                 annotation:
-                  title: "Unterteilung Hauptkategorie"
-                  description: ["Spezifische Details der Unterteilung."]
+                  title: "Fehlende Unterlage"
+                  description: ["Grundstückseigentümerschaft"]
                 subparagraphs: []
   - name: erwägungen
     content:
       - number: "1."
-        text: "Dies ist die erste rechtliche Erwägung mit komplexer Struktur."
+        text: "Die Klage ist zulässig."
         annotation:
-          title: "Komplexe rechtliche Begründung"
-          description: ["Erklärung der komplexen rechtlichen Argumente."]
+          title: "Zulässigkeit"
+          description: ["Klage ist zulässig"]
         subparagraphs:
           - number: "1.a"
-            text: "Erste Unterkategorie der rechtlichen Begründung."
+            text: "Die Klagefrist wurde gewahrt."
             annotation:
-              title: "Unterkategorie Begründung"
-              description: ["Detaillierung der ersten Unterkategorie."]
+              title: "Klagefrist"
+              description: ["Frist gewahrt"]
             subparagraphs: []
       - number: "2."
-        text: "Dies ist eine optionale zweite rechtliche Erwägung."
+        text: "Die Klage ist begründet."
         annotation:
-          title: "Optionale rechtliche Erwägung"
-          description: ["Erklärung eines optionalen rechtlichen Punktes."]
+          title: "Begründetheit"
+          description: ["Klage ist begründet"]
         subparagraphs: []
   - name: entscheid
     content:
       - number: "1."
-        text: "Das Gericht entscheidet wie folgt im vierten Fall."
+        text: "Der Verwaltungsakt wird aufgehoben."
         annotation:
-          title: "Entscheidung"
-          description: ["Feststellung der endgültigen Entscheidung des Gerichts."]
+          title: "Aufhebung"
+          description: ["Verwaltungsakt aufgehoben"]
         subparagraphs: []

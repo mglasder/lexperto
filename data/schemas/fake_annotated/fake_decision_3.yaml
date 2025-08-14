@@ -4,42 +4,42 @@ content:
   - name: sachverhalt
     content:
       - number: "A."
-        text: "This is the first paragraph of the sachverhalt in the third case."
+        text: "Der Kläger begehrt die Aufhebung eines Verwaltungsakts der Beklagten."
         annotation:
-          title: "Introduction"
-          description: ["A summary of the case background."] # Slightly different description
+          title: "Antrag"
+          description: ["Klageantrag auf Aufhebung"]
         subparagraphs: []
       - number: "B."
-        text: "This is the second paragraph of the sachverhalt in the third case."
+        text: "Der Verwaltungsakt betrifft die Ablehnung eines Gaststättengenehmigungsantrags."
         annotation:
-          title: "Facts of the Case" # Slightly different title
-          description: ["Detail the key facts of the case."]
+          title: "Gegenstand"
+          description: ["Gaststättengenehmigung abgelehnt"]
         subparagraphs:
           - number: "B.a"
-            text: "A sub-fact related to B in the third case."
+            text: "Der Antrag wurde am 20. April 2023 eingereicht."
             annotation:
-              title: "Sub-Fact Detail" # Slightly different title
-              description: ["Detail a specific sub-fact."]
+              title: "Einreichung"
+              description: ["Antrag eingereicht"]
             subparagraphs: []
   - name: erwägungen
     content:
       - number: "1."
-        text: "This is the main legal consideration in the third case."
+        text: "Die Klage ist zulässig."
         annotation:
-          title: "Main Legal Reasoning"
-          description: ["Explain the core legal argument."]
+          title: "Zulässigkeit"
+          description: ["Klage ist zulässig"]
         subparagraphs: []
       - number: "2."
-        text: "This is another legal consideration in the third case."
+        text: "Die Klage ist begründet."
         annotation:
-          title: "Secondary Legal Reasoning"
-          description: ["Explain a secondary legal point."]
+          title: "Begründetheit"
+          description: ["Klage ist begründet"]
         subparagraphs: []
   - name: entscheid
     content:
       - number: "1."
-        text: "The court decides as follows in the third case."
+        text: "Der Verwaltungsakt wird aufgehoben."
         annotation:
-          title: "Decision"
-          description: ["State the final decision of the court."]
+          title: "Aufhebung"
+          description: ["Verwaltungsakt aufgehoben"]
         subparagraphs: [] 

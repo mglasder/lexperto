@@ -4,84 +4,84 @@ content:
   - name: sachverhalt
     content:
       - number: "A."
-        text: "Dies ist der erste Absatz des Sachverhalts im fünften Fall mit maximaler Verschachtelung."
+        text: "Der Kläger begehrt die Aufhebung eines Verwaltungsakts der Beklagten."
         annotation:
-          title: "Maximal verschachtelte Einleitung"
-          description: ["Zusammenfassung des extrem komplexen Fallhintergrunds."]
+          title: "Antrag"
+          description: ["Klageantrag auf Aufhebung"]
         subparagraphs:
           - number: "A.a"
-            text: "Erste Ebene der Verschachtelung."
+            text: "Der Antrag wurde am 25. Juni 2023 eingereicht."
             annotation:
-              title: "Erste Verschachtelungsebene"
-              description: ["Detaillierung der ersten Verschachtelungsebene."]
+              title: "Einreichung"
+              description: ["Antrag eingereicht"]
             subparagraphs:
               - number: "A.a.1"
-                text: "Zweite Ebene der Verschachtelung."
+                text: "Die Einreichung erfolgte persönlich beim Gericht."
                 annotation:
-                  title: "Zweite Verschachtelungsebene"
-                  description: ["Detaillierung der zweiten Verschachtelungsebene."]
+                  title: "Einreichungsart"
+                  description: ["Persönlich eingereicht"]
                 subparagraphs:
                   - number: "A.a.1.1"
-                    text: "Dritte Ebene der Verschachtelung - maximale Tiefe."
+                    text: "Der Empfang wurde durch Unterschrift bestätigt."
                     annotation:
-                      title: "Maximale Verschachtelungstiefe"
-                      description: ["Spezifische Details der maximalen Verschachtelung."]
+                      title: "Empfangsbestätigung"
+                      description: ["Unterschrift bestätigt"]
                     subparagraphs: []
       - number: "B."
-        text: "Dies ist der zweite Absatz mit alternativer Verschachtelungsstruktur."
+        text: "Der Verwaltungsakt betrifft die Ablehnung eines Gaststättengenehmigungsantrags."
         annotation:
-          title: "Alternative Verschachtelungsstruktur"
-          description: ["Darstellung einer alternativen Verschachtelungsstruktur."]
+          title: "Gegenstand"
+          description: ["Gaststättengenehmigung abgelehnt"]
         subparagraphs:
           - number: "B.a"
-            text: "Erste Alternative."
+            text: "Der Antrag betraf die Eröffnung einer Gaststätte."
             annotation:
-              title: "Erste Alternative"
-              description: ["Detaillierung der ersten Alternative."]
+              title: "Gaststätte"
+              description: ["Eröffnung beantragt"]
             subparagraphs: []
           - number: "B.b"
-            text: "Zweite Alternative mit Unterteilung."
+            text: "Die Ablehnung erfolgte wegen fehlender Unterlagen."
             annotation:
-              title: "Zweite Alternative"
-              description: ["Detaillierung der zweiten Alternative."]
+              title: "Ablehnungsgrund"
+              description: ["Fehlende Unterlagen"]
             subparagraphs:
               - number: "B.b.1"
-                text: "Unterteilung der zweiten Alternative."
+                text: "Es fehlte der Nachweis der Zuverlässigkeit."
                 annotation:
-                  title: "Unterteilung Alternative"
-                  description: ["Spezifische Details der Unterteilung."]
+                  title: "Fehlende Unterlage"
+                  description: ["Zuverlässigkeitsnachweis"]
                 subparagraphs: []
   - name: erwägungen
     content:
       - number: "1."
-        text: "Dies ist die erste rechtliche Erwägung mit maximaler Verschachtelung."
+        text: "Die Klage ist zulässig."
         annotation:
-          title: "Maximal verschachtelte rechtliche Begründung"
-          description: ["Erklärung der maximal verschachtelten rechtlichen Argumente."]
+          title: "Zulässigkeit"
+          description: ["Klage ist zulässig"]
         subparagraphs:
           - number: "1.a"
-            text: "Erste Ebene der rechtlichen Verschachtelung."
+            text: "Die Klagefrist wurde gewahrt."
             annotation:
-              title: "Erste Ebene rechtliche Verschachtelung"
-              description: ["Detaillierung der ersten Ebene."]
+              title: "Klagefrist"
+              description: ["Frist gewahrt"]
             subparagraphs:
               - number: "1.a.1"
-                text: "Zweite Ebene der rechtlichen Verschachtelung."
+                text: "Die Frist betrug einen Monat."
                 annotation:
-                  title: "Zweite Ebene rechtliche Verschachtelung"
-                  description: ["Detaillierung der zweiten Ebene."]
+                  title: "Fristdauer"
+                  description: ["Ein Monat"]
                 subparagraphs: []
       - number: "2."
-        text: "Dies ist eine optionale zweite rechtliche Erwägung ohne Verschachtelung."
+        text: "Die Klage ist begründet."
         annotation:
-          title: "Optionale rechtliche Erwägung ohne Verschachtelung"
-          description: ["Erklärung eines optionalen rechtlichen Punktes ohne weitere Unterteilung."]
+          title: "Begründetheit"
+          description: ["Klage ist begründet"]
         subparagraphs: []
   - name: entscheid
     content:
       - number: "1."
-        text: "Das Gericht entscheidet wie folgt im fünften Fall."
+        text: "Der Verwaltungsakt wird aufgehoben."
         annotation:
-          title: "Entscheidung"
-          description: ["Feststellung der endgültigen Entscheidung des Gerichts."]
+          title: "Aufhebung"
+          description: ["Verwaltungsakt aufgehoben"]
         subparagraphs: []
