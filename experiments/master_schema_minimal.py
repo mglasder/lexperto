@@ -162,28 +162,28 @@ def aggregate_paragraphs_by_section(
 # -- LLM-based Clustering Logic --
 
 CLUSTER_PROMPT = """
-You are an expert legal analyst. Your task is to analyze a list of paragraphs from the same section of multiple court decisions and cluster them based on their semantic meaning.
+Sie sind ein erfahrener Rechtsanalytiker. Ihre Aufgabe ist es, eine Liste von Absätzen aus demselben Abschnitt mehrerer Gerichtsentscheidungen zu analysieren und sie basierend auf ihrer semantischen Bedeutung zu gruppieren.
 
-You will be given a list of paragraphs, each with an index, title, and description.
+Ihnen wird eine Liste von Absätzen vorgelegt, jeder mit einem Index, einem Titel und einer Beschreibung.
 
-**Instructions:**
-1.  **Analyze and Cluster**: Group the paragraphs into clusters of semantically similar content. A cluster can contain one or more paragraphs.
-2.  **Generate Abstract Title**: For each cluster, create a concise, abstract title that represents the core topic of the paragraphs in that cluster.
-3.  **Generate Abstract Description**: For each cluster, create a list of bullet points that describe the purpose or content of the paragraphs in that cluster.
-4.  **Return Indices**: For each cluster, provide the list of indices of the paragraphs that belong to it.
+**Anweisungen:**
+1.  **Analysieren und Gruppieren**: Gruppieren Sie die Absätze in Cluster von semantisch ähnlichem Inhalt. Ein Cluster kann einen oder mehrere Absätze enthalten.
+2.  **Abstrakten Titel generieren**: Erstellen Sie für jeden Cluster einen prägnanten, abstrakten Titel, der das Kernthema der Absätze in diesem Cluster repräsentiert.
+3.  **Abstrakte Beschreibung generieren**: Erstellen Sie für jeden Cluster eine Liste von Aufzählungspunkten, die den Zweck oder Inhalt der Absätze in diesem Cluster beschreiben.
+4.  **Indizes zurückgeben**: Geben Sie für jeden Cluster die Liste der Indizes der Absätze zurück, die zu ihm gehören.
 
-**Input Format:**
-The input is a list of JSON objects, where each object represents a paragraph:
+**Eingabeformat:**
+Die Eingabe ist eine Liste von JSON-Objekten, wobei jedes Objekt einen Absatz repräsentiert:
 ```json
 [
-  {"index": 0, "title": "Title of Para 1", "description": ["Description of Para 1"]},
-  {"index": 1, "title": "Title of Para 2", "description": ["Description of Para 2"]},
+  {"index": 0, "title": "Titel von Absatz 1", "description": ["Beschreibung von Absatz 1"]},
+  {"index": 1, "title": "Titel von Absatz 2", "description": ["Beschreibung von Absatz 2"]},
   ...
 ]
 ```
 
-**Output Format:**
-Respond with a single JSON object that adheres to the following Pydantic model:
+**Ausgabeformat:**
+Antworten Sie mit einem einzelnen JSON-Objekt, das dem folgenden Pydantic-Modell entspricht:
 `ClusteringResult(clusters: List[ParagraphCluster])`
 
 `ParagraphCluster(cluster_id: int, abstract_title: str, abstract_description: List[str], paragraph_indices: List[int])`
