@@ -1,0 +1,4 @@
+---
+description: All LLM prompts have to be in German. All code including but not limited to function signatures, class names, docstrings, comments, print statements and logging has to be in English of not specified otherwise.
+alwaysApply: false
+---
