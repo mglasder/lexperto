@@ -92,7 +92,7 @@ class ParagraphCluster(BaseSchema):
     cluster_id: int = Field(description="A unique ID for this cluster.")
     abstract_title: str = Field(description="A concise, abstract title for the paragraph cluster.")
     abstract_description: List[str] = Field(description="A list of bullet points for the abstract description.")
-    paragraph_indices: List[int] = Field(description="List of indices of the paragraphs belonging to this cluster from the input list.")
+    paragraph_indices: List[str] = Field(description="List of refs of the paragraphs belonging to this cluster from the input list.")
 
 class ClusteringResult(BaseSchema):
     """The structured result of clustering paragraphs for a single section."""
@@ -185,7 +185,7 @@ Die Eingabe ist eine Liste von JSON-Objekten, wobei jedes Objekt einen Absatz re
 Antworten Sie mit einem einzelnen JSON-Objekt, das dem folgenden Pydantic-Modell entspricht:
 `ClusteringResult(clusters: List[ParagraphCluster])`
 
-`ParagraphCluster(cluster_id: int, abstract_title: str, abstract_description: List[str], paragraph_indices: List[int])`
+`ParagraphCluster(cluster_id: int, abstract_title: str, abstract_description: List[str], paragraph_indices: List[str])`
 """
 
 def cluster_paragraphs_with_llm(
@@ -195,11 +195,11 @@ def cluster_paragraphs_with_llm(
     # Format the input for the LLM
     llm_input = [
         {
-            "index": i,
+            "index": p.ref.paragraph_number,
             "title": p.annotation.title,
             "description": p.annotation.description,
         }
-        for i, p in enumerate(paragraphs)
+        for p in paragraphs
     ]
 
     # Create the LLM chain with structured output
@@ -239,12 +239,18 @@ def create_master_schema(
 
         for cluster in clustering_result.clusters:
             # All paragraphs are required
+            # TODO: implement
             is_required = determine_requirement_dummy()
 
             # Get the decision IDs where this cluster appears
-            cluster_decision_ids = {
-                original_paragraphs[i].ref.decision_id for i in cluster.paragraph_indices
-            }
+            # The LLM returns string indices, so we need to find the actual paragraphs
+            cluster_decision_ids = set()
+            for idx in cluster.paragraph_indices:
+                # Find paragraphs with matching paragraph_number
+                for para in original_paragraphs:
+                    if para.ref.paragraph_number == idx:
+                        cluster_decision_ids.add(para.ref.decision_id)
+                        break
 
             # Recursively process subparagraphs for arbitrary depth using LLM
             subparagraph_templates = []
@@ -448,7 +454,7 @@ if __name__ == "__main__":
 
     # Initialize the LLM
     # As per the plan, we use a real LLM. This follows the pattern in annotation.py
-    llm = init_chat_model("openai:gpt-4.1-mini", temperature=0.0)
+    llm = init_chat_model("openai:gpt-5-mini")
     print("\nLLM initialized successfully.")
 
     # Store clustering results for each section
