@@ -1,0 +1,75 @@
+meta:
+  aktenzeichen: FAKE-004-2023
+content:
+  - name: sachverhalt
+    content:
+      - number: "A."
+        text: "Dies ist der erste Absatz des Sachverhalts im vierten Fall."
+        annotation:
+          title: "Einleitung"
+          description: ["Zusammenfassung des komplexen Fallhintergrunds."]
+        subparagraphs:
+          - number: "A.a"
+            text: "Erste Unterkategorie der Einleitung."
+            annotation:
+              title: "Unterkategorie Einleitung"
+              description: ["Detaillierung der ersten Unterkategorie."]
+            subparagraphs:
+              - number: "A.a.1"
+                text: "Weitere Unterteilung der ersten Unterkategorie."
+                annotation:
+                  title: "Detaillierte Unterteilung"
+                  description: ["Spezifische Details der Unterkategorie."]
+                subparagraphs: []
+      - number: "B."
+        text: "Dies ist der zweite Absatz des Sachverhalts mit komplexer Struktur."
+        annotation:
+          title: "Haupttatsachen"
+          description: ["Darstellung der wesentlichen Tatsachen des Falls."]
+        subparagraphs:
+          - number: "B.a"
+            text: "Erste Hauptkategorie der Tatsachen."
+            annotation:
+              title: "Hauptkategorie Tatsachen"
+              description: ["Detaillierung der ersten Hauptkategorie."]
+            subparagraphs: []
+          - number: "B.b"
+            text: "Zweite Hauptkategorie der Tatsachen."
+            annotation:
+              title: "Zweite Hauptkategorie"
+              description: ["Detaillierung der zweiten Hauptkategorie."]
+            subparagraphs:
+              - number: "B.b.1"
+                text: "Unterteilung der zweiten Hauptkategorie."
+                annotation:
+                  title: "Unterteilung Hauptkategorie"
+                  description: ["Spezifische Details der Unterteilung."]
+                subparagraphs: []
+  - name: erwägungen
+    content:
+      - number: "1."
+        text: "Dies ist die erste rechtliche Erwägung mit komplexer Struktur."
+        annotation:
+          title: "Komplexe rechtliche Begründung"
+          description: ["Erklärung der komplexen rechtlichen Argumente."]
+        subparagraphs:
+          - number: "1.a"
+            text: "Erste Unterkategorie der rechtlichen Begründung."
+            annotation:
+              title: "Unterkategorie Begründung"
+              description: ["Detaillierung der ersten Unterkategorie."]
+            subparagraphs: []
+      - number: "2."
+        text: "Dies ist eine optionale zweite rechtliche Erwägung."
+        annotation:
+          title: "Optionale rechtliche Erwägung"
+          description: ["Erklärung eines optionalen rechtlichen Punktes."]
+        subparagraphs: []
+  - name: entscheid
+    content:
+      - number: "1."
+        text: "Das Gericht entscheidet wie folgt im vierten Fall."
+        annotation:
+          title: "Entscheidung"
+          description: ["Feststellung der endgültigen Entscheidung des Gerichts."]
+        subparagraphs: []

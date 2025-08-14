@@ -1,0 +1,87 @@
+meta:
+  aktenzeichen: FAKE-005-2023
+content:
+  - name: sachverhalt
+    content:
+      - number: "A."
+        text: "Dies ist der erste Absatz des Sachverhalts im fünften Fall mit maximaler Verschachtelung."
+        annotation:
+          title: "Maximal verschachtelte Einleitung"
+          description: ["Zusammenfassung des extrem komplexen Fallhintergrunds."]
+        subparagraphs:
+          - number: "A.a"
+            text: "Erste Ebene der Verschachtelung."
+            annotation:
+              title: "Erste Verschachtelungsebene"
+              description: ["Detaillierung der ersten Verschachtelungsebene."]
+            subparagraphs:
+              - number: "A.a.1"
+                text: "Zweite Ebene der Verschachtelung."
+                annotation:
+                  title: "Zweite Verschachtelungsebene"
+                  description: ["Detaillierung der zweiten Verschachtelungsebene."]
+                subparagraphs:
+                  - number: "A.a.1.1"
+                    text: "Dritte Ebene der Verschachtelung - maximale Tiefe."
+                    annotation:
+                      title: "Maximale Verschachtelungstiefe"
+                      description: ["Spezifische Details der maximalen Verschachtelung."]
+                    subparagraphs: []
+      - number: "B."
+        text: "Dies ist der zweite Absatz mit alternativer Verschachtelungsstruktur."
+        annotation:
+          title: "Alternative Verschachtelungsstruktur"
+          description: ["Darstellung einer alternativen Verschachtelungsstruktur."]
+        subparagraphs:
+          - number: "B.a"
+            text: "Erste Alternative."
+            annotation:
+              title: "Erste Alternative"
+              description: ["Detaillierung der ersten Alternative."]
+            subparagraphs: []
+          - number: "B.b"
+            text: "Zweite Alternative mit Unterteilung."
+            annotation:
+              title: "Zweite Alternative"
+              description: ["Detaillierung der zweiten Alternative."]
+            subparagraphs:
+              - number: "B.b.1"
+                text: "Unterteilung der zweiten Alternative."
+                annotation:
+                  title: "Unterteilung Alternative"
+                  description: ["Spezifische Details der Unterteilung."]
+                subparagraphs: []
+  - name: erwägungen
+    content:
+      - number: "1."
+        text: "Dies ist die erste rechtliche Erwägung mit maximaler Verschachtelung."
+        annotation:
+          title: "Maximal verschachtelte rechtliche Begründung"
+          description: ["Erklärung der maximal verschachtelten rechtlichen Argumente."]
+        subparagraphs:
+          - number: "1.a"
+            text: "Erste Ebene der rechtlichen Verschachtelung."
+            annotation:
+              title: "Erste Ebene rechtliche Verschachtelung"
+              description: ["Detaillierung der ersten Ebene."]
+            subparagraphs:
+              - number: "1.a.1"
+                text: "Zweite Ebene der rechtlichen Verschachtelung."
+                annotation:
+                  title: "Zweite Ebene rechtliche Verschachtelung"
+                  description: ["Detaillierung der zweiten Ebene."]
+                subparagraphs: []
+      - number: "2."
+        text: "Dies ist eine optionale zweite rechtliche Erwägung ohne Verschachtelung."
+        annotation:
+          title: "Optionale rechtliche Erwägung ohne Verschachtelung"
+          description: ["Erklärung eines optionalen rechtlichen Punktes ohne weitere Unterteilung."]
+        subparagraphs: []
+  - name: entscheid
+    content:
+      - number: "1."
+        text: "Das Gericht entscheidet wie folgt im fünften Fall."
+        annotation:
+          title: "Entscheidung"
+          description: ["Feststellung der endgültigen Entscheidung des Gerichts."]
+        subparagraphs: []
