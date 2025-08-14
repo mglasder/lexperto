@@ -56,7 +56,7 @@ def load_annotation_prompt(prompt_path: Optional[str] = None) -> str:
 
 
 CONFIG = {
-    "llm_model": "openai:gpt-4.1-mini",
+    "llm_model": "openai:gpt-5-mini",
     "sections_in_order": ["sachverhalt", "erwägungen", "entscheid"],
 }
 
@@ -230,7 +230,7 @@ def main(decision: CourtDecision, debug: bool = False) -> CourtDecision:
 
     logger.info("Starting annotation process...")
     # Initialize agent
-    agent = init_chat_model(CONFIG["llm_model"], temperature=0.0)
+    agent = init_chat_model(CONFIG["llm_model"])
     agent.with_structured_output(ParagraphAnnotation)
 
     # Build graph
@@ -252,21 +252,19 @@ if __name__ == "__main__":
 
     # Optionally specify a local prompt file instead of downloading from LangSmith
     # prompt_path = "prompts/annotation/annotate_paragraphs_idunknown_vunknown_20250618_165519.txt"
-    prompt_path = None  # Use LangSmith
+    prompt_path = "prompts/annotation/annotate_paragraphs_idunknown_vunknown_20250618_165519.txt"
 
     # Load prompt
     global INSTRUCT_ANNOTATION
     INSTRUCT_ANNOTATION = load_annotation_prompt(prompt_path)
 
-    # Load a decision from YAML
-    input_path = "data/output/20250614_113847_schema_A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf.yaml"
 
     # Define decision schemas to process, should be in data/schemas/extracted/
     extracted_decisions = [
         "20250618_110958_schema_A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf.yaml",
-        "20250618_112146_schema_A-4685-2021_2022-08-19_8fb87126-b2c8-497f-be4a-da4a4b14285f.yaml",
-        "20250618_113330_schema_A-4830-2021_2023-10-23_9c13fc5c-089a-4835-a029-31f93416db9e.yaml",
-        "20250618_114032_schema_A-5153-2023_2024-11-11_f0d9086b-6def-4963-b3ec-5ff9beb6ffd0.yaml",
+        # "20250618_112146_schema_A-4685-2021_2022-08-19_8fb87126-b2c8-497f-be4a-da4a4b14285f.yaml",
+        # "20250618_113330_schema_A-4830-2021_2023-10-23_9c13fc5c-089a-4835-a029-31f93416db9e.yaml",
+        # "20250618_114032_schema_A-5153-2023_2024-11-11_f0d9086b-6def-4963-b3ec-5ff9beb6ffd0.yaml",
     ]
 
     for fname in extracted_decisions:
