@@ -98,7 +98,6 @@ class ClusteringResult(BaseSchema):
     """The structured result of clustering paragraphs for a single section."""
     clusters: List[ParagraphCluster]
 
-
 # -- Data Aggregation Logic --
 
 class SourceParagraph(BaseSchema):
@@ -224,6 +223,7 @@ def create_master_schema(
     all_decisions: List[CourtDecisionStructured],
     section_clustering_results: Dict[str, ClusteringResult],
     aggregated_paragraphs_by_section: Dict[str, List[SourceParagraph]],
+    llm: BaseChatModel
 ) -> MasterSchema:
     """Assembles the final MasterSchema from the clustering results."""
     master_sections = []
@@ -238,33 +238,38 @@ def create_master_schema(
         original_paragraphs = aggregated_paragraphs_by_section[section_name]
 
         for cluster in clustering_result.clusters:
-            # Determine if the paragraph is required
+            # All paragraphs are required
+            is_required = determine_requirement_dummy()
+
+            # Get the decision IDs where this cluster appears
             cluster_decision_ids = {
                 original_paragraphs[i].ref.decision_id for i in cluster.paragraph_indices
             }
-            is_required = len(cluster_decision_ids) == total_decision_count
 
-            # Formulate inclusion criteria for optional paragraphs
-            inclusion_criteria = []
-            if not is_required:
-                # Simple rule based on the abstract title for this prototype
-                inclusion_criteria.append(
-                    f"Include if a paragraph with the topic '{cluster.abstract_title}' is present."
-                )
-            
-            # TODO: Implement recursive processing for subparagraphs
-            # For this minimal prototype, we will leave subparagraphs empty.
+            # Recursively process subparagraphs for arbitrary depth using LLM
+            subparagraph_templates = []
+            for idx in cluster.paragraph_indices:
+                source_paragraph = original_paragraphs[idx]
+                if source_paragraph.subparagraphs:
+                    sub_templates = process_subparagraphs_recursively(
+                        source_paragraph.subparagraphs, 
+                        total_decision_count,
+                        original_paragraphs,
+                        llm
+                    )
+                    subparagraph_templates.extend(sub_templates)
 
             template = ParagraphTemplate(
                 number_pattern="X.", # Placeholder pattern
                 title_template=cluster.abstract_title,
                 description_template=cluster.abstract_description,
                 required=is_required,
-                inclusion_criteria=inclusion_criteria,
+                inclusion_criteria=[],
                 frequency=len(cluster_decision_ids) / total_decision_count,
                 similar_paragraph_refs=[
                     (1.0, original_paragraphs[i].ref) for i in cluster.paragraph_indices
                 ], # Placeholder similarity
+                subparagraph_templates=subparagraph_templates,
             )
             paragraph_templates.append(template)
 
@@ -288,6 +293,137 @@ def create_master_schema(
     )
 
     return master_schema
+
+
+def process_subparagraphs_recursively(
+    subparagraphs: List[SourceParagraph], 
+    total_decision_count: int,
+    all_paragraphs: List[SourceParagraph],
+    llm: BaseChatModel
+) -> List[ParagraphTemplate]:
+    """Recursively processes subparagraphs to arbitrary depth using LLM for similarity."""
+    if not subparagraphs:
+        return []
+    
+    # Group similar subparagraphs by their annotation content using LLM
+    subparagraph_groups = group_similar_subparagraphs(subparagraphs, llm)
+    
+    templates = []
+    for group in subparagraph_groups:
+        # All subparagraphs are required
+        is_required = determine_requirement_dummy()
+        
+        # Get the decision IDs where this group appears
+        group_decision_ids = {sp.ref.decision_id for sp in group}
+        
+        # Recursively process deeper levels
+        deeper_subparagraphs = []
+        for sp in group:
+            if sp.subparagraphs:
+                deeper_templates = process_subparagraphs_recursively(
+                    sp.subparagraphs, 
+                    total_decision_count,
+                    all_paragraphs,
+                    llm
+                )
+                deeper_subparagraphs.extend(deeper_templates)
+        
+        # Create template for this group
+        template = ParagraphTemplate(
+            number_pattern="X.X", # Placeholder pattern for subparagraphs
+            title_template=group[0].annotation.title,
+            description_template=group[0].annotation.description,
+            required=is_required,
+            inclusion_criteria=[],
+            frequency=len(group_decision_ids) / total_decision_count,
+            similar_paragraph_refs=[(1.0, sp.ref) for sp in group],
+            subparagraph_templates=deeper_subparagraphs,
+        )
+        templates.append(template)
+    
+    return templates
+
+
+def group_similar_subparagraphs(subparagraphs: List[SourceParagraph], llm: BaseChatModel) -> List[List[SourceParagraph]]:
+    """Groups subparagraphs by similarity in their annotation content using LLM."""
+    if not subparagraphs:
+        return []
+    
+    # LLM-based similarity grouping for intelligent categorization
+    # In a production system, this could use more sophisticated similarity algorithms
+    groups = []
+    processed = set()
+    
+    for i, sp in enumerate(subparagraphs):
+        if i in processed:
+            continue
+            
+        current_group = [sp]
+        processed.add(i)
+        
+        # Find similar subparagraphs using LLM
+        for j, other_sp in enumerate(subparagraphs[i+1:], i+1):
+            if j in processed:
+                continue
+                
+            if are_subparagraphs_similar(sp, other_sp, llm):
+                current_group.append(other_sp)
+                processed.add(j)
+        
+        groups.append(current_group)
+    
+    return groups
+
+
+def are_subparagraphs_similar(sp1: SourceParagraph, sp2: SourceParagraph, llm: BaseChatModel) -> bool:
+    """Determines if two subparagraphs are similar enough to group together using LLM."""
+    
+    # Create a prompt for the LLM to assess similarity
+    similarity_prompt = f"""
+    Du bist ein Experte für rechtliche Dokumentenanalyse. Deine Aufgabe ist es zu beurteilen, ob zwei Absätze semantisch ähnlich genug sind, um sie in der gleichen Gruppe zu kategorisieren.
+
+    **Absatz 1:**
+    - Titel: {sp1.annotation.title}
+    - Beschreibung: {', '.join(sp1.annotation.description)}
+    - Text: {sp1.text}
+
+    **Absatz 2:**
+    - Titel: {sp2.annotation.title}
+    - Beschreibung: {', '.join(sp2.annotation.description)}
+    - Text: {sp2.text}
+
+    **Frage:** Sind diese beiden Absätze semantisch ähnlich genug, um sie in der gleichen Kategorie zu gruppieren?
+
+    **Antwort:** Antworte nur mit "JA" oder "NEIN".
+    """
+
+    try:
+        # Get LLM response
+        response = llm.invoke([
+            ("system", "Du bist ein Experte für rechtliche Dokumentenanalyse. Antworte nur mit JA oder NEIN."),
+            ("human", similarity_prompt)
+        ])
+        
+        # Parse the response
+        response_text = response.content.strip().upper()
+        return response_text in ["JA", "YES", "J", "Y"]
+        
+    except Exception as e:
+        print(f"LLM similarity check failed, falling back to simple matching: {e}")
+        # Fallback to simple similarity if LLM fails
+        title_similar = (sp1.annotation.title == sp2.annotation.title or
+                        sp1.annotation.title.lower() == sp2.annotation.title.lower())
+        
+        desc1 = " ".join(sp1.annotation.description).lower()
+        desc2 = " ".join(sp2.annotation.description).lower()
+        desc_similar = desc1 == desc2 or desc1 in desc2 or desc2 in desc1
+        
+        return title_similar and desc_similar
+
+
+def determine_requirement_dummy() -> bool:
+    """Dummy function that always returns True (required)."""
+    return True
 
 
 if __name__ == "__main__":
@@ -338,7 +474,7 @@ if __name__ == "__main__":
     # Assemble the master schema
     print("\n--- Assembling Master Schema ---")
     master_schema = create_master_schema(
-        annotated_decisions, section_clustering_results, aggregated_paragraphs
+        annotated_decisions, section_clustering_results, aggregated_paragraphs, llm
     )
     print("Master schema assembled successfully.")
 
