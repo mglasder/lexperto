@@ -1,0 +1,31 @@
+meta: null
+content:
+- name: entscheid
+  content:
+  - number: '1.'
+    text: Die Beschwerde wird abgewiesen
+- name: erwägungen
+  content:
+  - number: '1.'
+    text: ''
+  - number: '1.1'
+    text: "Dem vorliegenden Verfahren liegt ein Amtshilfeersuchen der ersuchenden\
+      \ franz\x0246sischen Steuerbeh\x0246rde vom 19. April 2023 gest\x025Ctzt auf\
+      \ Art. 28 des DBA CH-FR zugrunde. Die Durchf\x025Chrung dieser Abkommensbestimmung\
+      \ richtet sich \x0253 unter Vorbehalt abweichender Regelungen im DBA CH-FR \x02\
+      53 nach dem Bundesgesetz vom 28. September 2012 \x0253ber die internationale\
+      \ Amtshilfe in Steuersachen (StAhiG, SR 651.1; vgl. Art. 1 Abs. 1 und 2 sowie\
+      \ Art. 24 StAhiG e contrario)."
+- name: sachverhalt
+  content:
+  - number: A.
+    text: ''
+  - number: A.a
+    text: 'Am (Datum) richtete die französische Steuerbehörde, die Direction Nationale
+      des Vérifications de Situations Fiscales (nachfolgend: ersuchende Behörde) betreffend
+      A._______ (nachfolgend: betroffene Person) gestützt auf Art. 28 des Abkommens
+      vom 9. September 1966 zwischen der Schweiz und Frankreich zur Vermeidung der
+      Doppelbesteuerung auf dem Gebiet der Steuern vom Einkommen und vom Vermögen
+      und zur Vermeidung von Steuerbetrug und Steuerflucht (SR 0.672.934.91, DBA CH-FR)
+      ein Amtshilfeersuchen an die Eidgenössische Steuerverwaltung (ESTV; nachfolgend
+      auch: Vorinstanz).'

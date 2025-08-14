@@ -89,18 +89,23 @@ def _annotate_paragraph_recursively(
     }
 
     logger.debug(f"Requesting annotation for paragraph {para.number}")
-    response = agent.invoke(
+
+    try:
+        structured_agent = agent.with_structured_output(ParagraphAnnotation)
+    except Exception as e:
+        logger.error(f"Failed to set structured output: {e}")
+        logger.error(f"agent type is {type(agent)}")
+        raise
+
+    annot = structured_agent.invoke(
         f"{INSTRUCT_ANNOTATION}\nAnnotate this paragraph from the {section_name} section:\n{context}"
     )
 
-    try:
-        annot = ParagraphAnnotation.from_response_str(response.content)
-    except json.JSONDecodeError as e:
-        logger.error(
-            f"Failed to decode JSON response for paragraph {para.number} - {e}"
-        )
+    if type(annot) is not ParagraphAnnotation:
+        msg = f"Paragraph {para.number} annotation failed. Expected ParagraphAnnotation, got {type(annot)}"
+        logger.error(msg)
         # Fallback to creating an un-annotated structure
-        annot = ParagraphAnnotation(title="Annotation Failed", description=[str(e)])
+        annot = ParagraphAnnotation(title="Annotation Failed", description=[msg])
 
     logger.debug(f"Received annotation for paragraph {para.number}")
     annotated_para = ParagraphStructAnnotated(
@@ -252,16 +257,18 @@ if __name__ == "__main__":
 
     # Optionally specify a local prompt file instead of downloading from LangSmith
     # prompt_path = "prompts/annotation/annotate_paragraphs_idunknown_vunknown_20250618_165519.txt"
-    prompt_path = "prompts/annotation/annotate_paragraphs_idunknown_vunknown_20250618_165519.txt"
+    prompt_path = (
+        "prompts/annotation/annotate_paragraphs_idunknown_vunknown_20250618_165519.txt"
+    )
 
     # Load prompt
     global INSTRUCT_ANNOTATION
     INSTRUCT_ANNOTATION = load_annotation_prompt(prompt_path)
 
-
     # Define decision schemas to process, should be in data/schemas/extracted/
     extracted_decisions = [
         "20250618_110958_schema_A-6208-2023_2025-02-28_d11ec6d4-0fe1-4cea-a1f3-cefaeee44ebf.yaml",
+        # "20250618_110958_schema_A-6208-2023_2025-02-28_DEBUG.yaml",
         # "20250618_112146_schema_A-4685-2021_2022-08-19_8fb87126-b2c8-497f-be4a-da4a4b14285f.yaml",
         # "20250618_113330_schema_A-4830-2021_2023-10-23_9c13fc5c-089a-4835-a029-31f93416db9e.yaml",
         # "20250618_114032_schema_A-5153-2023_2024-11-11_f0d9086b-6def-4963-b3ec-5ff9beb6ffd0.yaml",
@@ -273,7 +280,7 @@ if __name__ == "__main__":
 
         decision = CourtDecisionStructured.from_yaml_file(input_path)
         logger.info(f"Loaded decision with {len(decision.content)} sections")
-        decision.structure() # structures the decision into a tree of paragraphs
+        decision.structure()  # structures the decision into a tree of paragraphs
 
         # Run annotation
         annotated_decision = main(decision, debug=True)  # Set to True for debug logging
