@@ -4,29 +4,11 @@ content:
   - name: sachverhalt
     content:
       - number: "A."
-        text: "Der Kläger begehrt die Aufhebung eines Verwaltungsakts der Beklagten."
+        text: "Der Kläger begehrt die Aufhebung eines Verwaltungsakts der Beklagten. Der Antrag wurde am 25. Juni 2023 eingereicht. Die Einreichung erfolgte persönlich beim Gericht. Der Empfang wurde durch Unterschrift bestätigt."
         annotation:
-          title: "Antrag"
-          description: ["Klageantrag auf Aufhebung"]
-        subparagraphs:
-          - number: "A.a"
-            text: "Der Antrag wurde am 25. Juni 2023 eingereicht."
-            annotation:
-              title: "Einreichung"
-              description: ["Antrag eingereicht"]
-            subparagraphs:
-              - number: "A.a.1"
-                text: "Die Einreichung erfolgte persönlich beim Gericht."
-                annotation:
-                  title: "Einreichungsart"
-                  description: ["Persönlich eingereicht"]
-                subparagraphs:
-                  - number: "A.a.1.1"
-                    text: "Der Empfang wurde durch Unterschrift bestätigt."
-                    annotation:
-                      title: "Empfangsbestätigung"
-                      description: ["Unterschrift bestätigt"]
-                    subparagraphs: []
+          title: "Antrag, Einreichung und Empfang"
+          description: ["Klageantrag auf Aufhebung", "Antrag eingereicht", "Persönlich eingereicht", "Unterschrift bestätigt"]
+        subparagraphs: []
       - number: "B."
         text: "Der Verwaltungsakt betrifft die Ablehnung eines Gaststättengenehmigungsantrags."
         annotation:
@@ -51,26 +33,20 @@ content:
                   title: "Fehlende Unterlage"
                   description: ["Zuverlässigkeitsnachweis"]
                 subparagraphs: []
+              - number: "B.b.2"
+                text: "Es fehlte der Nachweis der fachlichen Qualifikation."
+                annotation:
+                  title: "Fehlende Unterlage"
+                  description: ["Fachliche Qualifikation"]
+                subparagraphs: []
   - name: erwägungen
     content:
       - number: "1."
-        text: "Die Klage ist zulässig."
+        text: "Die Klage ist zulässig. Die Klagefrist wurde gewahrt. Die Frist betrug einen Monat."
         annotation:
-          title: "Zulässigkeit"
-          description: ["Klage ist zulässig"]
-        subparagraphs:
-          - number: "1.a"
-            text: "Die Klagefrist wurde gewahrt."
-            annotation:
-              title: "Klagefrist"
-              description: ["Frist gewahrt"]
-            subparagraphs:
-              - number: "1.a.1"
-                text: "Die Frist betrug einen Monat."
-                annotation:
-                  title: "Fristdauer"
-                  description: ["Ein Monat"]
-                subparagraphs: []
+          title: "Zulässigkeit, Klagefrist und Fristdauer"
+          description: ["Klage ist zulässig", "Frist gewahrt", "Ein Monat"]
+        subparagraphs: []
       - number: "2."
         text: "Die Klage ist begründet."
         annotation:

@@ -4,23 +4,11 @@ content:
   - name: sachverhalt
     content:
       - number: "A."
-        text: "Der Kläger begehrt die Aufhebung eines Verwaltungsakts der Beklagten."
+        text: "Der Kläger begehrt die Aufhebung eines Verwaltungsakts der Beklagten. Der Antrag wurde am 10. Mai 2023 eingereicht. Die Einreichung erfolgte per Einschreiben."
         annotation:
-          title: "Antrag"
-          description: ["Klageantrag auf Aufhebung"]
-        subparagraphs:
-          - number: "A.a"
-            text: "Der Antrag wurde am 10. Mai 2023 eingereicht."
-            annotation:
-              title: "Einreichung"
-              description: ["Antrag eingereicht"]
-            subparagraphs:
-              - number: "A.a.1"
-                text: "Die Einreichung erfolgte per Einschreiben."
-                annotation:
-                  title: "Einreichungsart"
-                  description: ["Per Einschreiben"]
-                subparagraphs: []
+          title: "Antrag und Einreichung"
+          description: ["Klageantrag auf Aufhebung", "Antrag eingereicht", "Per Einschreiben"]
+        subparagraphs: []
       - number: "B."
         text: "Der Verwaltungsakt betrifft die Ablehnung eines Baugenehmigungsantrags."
         annotation:
@@ -45,20 +33,20 @@ content:
                   title: "Fehlende Unterlage"
                   description: ["Grundstückseigentümerschaft"]
                 subparagraphs: []
+              - number: "B.b.2"
+                text: "Es fehlte der Nachweis der finanziellen Leistungsfähigkeit."
+                annotation:
+                  title: "Fehlende Unterlage"
+                  description: ["Finanzielle Leistungsfähigkeit"]
+                subparagraphs: []
   - name: erwägungen
     content:
       - number: "1."
-        text: "Die Klage ist zulässig."
+        text: "Die Klage ist zulässig. Die Klagefrist wurde gewahrt."
         annotation:
-          title: "Zulässigkeit"
-          description: ["Klage ist zulässig"]
-        subparagraphs:
-          - number: "1.a"
-            text: "Die Klagefrist wurde gewahrt."
-            annotation:
-              title: "Klagefrist"
-              description: ["Frist gewahrt"]
-            subparagraphs: []
+          title: "Zulässigkeit und Klagefrist"
+          description: ["Klage ist zulässig", "Frist gewahrt"]
+        subparagraphs: []
       - number: "2."
         text: "Die Klage ist begründet."
         annotation:
