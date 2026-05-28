@@ -78,6 +78,8 @@ pixi run draft-sachverhalt
 pixi run draft-sachverhalt-sample
 ```
 
+These tasks use tracked fixture inputs from `tests/fixtures/drafting/`, and `draft-sachverhalt-sample` writes output to `data/output/sachverhalt_sample.txt`.
+
 Provider configuration examples:
 
 ```bash
@@ -86,11 +88,7 @@ export LLM_MODEL="openai:gpt-4.1-mini"
 export LLM_MODEL="anthropic:claude-3-7-sonnet-latest"
 ```
 
-Optional drafting-specific model override (falls back to `LLM_MODEL` when unset):
-
-```bash
-export SACHVERHALT_DRAFT_MODEL="openai:gpt-4.1-mini"
-```
+Model resolution follows implemented behavior: `--model` takes precedence over `LLM_MODEL`, and `LLM_MODEL` falls back to the built-in default (`openai:gpt-4.1-mini`).
 
 `experiments/experiment.py` is legacy and non-canonical; keep it for reference only and prefer the `src/sachverhalt_draft.py` + Pixi task path above.
 
