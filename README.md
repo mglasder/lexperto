@@ -58,12 +58,10 @@ export LLM_MODEL="anthropic:claude-3-7-sonnet-latest"
 
 `LLM_MODEL` is read by both extraction and annotation pipelines through `langchain`'s `init_chat_model(...)`.
 
-## Setup
+## Setup (Pixi)
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+pixi install
 ```
 
 Copy environment template:
@@ -91,18 +89,30 @@ Optional:
 - `LANGSMITH_API_KEY` (only required if you want to pull prompts from LangSmith)
 - `EXTRACTION_PROMPT_PATH`, `PARSING_PROMPT_PATH`, `PARAGRAPHS_PROMPT_PATH`, `ANNOTATION_PROMPT_PATH` (local prompt overrides)
 
+Run commands inside the Pixi environment:
+
+```bash
+pixi shell
+```
+
 ## Quick checks
 
 Run a meaningful local check that does not require external services:
 
 ```bash
-pytest tests/test_structuring.py
+pixi run test-quick
 ```
 
 Run all tests:
 
 ```bash
-pytest
+pixi run test
+```
+
+Run a syntax-only validation for key modules:
+
+```bash
+pixi run syntax-check
 ```
 
 ## Data note
