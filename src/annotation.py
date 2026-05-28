@@ -4,14 +4,19 @@ from datetime import datetime
 from typing import List, Optional, Union, Callable
 import logging
 import sys
+from pathlib import Path
 
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from langchain_core.language_models import BaseChatModel
 from langgraph.constants import END
 from langgraph.graph import StateGraph
-from langsmith import Client
 from pydantic import BaseModel, Field
+
+try:
+    from langsmith import Client
+except Exception:  # pragma: no cover - optional dependency at runtime
+    Client = None
 
 from src.models.extraction import (
     ParagraphStruct,
@@ -30,10 +35,9 @@ logging.basicConfig(
 logging.getLogger("pdfminer").setLevel(logging.ERROR)
 
 load_dotenv()
-os.environ["LANGSMITH_TRACING"] = "true"  # overwrites dotenv
 
 logger = logging.getLogger(__name__)
-langsmith_client = Client()
+langsmith_client = Client() if Client is not None else None
 
 
 def load_annotation_prompt(prompt_path: Optional[str] = None) -> str:
@@ -45,20 +49,32 @@ def load_annotation_prompt(prompt_path: Optional[str] = None) -> str:
     Returns:
         Prompt template string.
     """
-    if prompt_path:
-        with open(prompt_path, "r", encoding="utf-8") as f:
+    default_prompt_path = Path(
+        "prompts/annotation/annotate_paragraphs_idunknown_vunknown_20250618_165519.txt"
+    )
+    resolved_path = Path(prompt_path) if prompt_path else default_prompt_path
+
+    if resolved_path.exists():
+        with open(resolved_path, "r", encoding="utf-8") as f:
             return f.read()
-    else:
+
+    if langsmith_client is not None:
         prompt = langsmith_client.pull_prompt(
             "annotate_paragraphs", include_model=False
         )
         return prompt.template
 
+    raise FileNotFoundError(
+        "No local annotation prompt file found and LangSmith is unavailable."
+    )
+
 
 CONFIG = {
-    "llm_model": "openai:gpt-5-mini",
+    "llm_model": os.getenv("LLM_MODEL", "openai:gpt-5-mini"),
     "sections_in_order": ["sachverhalt", "erwägungen", "entscheid"],
 }
+
+INSTRUCT_ANNOTATION = load_annotation_prompt(os.getenv("ANNOTATION_PROMPT_PATH"))
 
 
 class AnnotationState(BaseModel):

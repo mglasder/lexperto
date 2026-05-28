@@ -1,149 +1,123 @@
 # Lexperto
 
-A legal document analysis and extraction system.
+Lexperto is a prototype for AI-assisted drafting support on Swiss Federal Administrative Court tax-information-exchange decisions. It focuses on extracting structured sections and paragraph hierarchies from court rulings and enriching them with legal annotations.
 
-## Project Structure
+## Status
 
-```
-lexperto/
-├── src/                      # Main project code
-│   ├── __init__.py
-│   ├── annotation.py         # Annotation logic
-│   ├── extraction.py         # Extraction logic
-│   ├── structuring.py        # Structuring logic
-│   ├── utils.py              # Utility functions
-│   └── models/               # ML models and related code
-│       ├── __init__.py
-│       ├── extraction.py
-│       ├── items.py
-│       ├── prompt.py
-│       ├── results.py
-│       └── state.py
-│
-├── experiments/              # Experimental code and scripts
-│   ├── __init__.py
-│   ├── experiment.py
-│   ├── hierarchy.py
-│   ├── lexperto.py
-│   ├── multiagents.py
-│   ├── preprocessing.py
-│   ├── scraping.py
-│   ├── search.py
-│   └── trylang.py
-│
-├── prompts/                  # All prompt-related content
-│   ├── aerw/
-│   ├── annotation/
-│   ├── experimental/
-│   ├── instructions/
-│   ├── kerw/
-│   ├── multi/
-│   ├── sach/
-│   ├── test/
-│   └── prompts.py
-│
-├── data/                     # Data directories
-│   ├── input/
-│   ├── output/
-│   ├── urteile/
-│   └── urteile_html/
-│
-├── tests/                    # Test files
-├── run_logs/                 # Log files
-├── scripts/                  # Helper scripts
-├── pyproject.toml            # Black config
-├── README.md                 # Project documentation
-├── implementation-plan.md    # Implementation plan
-├── master-schema-phase-1.md  # Master schema phase 1
-├── master-schema.md          # Master schema
-└── environment.yml           # Conda environment file
-```
+**Status: Prototype**
 
-## Setup (Recommended: Conda + pip)
+- Research/engineering exploration in progress
+- No institutional deployment
+- Not a production legal system
 
-1. Create a new conda environment with only Python (no dependencies):
+## Why this exists
+
+Drafting and reviewing legal reasoning is repetitive and structure-heavy. Lexperto explores whether LLM-assisted pipelines can reduce manual overhead by turning long rulings into structured, machine-readable intermediate representations.
+
+## Scope
+
+Current prototype scope:
+
+1. Extract core ruling sections (`Sachverhalt`, `Erwägungen`, `Entscheid`)
+2. Parse section content into hierarchical paragraphs
+3. Annotate paragraphs with compact legal titles and point-wise descriptions
+
+Out of scope:
+
+- End-to-end court workflow automation
+- Guaranteed legal correctness
+- Production reliability guarantees
+
+## Architecture
+
+High-level flow:
+
+1. Input decision document (PDF/text)
+2. Section extraction (`src/extraction.py`)
+3. Paragraph structuring (`src/structuring.py`)
+4. Paragraph annotation (`src/annotation.py`)
+5. YAML/JSON artifacts for downstream analysis
+
+Key directories:
+
+- `src/`: core extraction/annotation/structuring pipeline
+- `prompts/`: local prompt assets
+- `tests/`: unit and integration-style tests
+- `experiments/`: exploratory scripts (not stability-guaranteed)
+- `data/schemas/`: example extracted/annotated outputs
+
+## Model Provider Support (OpenAI + Claude)
+
+The core pipeline supports model selection via environment variable:
 
 ```bash
-conda create -n jurabot311 python=3.11
-conda activate jurabot311
+export LLM_MODEL="openai:gpt-4.1-mini"
+# or
+export LLM_MODEL="anthropic:claude-3-7-sonnet-latest"
 ```
 
-2. Install all project dependencies using pip:
+`LLM_MODEL` is read by both extraction and annotation pipelines through `langchain`'s `init_chat_model(...)`.
+
+## Setup
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Development
-
-- Core functionality is in the `src/` directory
-- Experimental code is in the `experiments/` directory
-- All prompts are managed in the `prompts/` directory
-- Tests are in the `tests/` directory
-
-### Azure OpenAI with LangChain (private endpoint)
-
-Set these environment variables:
+Copy environment template:
 
 ```bash
-export AZURE_OPENAI_ENDPOINT="https://<your-resource>.cognitiveservices.azure.com/"
-export AZURE_OPENAI_API_KEY="<your-key>"
-export AZURE_OPENAI_API_VERSION="2024-12-01-preview"
-export AZURE_OPENAI_CHAT_DEPLOYMENT="gpt-4o-mini"  # your deployment name
+cp .env.example .env
 ```
 
-Run the SDK example:
+## Environment variables
+
+See `.env.example` for the full list.
+
+Minimum for OpenAI path:
+
+- `OPENAI_API_KEY`
+- `LLM_MODEL=openai:...`
+
+Minimum for Claude path:
+
+- `ANTHROPIC_API_KEY`
+- `LLM_MODEL=anthropic:...`
+
+Optional:
+
+- `LANGSMITH_API_KEY` (only required if you want to pull prompts from LangSmith)
+- `EXTRACTION_PROMPT_PATH`, `PARSING_PROMPT_PATH`, `PARAGRAPHS_PROMPT_PATH`, `ANNOTATION_PROMPT_PATH` (local prompt overrides)
+
+## Quick checks
+
+Run a meaningful local check that does not require external services:
 
 ```bash
-python -m experiments.test_private_llm
+pytest tests/test_structuring.py
 ```
 
-Run the LangChain Chat example:
+Run all tests:
 
 ```bash
-python -m experiments.langchain_azure_openai_chat
+pytest
 ```
 
-## Simple Git Operations (Windows)
+## Data note
 
-Open the Anaconda Prompt or Command Prompt and navigate to your project directory:
+The `data/schemas/` directory contains prototype artifacts derived from legal decisions for research and engineering exploration. These files are not presented as official court data products and should be treated as development artifacts.
 
-### Pull latest changes
-```
-git pull
-```
+## Limitations
 
-### Add changes
-```
-git add <file_or_folder>
-git add . //adds all changed files
-```
+- LLM outputs may vary between runs/providers
+- Prompt and schema design are still evolving
+- Error handling and observability are prototype-level
+- No claim of legal completeness or correctness
 
-### Commit changes locally
-```
-git commit -m "Your commit message"
-```
+## Roadmap
 
-### Push changes to remote repo
-```
-git push
-```
-
-### Create a new branch
-```
-git checkout -b new-branch-name
-```
-
-### Switch to an existing branch
-```
-git checkout branch-name
-```
-
-## Documentation
-
-- `implementation-plan.md`: Overall implementation plan
-- `master-schema.md`: Master schema documentation
-- `master-schema-phase-1.md`: Master schema phase 1
-
-
-
+- Improve deterministic parsing quality across varied ruling formats
+- Expand provider-agnostic evaluation for OpenAI and Claude models
+- Tighten test coverage around extraction and annotation edge cases

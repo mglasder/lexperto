@@ -7,7 +7,13 @@ from langchain.chat_models import init_chat_model
 from langgraph.constants import START, END
 from langgraph.graph import StateGraph
 import logging
-from langsmith import Client
+from pathlib import Path
+from typing import Optional
+
+try:
+    from langsmith import Client
+except Exception:  # pragma: no cover - optional dependency at runtime
+    Client = None
 
 from models.extraction import Section, Paragraph, ParagraphList, CourtDecision
 from models.state import InputState, SectionTextState, GraphState
@@ -22,22 +28,76 @@ logging.basicConfig(
 logging.getLogger("pdfminer").setLevel(logging.ERROR)
 
 load_dotenv()
-os.environ["LANGSMITH_TRACING"] = "true"  # overwrites dotenv
 
 logger = logging.getLogger(__name__)
-langsmith_client = Client()
+LLM_MODEL = os.getenv("LLM_MODEL", "openai:gpt-4.1-mini")
 
-INSTRUCT_EXTRACTION = langsmith_client.pull_prompt(
-    "extract_sections", include_model=False
-)
-INSTRUCT_PARSING = langsmith_client.pull_prompt(
-    "structured_parsing", include_model=False
-)
-INSTRUCT_PARAGRAPHS = langsmith_client.pull_prompt(
-    "extract_paragraphs", include_model=False
-)
+DEFAULT_INSTRUCT_EXTRACTION = """Extrahiere aus dem folgenden Urteil die drei Abschnitte:
+- Sachverhalt
+- Erwägungen
+- Entscheid
+Gib die Abschnitte vollständig und unverändert zurück."""
 
-LLM_MODEL = "openai:gpt-4.1-mini"
+DEFAULT_INSTRUCT_PARSING = """Antworte ausschließlich im folgenden strukturierten Format:
+{struct}"""
+
+DEFAULT_INSTRUCT_PARAGRAPHS = """Extrahiere alle Paragraphen für den Abschnitt "{section_name}".
+Nummerierungslogik:
+{numbering_logic}
+
+Nutze für jeden Eintrag exakt diese Struktur:
+{paragraph_struct}
+
+Beispiel Input:
+{example_input}
+
+Beispiel Output:
+{example_output}"""
+
+
+def _resolve_prompt_from_path(path_value: Optional[str]) -> Optional[str]:
+    if not path_value:
+        return None
+    prompt_path = Path(path_value)
+    if prompt_path.exists():
+        return prompt_path.read_text(encoding="utf-8")
+    logger.warning("Prompt file not found at %s", prompt_path)
+    return None
+
+
+def _load_prompt(
+    env_var_name: str, langsmith_prompt_name: str, fallback_template: str
+) -> str:
+    path_prompt = _resolve_prompt_from_path(os.getenv(env_var_name))
+    if path_prompt:
+        return path_prompt
+
+    if Client is not None:
+        try:
+            langsmith_client = Client()
+            prompt = langsmith_client.pull_prompt(
+                langsmith_prompt_name, include_model=False
+            )
+            return prompt.template
+        except Exception as error:
+            logger.warning(
+                "Falling back to local default prompt for %s: %s",
+                langsmith_prompt_name,
+                error,
+            )
+
+    return fallback_template
+
+
+INSTRUCT_EXTRACTION = _load_prompt(
+    "EXTRACTION_PROMPT_PATH", "extract_sections", DEFAULT_INSTRUCT_EXTRACTION
+)
+INSTRUCT_PARSING = _load_prompt(
+    "PARSING_PROMPT_PATH", "structured_parsing", DEFAULT_INSTRUCT_PARSING
+)
+INSTRUCT_PARAGRAPHS = _load_prompt(
+    "PARAGRAPHS_PROMPT_PATH", "extract_paragraphs", DEFAULT_INSTRUCT_PARAGRAPHS
+)
 
 SV_PARA_LOGIC = """
 A.
@@ -172,7 +232,7 @@ def section_extraction_node(state: InputState) -> SectionTextState:
 
     logger.info("Invoking agent for section extraction")
     response = agent.invoke(
-        f"{INSTRUCT_EXTRACTION.template}\n{INSTRUCT_PARSING.format(struct=SectionTextState.model_fields)}\nHier ist das Urteil: {state.pdf_doc}. Extrahiere jetzt den Sachverhalt, die Erwägungen und den Entscheid."
+        f"{INSTRUCT_EXTRACTION}\n{INSTRUCT_PARSING.format(struct=SectionTextState.model_fields)}\nHier ist das Urteil: {state.pdf_doc}. Extrahiere jetzt den Sachverhalt, die Erwägungen und den Entscheid."
     )
 
     logger.info("Section extraction completed successfully")
