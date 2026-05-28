@@ -10,6 +10,18 @@ Lexperto is a prototype for AI-assisted drafting support on Swiss Federal Admini
 - No institutional deployment
 - Not a production legal system
 
+## For Hiring Reviewers (2-minute scan)
+
+- Start with `Status`, `Scope`, and `Limitations` for boundaries and maturity.
+- Check `Architecture` and `Model Provider Support (OpenAI + Claude)` for technical shape.
+- Use `Quick checks` to see the fastest local validation commands.
+
+## For Technical Collaborators
+
+- Read `Architecture` and `Key directories` to map the pipeline and code layout.
+- Follow `Setup (Pixi)` and `Environment variables` for local execution.
+- Use `Quick checks` and `Roadmap` to align on current quality gates and next priorities.
+
 ## Motivation
 
 Drafting and reviewing legal reasoning is repetitive and structure-heavy. Lexperto explores whether LLM-assisted pipelines can reduce manual overhead by turning long rulings into structured, machine-readable intermediate representations.
