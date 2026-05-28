@@ -1,0 +1,27 @@
+[workspace]
+name = "lexperto"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64", "osx-arm64"]
+
+[dependencies]
+python = ">=3.11,<3.13"
+pip = ">=24"
+
+[pypi-dependencies]
+python-dotenv = "*"
+pydantic = "*"
+PyYAML = "*"
+langchain = "*"
+langchain-openai = "*"
+langchain-anthropic = "*"
+langgraph = "*"
+langsmith = "*"
+pdfplumber = "*"
+PyPDF2 = "*"
+pytest = "*"
+
+[tasks]
+test = "pytest"
+test-quick = "pytest tests/test_structuring.py"
+syntax-check = "python -m py_compile src/extraction.py src/annotation.py scripts/download_annotation_prompt.py"
+smoke = "python scripts/smoke_check.py"

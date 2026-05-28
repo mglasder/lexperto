@@ -27,7 +27,9 @@ def download_annotation_prompt():
         # Create filename with metadata
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         metadata = prompt.metadata
-        filename = f"{timestamp}_annotate_paragraphs_{metadata["lc_hub_commit_hash"]}.txt"
+        filename = (
+            f"{timestamp}_annotate_paragraphs_{metadata['lc_hub_commit_hash']}.txt"
+        )
         
         prompt_file = annotation_dir / filename
         with open(prompt_file, "w", encoding="utf-8") as f:
