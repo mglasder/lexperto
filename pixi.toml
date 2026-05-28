@@ -24,5 +24,7 @@ pytest = "*"
 [tasks]
 test = "pytest"
 test-quick = "pytest tests/test_structuring.py"
-syntax-check = "python -m py_compile src/extraction.py src/annotation.py scripts/download_annotation_prompt.py"
+syntax-check = "python -m py_compile src/extraction.py src/annotation.py src/sachverhalt_draft.py scripts/download_annotation_prompt.py"
 smoke = "python scripts/smoke_check.py"
+draft-sachverhalt = "python -m src.sachverhalt_draft --verfuegung data/input/1_verfuegung_sachverhalt.txt --beschwerde data/input/1_beschwerde_sachverhalt.txt"
+draft-sachverhalt-sample = "python -m src.sachverhalt_draft --verfuegung data/input/1_verfuegung_sachverhalt.txt --beschwerde data/input/1_beschwerde_sachverhalt.txt --output data/output/sachverhalt_sample.txt"
