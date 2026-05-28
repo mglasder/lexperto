@@ -81,6 +81,29 @@ pip install -r requirements.txt
 - All prompts are managed in the `prompts/` directory
 - Tests are in the `tests/` directory
 
+### Azure OpenAI with LangChain (private endpoint)
+
+Set these environment variables:
+
+```bash
+export AZURE_OPENAI_ENDPOINT="https://<your-resource>.cognitiveservices.azure.com/"
+export AZURE_OPENAI_API_KEY="<your-key>"
+export AZURE_OPENAI_API_VERSION="2024-12-01-preview"
+export AZURE_OPENAI_CHAT_DEPLOYMENT="gpt-4o-mini"  # your deployment name
+```
+
+Run the SDK example:
+
+```bash
+python -m experiments.test_private_llm
+```
+
+Run the LangChain Chat example:
+
+```bash
+python -m experiments.langchain_azure_openai_chat
+```
+
 ## Simple Git Operations (Windows)
 
 Open the Anaconda Prompt or Command Prompt and navigate to your project directory:
