@@ -10,7 +10,7 @@ Lexperto is a prototype for AI-assisted drafting support on Swiss Federal Admini
 - No institutional deployment
 - Not a production legal system
 
-## Why this exists
+## Motivation
 
 Drafting and reviewing legal reasoning is repetitive and structure-heavy. Lexperto explores whether LLM-assisted pipelines can reduce manual overhead by turning long rulings into structured, machine-readable intermediate representations.
 
@@ -103,27 +103,15 @@ Run a local smoke check (no external API calls):
 pixi run smoke
 ```
 
-Run a meaningful local check that does not require external services:
-
-```bash
-pixi run test-quick
-```
-
 Run all tests:
 
 ```bash
 pixi run test
 ```
 
-Run a syntax-only validation for key modules:
-
-```bash
-pixi run syntax-check
-```
-
 ## Data note
 
-The `data/schemas/` directory contains only a minimal set of representative prototype samples to keep repository noise low.
+The `data/schemas/` directory contains a minimal set of representative prototype samples.
 
 ## Limitations
 
@@ -138,6 +126,3 @@ The `data/schemas/` directory contains only a minimal set of representative prot
 - Expand provider-agnostic evaluation for OpenAI and Claude models
 - Tighten test coverage around extraction and annotation edge cases
 
-## Usage restriction
-
-This repository is not open source. Public usage, redistribution, or derivative use is not allowed. See `LICENSE` for details.
