@@ -27,7 +27,7 @@ def read_input_text(input_path: Path) -> str:
         except ImportError as error:
             raise RuntimeError(
                 "python-docx is required to read .docx files. Install it with "
-                "`pip install python-docx` or use a .txt input."
+                "`pixi add python-docx` (then `pixi install`) or use a .txt input."
             ) from error
 
         document = Document(input_path)
