@@ -10,6 +10,22 @@ Lexperto is a prototype for AI-assisted drafting support on Swiss Federal Admini
 - No institutional deployment
 - Not a production legal system
 
+## For Hiring Reviewers (2-minute scan)
+
+- **Value:** Lexperto explores faster drafting support by converting long tax-information-exchange rulings into structured legal artifacts.
+- **Technical depth:** See `Architecture` and `Model Provider Support (OpenAI + Claude)` for pipeline stages, model routing, and outputs.
+- **Safety framing:** This repository is a prototype (`Status`) with explicit limits (`Limitations`) and no production/legal correctness claims.
+- **Quick credibility check:** Run `pixi run smoke` for a local no-API pipeline sanity check.
+
+## For Technical Collaborators
+
+- **Setup:** Run `pixi install`, then copy `.env.example` to `.env`.
+- **Fast check:** `pixi run smoke`
+- **Targeted tests:** `pixi run test-quick`
+- **Full tests:** `pixi run test`
+- **Stable core areas:** `src/extraction.py`, `src/structuring.py`, `src/annotation.py`, and `tests/`.
+- **Exploratory area:** `experiments/` is intentionally non-stable and may change without compatibility guarantees.
+
 ## Motivation
 
 Drafting and reviewing legal reasoning is repetitive and structure-heavy. Lexperto explores whether LLM-assisted pipelines can reduce manual overhead by turning long rulings into structured, machine-readable intermediate representations.
@@ -38,13 +54,13 @@ High-level flow:
 4. Paragraph annotation (`src/annotation.py`)
 5. YAML/JSON artifacts for downstream analysis
 
-Key directories:
+## Repository Map
 
 - `src/`: core extraction/annotation/structuring pipeline
-- `prompts/`: local prompt assets
-- `tests/`: unit and integration-style tests
-- `experiments/`: exploratory scripts (not stability-guaranteed)
-- `data/schemas/`: example extracted/annotated outputs
+- `tests/`: regression and behavior checks for core pipeline stages
+- `prompts/`: local prompt assets and overrides
+- `experiments/`: exploratory scripts (non-stable by design)
+- `docs/`: project notes, plans, and architecture-oriented documentation
 
 ## Model Provider Support (OpenAI + Claude)
 
@@ -103,7 +119,13 @@ Run a local smoke check (no external API calls):
 pixi run smoke
 ```
 
-Run all tests:
+Run targeted tests for the structuring core:
+
+```bash
+pixi run test-quick
+```
+
+Run the full test suite:
 
 ```bash
 pixi run test
