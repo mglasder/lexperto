@@ -278,7 +278,6 @@ if __name__ == "__main__":
     )
 
     # Load prompt
-    global INSTRUCT_ANNOTATION
     INSTRUCT_ANNOTATION = load_annotation_prompt(prompt_path)
 
     # Define decision schemas to process, should be in data/schemas/extracted/
