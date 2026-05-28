@@ -15,11 +15,20 @@ EXAMPLE_RULING_PATH = Path("data/templates/factual_section_example.txt")
 
 
 def read_input_text(input_path: Path) -> str:
+    if not input_path.exists():
+        raise RuntimeError(f"Input file does not exist: {input_path}")
+
     suffix = input_path.suffix.lower()
     if suffix == ".txt":
         return input_path.read_text(encoding="utf-8")
     if suffix == ".docx":
-        from docx import Document
+        try:
+            from docx import Document
+        except ImportError as error:
+            raise RuntimeError(
+                "python-docx is required to read .docx files. Install it with "
+                "`pip install python-docx` or use a .txt input."
+            ) from error
 
         document = Document(input_path)
         return "\n".join(paragraph.text for paragraph in document.paragraphs).strip()
@@ -57,7 +66,7 @@ def build_sachverhalt_prompt(
 def resolve_model_name(cli_model: Optional[str]) -> str:
     if cli_model:
         return cli_model
-    return os.getenv("SACHVERHALT_DRAFT_MODEL") or os.getenv("LLM_MODEL", DEFAULT_MODEL)
+    return os.getenv("LLM_MODEL", DEFAULT_MODEL)
 
 
 def build_output_path(
@@ -81,21 +90,40 @@ def validate_provider_credentials(model_name: str) -> None:
 
 
 def generate_sachverhalt(prompt: str, model_name: str) -> str:
-    from langchain.chat_models import init_chat_model
+    try:
+        from langchain.chat_models import init_chat_model
 
-    validate_provider_credentials(model_name)
-    model = init_chat_model(model_name, temperature=0.3)
-    response = model.invoke(prompt)
-    content = getattr(response, "content", "")
-    if not isinstance(content, str) or not content.strip():
-        raise RuntimeError("Model returned empty content")
-    return content.strip()
+        validate_provider_credentials(model_name)
+        model = init_chat_model(model_name, temperature=0.3)
+        response = model.invoke(prompt)
+        content = getattr(response, "content", "")
+        if not isinstance(content, str) or not content.strip():
+            raise RuntimeError("Model returned empty content")
+        return content.strip()
+    except Exception as error:
+        raise RuntimeError(
+            f"Failed to generate Sachverhalt with model '{model_name}' during model invocation."
+        ) from error
 
 
 def _read_optional_input(path: Optional[Path]) -> Optional[str]:
     if path is None:
         return None
-    return read_input_text(path)
+    text = read_input_text(path)
+    if not text.strip():
+        raise RuntimeError(
+            f"Optional beschwerde input is empty: {path}. Provide non-empty content or omit --beschwerde."
+        )
+    return text
+
+
+def _read_required_input(path: Path) -> str:
+    text = read_input_text(path)
+    if not text.strip():
+        raise RuntimeError(
+            f"Required verfuegung input is empty: {path}. Provide a non-empty file for --verfuegung."
+        )
+    return text
 
 
 def _read_optional_template(path: Path) -> Optional[str]:
@@ -110,7 +138,7 @@ def run_with_paths(
     output_path: Path,
     model_name: str,
 ) -> Path:
-    verfuegung_text = read_input_text(verfuegung_path)
+    verfuegung_text = _read_required_input(verfuegung_path)
     beschwerde_text = _read_optional_input(beschwerde_path)
     example_order_text = _read_optional_template(EXAMPLE_ORDER_PATH)
     example_ruling_text = _read_optional_template(EXAMPLE_RULING_PATH)
