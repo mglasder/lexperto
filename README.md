@@ -97,6 +97,12 @@ pixi shell
 
 ## Quick checks
 
+Run a local smoke check (no external API calls):
+
+```bash
+pixi run smoke
+```
+
 Run a meaningful local check that does not require external services:
 
 ```bash
@@ -117,7 +123,7 @@ pixi run syntax-check
 
 ## Data note
 
-The `data/schemas/` directory contains prototype artifacts derived from legal decisions for research and engineering exploration. These files are not presented as official court data products and should be treated as development artifacts.
+The `data/schemas/` directory contains only a minimal set of representative prototype samples to keep repository noise low.
 
 ## Limitations
 
@@ -131,3 +137,7 @@ The `data/schemas/` directory contains prototype artifacts derived from legal de
 - Improve deterministic parsing quality across varied ruling formats
 - Expand provider-agnostic evaluation for OpenAI and Claude models
 - Tighten test coverage around extraction and annotation edge cases
+
+## Usage restriction
+
+This repository is not open source. Public usage, redistribution, or derivative use is not allowed. See `LICENSE` for details.
