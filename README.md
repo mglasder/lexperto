@@ -69,6 +69,31 @@ export LLM_MODEL="anthropic:claude-3-7-sonnet-latest"
 
 `LLM_MODEL` is read by both extraction and annotation pipelines through `langchain`'s `init_chat_model(...)`.
 
+## Drafting (Sachverhalt) - Canonical Path
+
+The canonical drafting workflow runs from `src/sachverhalt_draft.py` and should be invoked via Pixi tasks:
+
+```bash
+pixi run draft-sachverhalt
+pixi run draft-sachverhalt-sample
+```
+
+Provider configuration examples:
+
+```bash
+export LLM_MODEL="openai:gpt-4.1-mini"
+# or
+export LLM_MODEL="anthropic:claude-3-7-sonnet-latest"
+```
+
+Optional drafting-specific model override (falls back to `LLM_MODEL` when unset):
+
+```bash
+export SACHVERHALT_DRAFT_MODEL="openai:gpt-4.1-mini"
+```
+
+`experiments/experiment.py` is legacy and non-canonical; keep it for reference only and prefer the `src/sachverhalt_draft.py` + Pixi task path above.
+
 ## Setup (Pixi)
 
 ```bash
