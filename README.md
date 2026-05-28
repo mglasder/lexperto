@@ -88,7 +88,7 @@ export LLM_MODEL="openai:gpt-4.1-mini"
 export LLM_MODEL="anthropic:claude-3-7-sonnet-latest"
 ```
 
-Model resolution follows implemented behavior: `--model` takes precedence over `LLM_MODEL`, and `LLM_MODEL` falls back to the built-in default (`openai:gpt-4.1-mini`).
+Model resolution precedence for drafting is: `--model` > `SACHVERHALT_DRAFT_MODEL` > `LLM_MODEL` > built-in default (`openai:gpt-4.1-mini`).
 
 `experiments/experiment.py` is legacy and non-canonical; keep it for reference only and prefer the `src/sachverhalt_draft.py` + Pixi task path above.
 

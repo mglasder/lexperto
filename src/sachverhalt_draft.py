@@ -66,6 +66,9 @@ def build_sachverhalt_prompt(
 def resolve_model_name(cli_model: Optional[str]) -> str:
     if cli_model:
         return cli_model
+    draft_model = os.getenv("SACHVERHALT_DRAFT_MODEL")
+    if draft_model:
+        return draft_model
     return os.getenv("LLM_MODEL", DEFAULT_MODEL)
 
 
