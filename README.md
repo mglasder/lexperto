@@ -10,21 +10,16 @@ Lexperto is a prototype for AI-assisted drafting support on Swiss Federal Admini
 - No institutional deployment
 - Not a production legal system
 
-## For Hiring Reviewers (2-minute scan)
+## Executive Summary
 
 - **Value:** Lexperto explores faster drafting support by converting long tax-information-exchange rulings into structured legal artifacts.
 - **Technical depth:** See `Architecture` and `Model Provider Support (OpenAI + Claude)` for pipeline stages, model routing, and outputs.
-- **Safety framing:** This repository is a prototype (`Status`) with explicit limits (`Limitations`) and no production/legal correctness claims.
-- **Quick credibility check:** Run `pixi run smoke` for a local no-API pipeline sanity check.
-
-## For Technical Collaborators
-
+- **Quick check:** Run `pixi run smoke` for a local no-API pipeline sanity check.
 - **Setup:** Run `pixi install`, then copy `.env.example` to `.env`.
-- **Fast check:** `pixi run smoke`
 - **Targeted tests:** `pixi run test-quick`
 - **Full tests:** `pixi run test`
 - **Stable core areas:** `src/extraction.py`, `src/structuring.py`, `src/annotation.py`, and `tests/`.
-- **Exploratory area:** `experiments/` is intentionally non-stable and may change without compatibility guarantees.
+- **Exploratory area:** `experiments/` is intentionally non-stable.
 
 ## Motivation
 
@@ -64,7 +59,7 @@ High-level flow:
 
 ## Model Provider Support (OpenAI + Claude)
 
-The core pipeline supports model selection via environment variable:
+The core pipeline supports model selection via environment variable, e.g.:
 
 ```bash
 export LLM_MODEL="openai:gpt-4.1-mini"
