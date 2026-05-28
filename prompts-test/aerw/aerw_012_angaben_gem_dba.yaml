@@ -1,0 +1,6 @@
+task: "Prüfung, welche Angaben die ersuchende Behörde im Amtshilfeersuchen gemäss dem anwendbaren DBA machen muss"
+examples:
+  - "Gemäss Bst. ebis Ziff. 2 des Zusatzprotokolls zum DBA CH-IT besteht Einvernehmen darüber, dass die Steuerbehörden des ersuchenden Staates bei der Stellung eines Amtshilfebegehrens nach Artikel 27 den Steuerbehörden des ersuchten Staates die nachstehenden Angaben zu liefern haben: (i) die Identität der in eine Überprüfung oder Untersuchung einbezogenen Person; (ii) die Zeitperiode, für welche die Informationen verlangt werden; (iii) eine Beschreibung der verlangten Informationen sowie Angaben hinsichtlich der Form, in der der ersuchende Staat diese Informationen vom ersuchten Staat zu erhalten wünscht; (iv) den Steuerzweck, für den die Informationen verlangt werden; (v) soweit bekannt, den Namen und die Adresse des mutmasslichen Inhabers der verlangten Informationen.    Enthält ein Amtshilfeersuchen alle Informationen, die gemäss dem anwendbaren Übereinkommen erforderlich sind, kann das Vorliegen einer sog. «fishing expedition» (vgl. hierzu E. 3.4.1) grundsätzlich verneint werden (vgl. Urteil des BGer 2C_953/2020 vom 24. November 2021 E. 3.3; Urteile des BVGer A-4830/2021 vom 23. Oktober 2023 E. 2.2.2, A-5281/2021 vom 2. Mai 2022 E. 6.1)."
+mandatory: true
+requirement_for_analysis: 
+search: most_recent

@@ -1,0 +1,6 @@
+task: "Prüfung der Zuständigkeit: Das Bundesverwaltungsgericht prüft, ob es zur Beurteilung der vorliegenden Sache zuständig ist."
+examples:
+- "Gemäss Art. 31 des Bundesgesetzes vom 17. Juni 2005 über das Bundesverwaltungsgericht (VGG, SR 173.32) beurteilt dieses Gericht Beschwerden gegen Verfügungen nach Art. 5 des Bundesgesetzes vom 20. Dezember 1968 über das Verwaltungsverfahren (VwVG, SR 172.021). Die ESTV gehört als Behörde nach Art. 33 VGG zu den Vorinstanzen des Bundesverwaltungsgerichts. Eine das Sachgebiet betreffende Ausnahme im Sinne von Art. 32 VGG liegt nicht vor. Das Bundesverwaltungsgericht ist folglich für die Beurteilung der vorliegenden Sache zuständig."
+mandatory: true
+requirement_for_analysis:
+search: most_recent
