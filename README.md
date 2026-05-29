@@ -1,6 +1,10 @@
 # Lexperto
 
-Lexperto is a prototype for AI-assisted drafting support on Swiss Federal Administrative Court tax-information-exchange decisions. It focuses on extracting structured sections and paragraph hierarchies from court rulings and enriching them with legal annotations.
+Lexperto is a prototype focused on generating a **Sachverhalt draft** from legal input documents with interchangeable OpenAI/Claude model backends.
+
+## Motivation
+
+Drafting and reviewing legal reasoning is repetitive and structure-heavy. Lexperto explores whether LLM-assisted pipelines can reduce manual overhead by turning long rulings into structured, machine-readable intermediate representations.
 
 ## Status
 
@@ -10,101 +14,41 @@ Lexperto is a prototype for AI-assisted drafting support on Swiss Federal Admini
 - No institutional deployment
 - Not a production legal system
 
-## Executive Summary
+## What To Run First (Sachverhalt Draft)
 
-- **Value:** Lexperto explores faster drafting support by converting long tax-information-exchange rulings into structured legal artifacts.
-- **Technical depth:** See `Architecture` and `Model Provider Support (OpenAI + Claude)` for pipeline stages, model routing, and outputs.
-- **Quick check:** Run `pixi run smoke` for a local no-API pipeline sanity check.
-- **Setup:** Run `pixi install`, then copy `.env.example` to `.env`.
-- **Targeted tests:** `pixi run test-quick`
-- **Full tests:** `pixi run test`
-- **Stable core areas:** `src/extraction.py`, `src/structuring.py`, `src/annotation.py`, and `tests/`.
-- **Exploratory area:** `experiments/` is intentionally non-stable.
-
-## Motivation
-
-Drafting and reviewing legal reasoning is repetitive and structure-heavy. Lexperto explores whether LLM-assisted pipelines can reduce manual overhead by turning long rulings into structured, machine-readable intermediate representations.
-
-## Scope
-
-Current prototype scope:
-
-1. Extract core ruling sections (`Sachverhalt`, `Erwägungen`, `Entscheid`)
-2. Parse section content into hierarchical paragraphs
-3. Annotate paragraphs with compact legal titles and point-wise descriptions
-
-Out of scope:
-
-- End-to-end court workflow automation
-- Guaranteed legal correctness
-- Production reliability guarantees
-
-## Architecture
-
-High-level flow:
-
-1. Input decision document (PDF/text)
-2. Section extraction (`src/extraction.py`)
-3. Paragraph structuring (`src/structuring.py`)
-4. Paragraph annotation (`src/annotation.py`)
-5. YAML/JSON artifacts for downstream analysis
-
-## Repository Map
-
-- `src/`: core extraction/annotation/structuring pipeline
-- `tests/`: regression and behavior checks for core pipeline stages
-- `prompts/`: local prompt assets and overrides
-- `experiments/`: exploratory scripts (non-stable by design)
-- `docs/`: project notes, plans, and architecture-oriented documentation
-
-## Model Provider Support (OpenAI + Claude)
-
-The core pipeline supports model selection via environment variable, e.g.:
-
-```bash
-export LLM_MODEL="openai:gpt-4.1-mini"
-# or
-export LLM_MODEL="anthropic:claude-3-7-sonnet-latest"
-```
-
-`LLM_MODEL` is read by both extraction and annotation pipelines through `langchain`'s `init_chat_model(...)`.
-
-## Drafting (Sachverhalt) - Canonical Path
-
-The canonical drafting workflow runs from `src/sachverhalt_draft.py` and should be invoked via Pixi tasks:
-
-```bash
-pixi run draft-sachverhalt
-pixi run draft-sachverhalt-sample
-```
-
-These tasks use tracked fixture inputs from `tests/fixtures/drafting/`, and `draft-sachverhalt-sample` writes output to `data/output/sachverhalt_sample.txt`.
-
-Provider configuration examples:
-
-```bash
-export LLM_MODEL="openai:gpt-4.1-mini"
-# or
-export LLM_MODEL="anthropic:claude-3-7-sonnet-latest"
-```
-
-Model resolution precedence for drafting is: `--model` > `SACHVERHALT_DRAFT_MODEL` > `LLM_MODEL` > built-in default (`openai:gpt-4.1-mini`).
-
-`experiments/experiment.py` is legacy and non-canonical; keep it for reference only and prefer the `src/sachverhalt_draft.py` + Pixi task path above.
-
-## Setup (Pixi)
+Install and set up:
 
 ```bash
 pixi install
-```
-
-Copy environment template:
-
-```bash
 cp .env.example .env
 ```
 
-## Environment variables
+Choose provider/model:
+
+```bash
+export LLM_MODEL="openai:gpt-4.1-mini"
+# or
+export LLM_MODEL="anthropic:claude-opus-4-7"
+```
+
+Run drafting tasks:
+
+```bash
+pixi run draft-sachverhalt-sample
+```
+
+Example with real data (direct CLI use):
+
+```bash
+export OPENAI_API_KEY="anthropic:claude-opus-4-7"
+             
+pixi run python -m src.sachverhalt_draft \
+  --verfuegung data/input/Verfuegung_Clean_Format.docx \
+  --beschwerde data/input/Beschwerde_Clean_Format.docx \
+  --output data/output/sachverhalt_real_case.txt
+```
+
+## Environment Variables
 
 See `.env.example` for the full list.
 
@@ -118,10 +62,45 @@ Minimum for Claude path:
 - `ANTHROPIC_API_KEY`
 - `LLM_MODEL=anthropic:...`
 
+Optional drafting override:
+
+- `SACHVERHALT_DRAFT_MODEL` (used only by `src/sachverhalt_draft.py`)
+
 Optional:
 
 - `LANGSMITH_API_KEY` (only required if you want to pull prompts from LangSmith)
 - `EXTRACTION_PROMPT_PATH`, `PARSING_PROMPT_PATH`, `PARAGRAPHS_PROMPT_PATH`, `ANNOTATION_PROMPT_PATH` (local prompt overrides)
+
+## Other Components (Smaller Scope)
+
+Besides the core drafting path, the repository also contains extraction/annotation utilities for processing existing rulings:
+
+- section extraction (`src/extraction.py`)
+- paragraph structuring (`src/structuring.py`)
+- paragraph annotation (`src/annotation.py`)
+
+These components are useful for schema-oriented analysis workflows and prototype experimentation, but they are not the primary run path for drafting.
+
+## Repository Map
+
+- `src/sachverhalt_draft.py`: canonical Sachverhalt drafting entrypoint
+- `src/`: secondary extraction/annotation/structuring pipeline modules
+- `tests/`: regression and behavior checks
+- `prompts/`: local prompt assets and overrides
+- `experiments/`: exploratory scripts (non-stable by design)
+- `docs/`: project notes, plans, and architecture-oriented documentation
+
+## Setup (Pixi)
+
+```bash
+pixi install
+```
+
+Copy environment template:
+
+```bash
+cp .env.example .env
+```
 
 Run commands inside the Pixi environment:
 
@@ -151,18 +130,5 @@ pixi run test
 
 ## Data note
 
-The `data/schemas/` directory contains a minimal set of representative prototype samples.
-
-## Limitations
-
-- LLM outputs may vary between runs/providers
-- Prompt and schema design are still evolving
-- Error handling and observability are prototype-level
-- No claim of legal completeness or correctness
-
-## Roadmap
-
-- Improve deterministic parsing quality across varied ruling formats
-- Expand provider-agnostic evaluation for OpenAI and Claude models
-- Tighten test coverage around extraction and annotation edge cases
+The `data` directory contains a prototype sample.
 
