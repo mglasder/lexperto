@@ -5,6 +5,7 @@ import pytest
 from src.sachverhalt_draft import (
     build_output_path,
     build_sachverhalt_prompt,
+    chat_model_init_kwargs,
     read_input_text,
     resolve_model_name,
     run_with_paths,
@@ -38,6 +39,11 @@ def test_build_prompt_contains_required_sections() -> None:
     assert "DOKUMENT" in prompt
     assert "BEISPIEL VERFÜGUNG" in prompt
     assert "BEISPIEL SACHVERHALT" in prompt
+
+
+def test_chat_model_init_kwargs_omits_temperature_for_anthropic() -> None:
+    assert chat_model_init_kwargs("anthropic:claude-opus-4-7") == {}
+    assert chat_model_init_kwargs("openai:gpt-4.1-mini") == {"temperature": 0.3}
 
 
 def test_resolve_model_name_cli_overrides_env(monkeypatch: pytest.MonkeyPatch) -> None:

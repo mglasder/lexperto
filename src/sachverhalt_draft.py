@@ -4,11 +4,13 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
+from docx import Document
 from dotenv import load_dotenv
+from langchain.chat_models import init_chat_model
 
 load_dotenv()
 
-DEFAULT_MODEL = "openai:gpt-4.1-mini"
+DEFAULT_MODEL = "anthropic:claude-opus-4-7"
 DEFAULT_OUTPUT_DIR = Path("data/output")
 EXAMPLE_ORDER_PATH = Path("data/templates/court_order_sample.txt")
 EXAMPLE_RULING_PATH = Path("data/templates/factual_section_example.txt")
@@ -22,14 +24,6 @@ def read_input_text(input_path: Path) -> str:
     if suffix == ".txt":
         return input_path.read_text(encoding="utf-8")
     if suffix == ".docx":
-        try:
-            from docx import Document
-        except ImportError as error:
-            raise RuntimeError(
-                "python-docx is required to read .docx files. Install it with "
-                "`pixi add python-docx` (then `pixi install`) or use a .txt input."
-            ) from error
-
         document = Document(input_path)
         return "\n".join(paragraph.text for paragraph in document.paragraphs).strip()
     raise ValueError(f"Unsupported input format: {input_path.suffix}")
@@ -94,10 +88,8 @@ def validate_provider_credentials(model_name: str) -> None:
 
 def generate_sachverhalt(prompt: str, model_name: str) -> str:
     try:
-        from langchain.chat_models import init_chat_model
-
         validate_provider_credentials(model_name)
-        model = init_chat_model(model_name, temperature=0.3)
+        model = init_chat_model(model_name)
         response = model.invoke(prompt)
         content = getattr(response, "content", "")
         if not isinstance(content, str) or not content.strip():
